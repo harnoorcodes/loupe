@@ -1,0 +1,50 @@
+{
+  "documents": [
+    "articles_of_incorporation.pdf",
+    "cap_table.pdf",
+    "board_minutes_2024.pdf",
+    "financial_statements_2025.pdf",
+    "contract_titanretail.pdf",
+    "contract_meridian.pdf",
+    "employment_ceo.docx",
+    "employment_cto.docx",
+    "ip_assignment.docx",
+    "insurance_policy.pdf"
+  ],
+  "defects": [
+    {
+      "defect_id": "D-001",
+      "defect_type": "arithmetic",
+      "documents": [
+        "cap_table.pdf"
+      ],
+      "anchors": [
+        "Total issued and outstanding shares: 4,250,000",
+        "410,000 options"
+      ],
+      "description": "Stated total of 4,250,000 shares does not reconcile with the sum of holdings: 1,800,000 + 1,200,000 + 900,000 + 410,000 = 4,310,000. Discrepancy of 60,000 shares."
+    },
+    {
+      "defect_id": "D-002",
+      "defect_type": "cross_doc_contradiction",
+      "documents": [
+        "contract_titanretail.pdf",
+        "financial_statements_2025.pdf"
+      ],
+      "anchors": [
+        "Customer may terminate this Agreement upon thirty (30) days",
+        "representing 43% of total revenue"
+      ],
+      "description": "TitanRetail may terminate on change of control without penalty, and represents 43% of FY2025 revenue. An acquisition therefore puts USD 3,612,000 of annual revenue at immediate risk."
+    },
+    {
+      "defect_id": "D-003",
+      "defect_type": "missing_document",
+      "documents": [],
+      "anchors": [
+        "equity incentive plan"
+      ],
+      "description": "410,000 options are stated as granted under an equity incentive plan, and board minutes record only an intention to prepare one. No plan document is present in the data room."
+    }
+  ]
+}

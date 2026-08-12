@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from datetime import date
 from decimal import Decimal
 
 import pytest
@@ -70,7 +69,7 @@ class TestSpanValidation:
 
     def test_fabricated_text_rejected(self) -> None:
         fake = Span(
-            document_id="doc-1", page=1, char_start=24, char_end=33,
+            document_id="doc-1", page=1, char_start=23, char_end=32,
             text="9,999,999",
         )
         with pytest.raises(SpanValidationError, match="text mismatch"):

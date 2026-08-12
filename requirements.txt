@@ -12,3 +12,11 @@ structlog>=24.4.0         # structured JSON logging
 pytest>=8.3.0
 pytest-asyncio>=0.24.0    # async test support
 ruff>=0.7.0               # linter + formatter
+
+
+# Ingestion
+pypdf>=5.1.0
+python-docx>=1.1.2
+
+# Test fixtures only
+reportlab>=4.2.0

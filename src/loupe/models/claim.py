@@ -120,9 +120,10 @@ class Claim(BaseModel):
             return False
         if self.subject != other.subject:
             return False
-        if self.claim_type is ClaimType.MONETARY and self.currency != other.currency:
-            return False
-        return True
+        return not (
+            self.claim_type is ClaimType.MONETARY
+            and self.currency != other.currency
+        )
 
     def is_cross_document(self, other: Claim) -> bool:
         """True if the two claims come from different documents."""
