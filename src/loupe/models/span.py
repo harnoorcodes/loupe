@@ -58,6 +58,10 @@ class Span(BaseModel):
         if self.document_id != other.document_id:
             return False
         return self.char_start < other.char_end and other.char_start < self.char_end
+    
+    def overlaps_offset(self, offset: int) -> bool:
+        """True if a character offset falls inside this span."""
+        return self.char_start <= offset < self.char_end
 
     def citation(self) -> str:
         """Return a short human-readable reference, e.g. 'doc-7 p.4'."""
