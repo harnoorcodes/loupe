@@ -23,6 +23,7 @@ from loupe.models.claim import Claim
 from loupe.models.document import Document
 from loupe.models.finding import Finding, FindingStatus
 from loupe.observability.logging import get_logger
+from loupe.store.entities import normalise_entity
 
 log = get_logger(__name__)
 
@@ -82,18 +83,23 @@ class EvidenceStore:
         return tuple(self._claims[i] for i in ids if i in self._claims)
 
     def claims_about(self, subject: str) -> tuple[Claim, ...]:
-        """All claims about one subject, across every document.
+        """All claims about one entity, across every document.
 
-        This is the retrieval primitive the tension detector runs on.
+        Matching is on the normalised entity key, so "TitanRetail Group"
+        and "TitanRetail Group Limited" return the same set. This is the
+        retrieval primitive the tension detector runs on, and unmerged
+        variants here mean missed cross-document contradictions.
         """
-        needle = subject.lower().strip()
-        return tuple(c for c in self._claims.values() if needle in c.subject.lower())
+        key = normalise_entity(subject)
+        return tuple(
+            c for c in self._claims.values() if normalise_entity(c.subject) == key
+        )
 
     def subjects(self) -> tuple[str, ...]:
-        """Distinct subjects, most-claimed first."""
+        """Distinct normalised entity keys, most-claimed first."""
         counts: dict[str, int] = defaultdict(int)
         for claim in self._claims.values():
-            counts[claim.subject] += 1
+            counts[normalise_entity(claim.subject)] += 1
         return tuple(sorted(counts, key=lambda s: -counts[s]))
 
     # --- findings ---------------------------------------------------------

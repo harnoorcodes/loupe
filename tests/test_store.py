@@ -62,10 +62,10 @@ class TestClaims:
         self, store: EvidenceStore
     ) -> None:
         """The retrieval primitive the tension detector depends on."""
-        store.add_claim(claim("c-1", "doc-1", "northwind analytics"))
-        store.add_claim(claim("c-2", "doc-2", "northwind analytics"))
-        store.add_claim(claim("c-3", "doc-3", "titanretail"))
-        matches = store.claims_about("northwind")
+        store.add_claim(claim("c-1", "doc-1", "Northwind Analytics Inc."))
+        store.add_claim(claim("c-2", "doc-2", "Northwind Analytics"))
+        store.add_claim(claim("c-3", "doc-3", "TitanRetail Group"))
+        matches = store.claims_about("Northwind Analytics Limited")
         assert len(matches) == 2
         assert {m.document_id for m in matches} == {"doc-1", "doc-2"}
 
