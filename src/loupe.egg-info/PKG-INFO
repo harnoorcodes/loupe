@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: loupe
+Version: 0.1.0
+Summary: Multi-agent due diligence system for M&A data rooms
+Requires-Python: >=3.11

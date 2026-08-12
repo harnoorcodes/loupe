@@ -1,6 +1,14 @@
-# Milestone 0 -- connectivity only. Grows in later milestones.
-openai-agents>=0.6.0      # the Agents SDK (Agent, Runner, handoffs, tools)
-openai>=1.99.0            # HTTP client; we point it at Gemini's endpoint
-pydantic>=2.9.0           # typed outputs
-pydantic-settings>=2.5.0  # env-var config
+# Core
+openai-agents>=0.6.0      # Agent, Runner, handoffs, tools
+openai>=1.99.0            # HTTP client, pointed at Gemini
+pydantic>=2.9.0           # typed models
+pydantic-settings>=2.5.0  # env-var config with validation
 python-dotenv>=1.0.1      # loads .env
+
+# Observability
+structlog>=24.4.0         # structured JSON logging
+
+# Dev
+pytest>=8.3.0
+pytest-asyncio>=0.24.0    # async test support
+ruff>=0.7.0               # linter + formatter
