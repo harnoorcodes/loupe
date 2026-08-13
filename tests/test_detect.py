@@ -68,7 +68,7 @@ class TestArithmetic:
         findings = arithmetic.detect(store)
         assert len(findings) == 1
         assert findings[0].finding_type is FindingType.ARITHMETIC
-        assert "60,000" in findings[0].description
+        assert "350,000" in findings[0].description
 
     def test_reconciling_totals_produce_nothing(self, store: EvidenceStore) -> None:
         """A correct cap table must produce no finding. Precision matters."""

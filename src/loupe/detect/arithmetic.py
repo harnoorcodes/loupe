@@ -4,16 +4,20 @@ No LLM. A model asked to add numbers is slower, costs money, and is wrong
 sometimes. Python is none of those things. The model's job was extracting
 the numbers; adding them is ours.
 
-Two hazards this file has to handle, both observed in real runs:
+Three hazards this file handles, all observed in real runs:
 
-1. The extractor emits DUPLICATE claims for one fact, phrased differently.
-   Summing naively double-counts. We deduplicate on (holder, value) before
-   summing.
+1. The extractor emits DUPLICATE claims for one fact. The same founder
+   holding appears in both the cap table and their employment agreement.
+   Summing naively double-counts, so claims are deduplicated by value.
 
-2. Distinguishing a stated total from a component is genuinely ambiguous:
-   "410,000 options outstanding" contains a total-marker word but is a
-   component of the cap table. We require a total to be the largest value
-   in its group, and reconcile against that one only.
+2. Total versus component is ambiguous. "410,000 options outstanding"
+   contains a total-marker word but is a component. Only the LARGEST stated
+   total is reconciled against.
+
+3. Defined terms matter. "Issued and outstanding" EXCLUDES unexercised
+   options; "fully diluted" includes them. Adding options to an issued count
+   conflates two different figures and produces a finding that is wrong on
+   definition rather than arithmetic. Options are therefore excluded.
 """
 
 from __future__ import annotations
@@ -52,6 +56,7 @@ EXCLUDE_PATTERNS = (
 
 TOLERANCE = Decimal("0.01")
 _SHARE_WORD = re.compile(r"\b(share|option|unit|stock)", re.IGNORECASE)
+_OPTION_WORD = re.compile(r"\b(option|warrant|rsu)", re.IGNORECASE)
 
 
 def _matches(claim: Claim, patterns: tuple[str, ...]) -> bool:
@@ -84,12 +89,12 @@ def _deduplicate(claims: list[Claim]) -> list[Claim]:
     agreement. Summing both double-counts it and manufactures a phantom
     discrepancy.
 
-    Deduplication is on the VALUE, not on the holder's name. Extracted
-    quotes phrase the holder inconsistently ("Sarah Chen holds" versus "The
+    Deduplication is on the VALUE, not the holder's name. Extracted quotes
+    phrase the holder inconsistently ("Sarah Chen holds" versus "The
     Executive holds"), so name matching is unreliable, whereas two identical
     share counts in one cap table are almost always the same holding
-    described twice. Where the same claim appears in multiple documents, the
-    cap table version is preferred as the authoritative source.
+    described twice. Where a value appears in several documents, the cap
+    table version is preferred as authoritative.
     """
     by_value: dict[Decimal, Claim] = {}
     for claim in claims:
@@ -100,21 +105,20 @@ def _deduplicate(claims: list[Claim]) -> list[Claim]:
         if existing is None:
             by_value[value] = claim
             continue
-        # Prefer the cap table as the authoritative statement of a holding.
         if "cap_table" in claim.document_id and "cap_table" not in existing.document_id:
             by_value[value] = claim
     return sorted(by_value.values(), key=lambda c: -(c.numeric_value or Decimal(0)))
 
 
 def detect_share_reconciliation(store: EvidenceStore) -> list[Finding]:
-    """Check that the stated share total reconciles with its components.
+    """Check that the stated share total reconciles with identified holdings.
 
-    Only the LARGEST stated total is reconciled. Smaller figures that carry
-    total-like wording (for example an option pool described as
-    "outstanding") are treated as components, which is what they are.
+    Only the LARGEST stated total is reconciled. Unexercised options are
+    excluded, since "issued and outstanding" is a defined term that does not
+    include them.
 
     Returns:
-        At most one finding, citing the total and every component summed.
+        At most one finding, citing the total and every holding summed.
     """
     claims = _share_claims(store)
     if not claims:
@@ -128,6 +132,9 @@ def detect_share_reconciliation(store: EvidenceStore) -> list[Finding]:
     total = max(totals, key=lambda c: c.numeric_value or Decimal(0))
     assert total.numeric_value is not None
 
+    # "Issued and outstanding" excludes unexercised options and warrants.
+    # Including them conflates the issued count with the fully diluted count,
+    # which is a definitional error rather than a discrepancy.
     components = _deduplicate(
         [
             c
@@ -136,6 +143,7 @@ def detect_share_reconciliation(store: EvidenceStore) -> list[Finding]:
             and _matches(c, HOLDER_PATTERNS)
             and c.numeric_value is not None
             and c.numeric_value < total.numeric_value
+            and not _OPTION_WORD.search(f"{c.predicate} {c.raw_text}")
         ]
     )
 
@@ -153,10 +161,8 @@ def detect_share_reconciliation(store: EvidenceStore) -> list[Finding]:
         return []
 
     evidence: tuple[Span, ...] = (total.span, *(c.span for c in components))
-    parts = " + ".join(
-        f"{c.numeric_value:,.0f}" for c in components if c.numeric_value
-    )
-    direction = "exceed" if difference > 0 else "fall short of"
+    parts = " + ".join(f"{c.numeric_value:,.0f}" for c in components if c.numeric_value)
+    direction = "exceed" if difference > 0 else "are unaccounted for against"
 
     log.info(
         "share reconciliation mismatch",
@@ -171,15 +177,16 @@ def detect_share_reconciliation(store: EvidenceStore) -> list[Finding]:
             finding_id="arith-shares-001",
             finding_type=FindingType.ARITHMETIC,
             severity=Severity.HIGH,
-            title="Stated share total does not reconcile with individual holdings",
+            title="Stated share total does not reconcile with identified holdings",
             description=(
-                f"The cap table states a total of {total.numeric_value:,.0f} "
-                f"shares, but the individual holdings sum to {summed:,.0f} "
-                f"({parts}). The components {direction} the stated total by "
-                f"{abs(difference):,.0f} shares. An unreconciled cap table "
-                f"means the buyer cannot rely on the stated ownership "
-                f"percentages, and may be acquiring a different equity "
-                f"position than represented."
+                f"The cap table states {total.numeric_value:,.0f} shares "
+                f"issued and outstanding, but identified holdings account for "
+                f"only {summed:,.0f} ({parts}). {abs(difference):,.0f} shares "
+                f"{direction} the identified holdings. Either a holder is "
+                f"undisclosed or the stated total is wrong; in either case the "
+                f"buyer cannot rely on the stated ownership percentages. "
+                f"Unexercised options are excluded from this reconciliation, "
+                f"as they are not issued shares."
             ),
             evidence=evidence,
             claim_ids=(total.claim_id, *(c.claim_id for c in components)),

@@ -234,12 +234,14 @@ PLANTED_DEFECTS: tuple[PlantedDefect, ...] = (
         documents=("cap_table.pdf",),
         anchors=(
             "Total issued and outstanding shares: 4,250,000",
-            "410,000 options",
+            "Sarah Chen holds 1,800,000 common shares",
         ),
         description=(
-            "Stated total of 4,250,000 shares does not reconcile with the sum "
-            "of holdings: 1,800,000 + 1,200,000 + 900,000 + 410,000 = 4,310,000. "
-            "Discrepancy of 60,000 shares."
+            "Stated total of 4,250,000 issued and outstanding shares does not "
+            "reconcile with identified holdings: 1,800,000 + 1,200,000 + "
+            "900,000 = 3,900,000. 350,000 shares are stated as outstanding "
+            "with no identified holder. Unexercised options are correctly "
+            "excluded, being not yet issued."
         ),
     ),
     PlantedDefect(
