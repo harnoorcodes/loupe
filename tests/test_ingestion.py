@@ -176,7 +176,7 @@ class TestPlantedDefects:
     def test_anchors_present_in_corpus(self, corpus_dir: Path) -> None:
         docs = {d.document_id: d for d in load_directory(corpus_dir)}
         for defect in PLANTED_DEFECTS:
-            if defect.defect_type == "missing_document":
+            if "missing_document" in defect.accepted_types:
                 continue
             corpus_text = " ".join(
                 docs[Path(f).stem].text for f in defect.documents

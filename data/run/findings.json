@@ -4,428 +4,6 @@
     "finding_type": "arithmetic",
     "severity": "high",
     "title": "Stated share total does not reconcile with identified holdings",
-    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares fall short of the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
-    "evidence": [
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 194,
-        "char_end": 241,
-        "text": "Total issued and outstanding shares: 4,250,000."
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 260,
-        "char_end": 301,
-        "text": "Sarah Chen holds 1,800,000 common shares."
-      },
-      {
-        "document_id": "employment_cto",
-        "page": 1,
-        "char_start": 345,
-        "char_end": 397,
-        "text": "The Executive holds 1,200,000 shares of common stock"
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 367,
-        "char_end": 417,
-        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
-      }
-    ],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0000",
-      "cap_table-c0001",
-      "employment_cto-c0006",
-      "cap_table-c0002"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.9,
-    "raised_by": "arithmetic_detector",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.099184Z"
-  },
-  {
-    "finding_id": "gap-R-004",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Shareholders Agreement",
-    "description": "No document satisfying this request was found in the data room. Governs transfer restrictions, drag-along and tag-along rights, any of which can block or complicate a sale.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-005",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Equity incentive plan document",
-    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"410,000 options have been granted to employees\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0005"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-007",
-    "finding_type": "missing_document",
-    "severity": "medium",
-    "title": "Missing: Accounts receivable ageing schedule",
-    "description": "No document satisfying this request was found in the data room. Reveals collection risk that headline revenue figures conceal.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-012",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Litigation schedule or no-litigation confirmation",
-    "description": "No document satisfying this request was found in the data room. Undisclosed litigation is a common source of post-closing dispute.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-013",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Debt agreements and loan documentation",
-    "description": "No document satisfying this request was found in the data room. Debt frequently carries change-of-control acceleration clauses.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-014",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Tax returns for the last three years",
-    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "tension-400",
-    "finding_type": "latent_liability",
-    "severity": "high",
-    "title": "Customer with Change of Control termination represents 43% of total revenue",
-    "description": "According to the contract, TitanRetail Group can terminate its agreement upon 30 days notice in the event of a change of control. Financial statements indicate that TitanRetail Group accounts for 43% of the total revenue. A change of control event during a merger could trigger this termination right, risking the loss of a major revenue streams that represents nearly half of the target's total revenue.",
-    "evidence": [
-      {
-        "document_id": "contract_titanretail",
-        "page": 1,
-        "char_start": 702,
-        "char_end": 738,
-        "text": "upon thirty (30) days written notice"
-      }
-    ],
-    "contradicts": [
-      {
-        "document_id": "financial_statements_2025",
-        "page": 1,
-        "char_start": 395,
-        "char_end": 428,
-        "text": "representing 43% of total revenue"
-      }
-    ],
-    "claim_ids": [
-      "contract_titanretail-c0004",
-      "financial_statements_2025-c0003"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.7,
-    "raised_by": "tension_detector",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:21:07.786357Z"
-  },
-  {
-    "finding_id": "arith-shares-001",
-    "finding_type": "arithmetic",
-    "severity": "high",
-    "title": "Stated share total does not reconcile with identified holdings",
-    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares fall short of the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
-    "evidence": [
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 194,
-        "char_end": 241,
-        "text": "Total issued and outstanding shares: 4,250,000."
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 260,
-        "char_end": 301,
-        "text": "Sarah Chen holds 1,800,000 common shares."
-      },
-      {
-        "document_id": "employment_cto",
-        "page": 1,
-        "char_start": 345,
-        "char_end": 397,
-        "text": "The Executive holds 1,200,000 shares of common stock"
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 367,
-        "char_end": 417,
-        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
-      }
-    ],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0000",
-      "cap_table-c0001",
-      "employment_cto-c0006",
-      "cap_table-c0002"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The 350,000 share discrepancy could represent unallocated shares in an option pool, treasury shares, or minor shareholders not captured in the limited document snippets, rather than a fundamental error in the cap table.",
-    "confidence": 0.9,
-    "raised_by": "arithmetic_detector",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.099184Z"
-  },
-  {
-    "finding_id": "gap-R-004",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Shareholders Agreement",
-    "description": "No document satisfying this request was found in the data room. Governs transfer restrictions, drag-along and tag-along rights, any of which can block or complicate a sale.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "A closely held or early-stage company may not have a standalone Shareholders Agreement if governance and transfer restrictions are fully detailed within the corporate bylaws or articles of incorporation.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-005",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Equity incentive plan document",
-    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"410,000 options have been granted to employees\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0005"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The 410,000 options could have been granted as individual standalone non-statutory stock options approved directly by the board of directors, which does not strictly require a formal equity incentive plan document.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-007",
-    "finding_type": "missing_document",
-    "severity": "low",
-    "title": "Missing: Accounts receivable ageing schedule",
-    "description": "No document satisfying this request was found in the data room. Reveals collection risk that headline revenue figures conceal.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "An accounts receivable aging schedule may be immaterial or irrelevant if the target operates on a subscription or cash-collection basis with negligible outstanding receivables.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-012",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Litigation schedule or no-litigation confirmation",
-    "description": "No document satisfying this request was found in the data room. Undisclosed litigation is a common source of post-closing dispute.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "retracted",
-    "challenge_reason": "The objection is correct. The absence of a litigation schedule in a data room is standard for companies without active disputes. No-litigation representations are handled in the transaction documents, making this finding conceptually incorrect.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-013",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Debt agreements and loan documentation",
-    "description": "No document satisfying this request was found in the data room. Debt frequently carries change-of-control acceleration clauses.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "retracted",
-    "challenge_reason": "A missing document finding is only valid if there is evidence that the target has outstanding debt (e.g., from financial statements or balance sheet lines). Without any evidence of existing debt liabilities, flagging this as a gap is purely speculative.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "gap-R-014",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Tax returns for the last three years",
-    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "Historical tax liabilities can be managed through standard pre-closing tax representations and indemnities in the acquisition agreement, reducing the need for physical historical returns.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:20:47.100182Z"
-  },
-  {
-    "finding_id": "tension-400",
-    "finding_type": "latent_liability",
-    "severity": "high",
-    "title": "Customer with Change of Control termination represents 43% of total revenue",
-    "description": "According to the contract, TitanRetail Group can terminate its agreement upon 30 days notice in the event of a change of control. Financial statements indicate that TitanRetail Group accounts for 43% of the total revenue. A change of control event during a merger could trigger this termination right, risking the loss of a major revenue streams that represents nearly half of the target's total revenue.",
-    "evidence": [
-      {
-        "document_id": "contract_titanretail",
-        "page": 1,
-        "char_start": 702,
-        "char_end": 738,
-        "text": "upon thirty (30) days written notice"
-      }
-    ],
-    "contradicts": [
-      {
-        "document_id": "financial_statements_2025",
-        "page": 1,
-        "char_start": 395,
-        "char_end": 428,
-        "text": "representing 43% of total revenue"
-      }
-    ],
-    "claim_ids": [
-      "contract_titanretail-c0004",
-      "financial_statements_2025-c0003"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The change of control risk can be mitigated prior to closing by making the acquisition conditional on obtaining a written waiver or consent from TitanRetail Group.",
-    "confidence": 0.7,
-    "raised_by": "tension_detector",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:21:07.786357Z"
-  },
-  {
-    "finding_id": "arith-shares-001",
-    "finding_type": "arithmetic",
-    "severity": "high",
-    "title": "Stated share total does not reconcile with identified holdings",
     "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
     "evidence": [
       {
@@ -471,7 +49,7 @@
     "confidence": 0.9,
     "raised_by": "arithmetic_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.559497Z"
+    "created_at": "2026-08-13T10:03:47.407910Z"
   },
   {
     "finding_id": "gap-R-004",
@@ -489,7 +67,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -509,7 +87,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -527,7 +105,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -545,7 +123,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -563,7 +141,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -581,7 +159,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "tension-400",
@@ -618,7 +196,7 @@
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T08:23:51.749392Z"
+    "created_at": "2026-08-13T10:03:47.595236Z"
   },
   {
     "finding_id": "arith-shares-001",
@@ -673,7 +251,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.559497Z"
+    "created_at": "2026-08-13T10:03:47.407910Z"
   },
   {
     "finding_id": "gap-R-004",
@@ -694,7 +272,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -717,7 +295,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -738,7 +316,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -759,7 +337,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -780,7 +358,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -801,7 +379,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.560500Z"
+    "created_at": "2026-08-13T10:03:47.408914Z"
   },
   {
     "finding_id": "tension-400",
@@ -841,428 +419,6 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T08:23:51.749392Z"
-  },
-  {
-    "finding_id": "arith-shares-001",
-    "finding_type": "arithmetic",
-    "severity": "high",
-    "title": "Stated share total does not reconcile with identified holdings",
-    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
-    "evidence": [
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 194,
-        "char_end": 241,
-        "text": "Total issued and outstanding shares: 4,250,000."
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 260,
-        "char_end": 301,
-        "text": "Sarah Chen holds 1,800,000 common shares."
-      },
-      {
-        "document_id": "employment_cto",
-        "page": 1,
-        "char_start": 345,
-        "char_end": 397,
-        "text": "The Executive holds 1,200,000 shares of common stock"
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 367,
-        "char_end": 417,
-        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
-      }
-    ],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0000",
-      "cap_table-c0001",
-      "employment_cto-c0006",
-      "cap_table-c0002"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.9,
-    "raised_by": "arithmetic_detector",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.362963Z"
-  },
-  {
-    "finding_id": "gap-R-004",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Shareholders Agreement",
-    "description": "No document satisfying this request was found in the data room. Governs transfer restrictions, drag-along and tag-along rights, any of which can block or complicate a sale.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.363964Z"
-  },
-  {
-    "finding_id": "gap-R-005",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Equity incentive plan document",
-    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"410,000 options have been granted to employees\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0005"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-007",
-    "finding_type": "missing_document",
-    "severity": "medium",
-    "title": "Missing: Accounts receivable ageing schedule",
-    "description": "No document satisfying this request was found in the data room. Reveals collection risk that headline revenue figures conceal.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-012",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Litigation schedule or no-litigation confirmation",
-    "description": "No document satisfying this request was found in the data room. Undisclosed litigation is a common source of post-closing dispute.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-013",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Debt agreements and loan documentation",
-    "description": "No document satisfying this request was found in the data room. Debt frequently carries change-of-control acceleration clauses.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-014",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Tax returns for the last three years",
-    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "tension-400",
-    "finding_type": "latent_liability",
-    "severity": "high",
-    "title": "Customer with Change of Control termination represents 43% of total revenue",
-    "description": "According to the contract, TitanRetail Group can terminate its agreement upon 30 days notice in the event of a change of control. Financial statements indicate that TitanRetail Group accounts for 43% of the total revenue. A change of control event during a merger could trigger this termination right, risking the loss of a major revenue streams that represents nearly half of the target's total revenue.",
-    "evidence": [
-      {
-        "document_id": "contract_titanretail",
-        "page": 1,
-        "char_start": 702,
-        "char_end": 738,
-        "text": "upon thirty (30) days written notice"
-      }
-    ],
-    "contradicts": [
-      {
-        "document_id": "financial_statements_2025",
-        "page": 1,
-        "char_start": 395,
-        "char_end": 428,
-        "text": "representing 43% of total revenue"
-      }
-    ],
-    "claim_ids": [
-      "contract_titanretail-c0004",
-      "financial_statements_2025-c0003"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "proposed",
-    "challenge_reason": null,
-    "confidence": 0.7,
-    "raised_by": "tension_detector",
-    "reviewed_by": [],
-    "created_at": "2026-08-13T08:26:15.559554Z"
-  },
-  {
-    "finding_id": "arith-shares-001",
-    "finding_type": "arithmetic",
-    "severity": "medium",
-    "title": "Stated share total does not reconcile with identified holdings",
-    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
-    "evidence": [
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 194,
-        "char_end": 241,
-        "text": "Total issued and outstanding shares: 4,250,000."
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 260,
-        "char_end": 301,
-        "text": "Sarah Chen holds 1,800,000 common shares."
-      },
-      {
-        "document_id": "employment_cto",
-        "page": 1,
-        "char_start": 345,
-        "char_end": 397,
-        "text": "The Executive holds 1,200,000 shares of common stock"
-      },
-      {
-        "document_id": "cap_table",
-        "page": 1,
-        "char_start": 367,
-        "char_end": 417,
-        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
-      }
-    ],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0000",
-      "cap_table-c0001",
-      "employment_cto-c0006",
-      "cap_table-c0002"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The 350,000 share difference is highly likely to be held by undisclosed minority shareholders (such as employees or early-stage angel investors) who are not highlighted on page 1 of the cap table, rather than representing an arithmetic error or invalid cap table.",
-    "confidence": 0.9,
-    "raised_by": "arithmetic_detector",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.362963Z"
-  },
-  {
-    "finding_id": "gap-R-004",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Shareholders Agreement",
-    "description": "No document satisfying this request was found in the data room. Governs transfer restrictions, drag-along and tag-along rights, any of which can block or complicate a sale.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "A Shareholders Agreement is only required if there are multiple shareholders wishing to govern their relationship; if the company is closely held or has simple governance, one might not exist.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.363964Z"
-  },
-  {
-    "finding_id": "gap-R-005",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Equity incentive plan document",
-    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"410,000 options have been granted to employees\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [
-      "cap_table-c0005"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The company may grant options on an ad-hoc basis through individual option agreements approved by the Board of Directors without having formally adopted a comprehensive equity incentive plan.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-007",
-    "finding_type": "missing_document",
-    "severity": "low",
-    "title": "Missing: Accounts receivable ageing schedule",
-    "description": "No document satisfying this request was found in the data room. Reveals collection risk that headline revenue figures conceal.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "An accounts receivable aging schedule is a routine working capital document, and its absence represents a standard financial diligence request rather than a major transaction risk.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-012",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Litigation schedule or no-litigation confirmation",
-    "description": "No document satisfying this request was found in the data room. Undisclosed litigation is a common source of post-closing dispute.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "retracted",
-    "challenge_reason": "The objection is correct. A company does not maintain a 'no-litigation confirmation' in the ordinary course of business. This is a transaction-specific disclosure drafted during the contract negotiation phase, making its 'absence' from the VDR a non-issue.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-013",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Debt agreements and loan documentation",
-    "description": "No document satisfying this request was found in the data room. Debt frequently carries change-of-control acceleration clauses.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "retracted",
-    "challenge_reason": "If the company is debt-free, no such agreements exist. Without any evidence of outstanding debt in the company's financial statements, claiming these documents are 'missing' is speculative and unsupported.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "gap-R-014",
-    "finding_type": "missing_document",
-    "severity": "high",
-    "title": "Missing: Tax returns for the last three years",
-    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
-    "evidence": [],
-    "contradicts": [],
-    "claim_ids": [],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "Tax returns might be temporarily unavailable or the company may be a newly formed entity that has not yet filed three years of returns.",
-    "confidence": 0.95,
-    "raised_by": "gap_auditor",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.364963Z"
-  },
-  {
-    "finding_id": "tension-400",
-    "finding_type": "latent_liability",
-    "severity": "high",
-    "title": "Customer with Change of Control termination represents 43% of total revenue",
-    "description": "According to the contract, TitanRetail Group can terminate its agreement upon 30 days notice in the event of a change of control. Financial statements indicate that TitanRetail Group accounts for 43% of the total revenue. A change of control event during a merger could trigger this termination right, risking the loss of a major revenue streams that represents nearly half of the target's total revenue.",
-    "evidence": [
-      {
-        "document_id": "contract_titanretail",
-        "page": 1,
-        "char_start": 702,
-        "char_end": 738,
-        "text": "upon thirty (30) days written notice"
-      }
-    ],
-    "contradicts": [
-      {
-        "document_id": "financial_statements_2025",
-        "page": 1,
-        "char_start": 395,
-        "char_end": 428,
-        "text": "representing 43% of total revenue"
-      }
-    ],
-    "claim_ids": [
-      "contract_titanretail-c0004",
-      "financial_statements_2025-c0003"
-    ],
-    "materiality": null,
-    "materiality_currency": null,
-    "status": "confirmed",
-    "challenge_reason": "The cited evidence of 'upon thirty (30) days written notice' indicates a standard termination for convenience rather than a specific change-of-control provision. Furthermore, the financial statement data is listed as 'conflicting' when it is actually supporting evidence.",
-    "confidence": 0.7,
-    "raised_by": "tension_detector",
-    "reviewed_by": [
-      "red_team_critic",
-      "red_team_critic"
-    ],
-    "created_at": "2026-08-13T08:26:15.559554Z"
+    "created_at": "2026-08-13T10:03:47.595236Z"
   }
 ]

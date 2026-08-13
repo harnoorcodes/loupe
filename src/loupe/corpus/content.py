@@ -1,8 +1,8 @@
 """Synthetic data room for Northwind Analytics, a fictional SaaS company.
 
 Documents are defined as plain text here and rendered to PDF/DOCX by the
-generator. Defects are planted deliberately so that recall and precision can
-be measured against known ground truth.
+generator. Defects are planted deliberately so that recall can be measured
+against known ground truth.
 
 Ground truth is recorded as SEARCH STRINGS, never character offsets. Offsets
 must always be derived from extracted text after a document has been parsed,
@@ -28,18 +28,36 @@ class PlantedDefect(NamedTuple):
 
     Attributes:
         defect_id: Stable identifier.
-        defect_type: Matches FindingType values.
+        accepted_types: Finding types that count as detecting this defect.
+            More than one is allowed because a single real problem can be
+            correctly classified in several ways. The change-of-control
+            issue is both a cross-document contradiction and a latent
+            liability; either label is a correct detection, and insisting on
+            one would score a correct answer as a miss.
         documents: Documents that must be read together to detect it.
-        anchors: Text fragments a correct finding should cite. Used to check
-            whether a detected finding refers to the right evidence.
+        anchors: Short text fragments a correct finding should mention. Kept
+            short deliberately, because a finding may quote a narrower span
+            than the sentence the defect lives in.
         description: What a correct finding would say.
     """
 
     defect_id: str
-    defect_type: str
+    accepted_types: tuple[str, ...]
     documents: tuple[str, ...]
     anchors: tuple[str, ...]
     description: str
+
+
+class ExpectedGap(NamedTuple):
+    """A document genuinely absent from this corpus but never planted.
+
+    These exist because the synthetic corpus is small. Reporting them is
+    CORRECT behaviour, not a false positive, so the score card counts them
+    separately rather than penalising the system for being right.
+    """
+
+    request_id: str
+    reason: str
 
 
 CAP_TABLE = DocSpec(
@@ -230,28 +248,21 @@ ALL_DOCUMENTS: tuple[DocSpec, ...] = (
 PLANTED_DEFECTS: tuple[PlantedDefect, ...] = (
     PlantedDefect(
         defect_id="D-001",
-        defect_type="arithmetic",
+        accepted_types=("arithmetic",),
         documents=("cap_table.pdf",),
-        anchors=(
-            "Total issued and outstanding shares: 4,250,000",
-            "Sarah Chen holds 1,800,000 common shares",
-        ),
+        anchors=("4,250,000",),
         description=(
             "Stated total of 4,250,000 issued and outstanding shares does not "
-            "reconcile with identified holdings: 1,800,000 + 1,200,000 + "
-            "900,000 = 3,900,000. 350,000 shares are stated as outstanding "
-            "with no identified holder. Unexercised options are correctly "
-            "excluded, being not yet issued."
+            "reconcile with identified holdings of 3,900,000. 350,000 shares "
+            "are stated as outstanding with no identified holder. Unexercised "
+            "options are correctly excluded, being not yet issued."
         ),
     ),
     PlantedDefect(
         defect_id="D-002",
-        defect_type="cross_doc_contradiction",
+        accepted_types=("latent_liability", "cross_doc_contradiction"),
         documents=("contract_titanretail.pdf", "financial_statements_2025.pdf"),
-        anchors=(
-            "Customer may terminate this Agreement upon thirty (30) days",
-            "representing 43% of total revenue",
-        ),
+        anchors=("43%", "thirty (30) days"),
         description=(
             "TitanRetail may terminate on change of control without penalty, "
             "and represents 43% of FY2025 revenue. An acquisition therefore "
@@ -260,7 +271,7 @@ PLANTED_DEFECTS: tuple[PlantedDefect, ...] = (
     ),
     PlantedDefect(
         defect_id="D-003",
-        defect_type="missing_document",
+        accepted_types=("missing_document",),
         documents=(),
         anchors=("equity incentive plan",),
         description=(
@@ -269,4 +280,13 @@ PLANTED_DEFECTS: tuple[PlantedDefect, ...] = (
             "No plan document is present in the data room."
         ),
     ),
+)
+
+
+EXPECTED_GAPS: tuple[ExpectedGap, ...] = (
+    ExpectedGap("R-004", "No shareholders agreement was written for this corpus."),
+    ExpectedGap("R-007", "No receivables schedule was written for this corpus."),
+    ExpectedGap("R-012", "No litigation schedule was written for this corpus."),
+    ExpectedGap("R-013", "No debt documentation was written for this corpus."),
+    ExpectedGap("R-014", "No tax returns were written for this corpus."),
 )
