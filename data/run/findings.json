@@ -49,7 +49,7 @@
     "confidence": 0.9,
     "raised_by": "arithmetic_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.407910Z"
+    "created_at": "2026-08-13T10:56:43.667408Z"
   },
   {
     "finding_id": "gap-R-004",
@@ -67,7 +67,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -87,7 +87,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -105,7 +105,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -123,7 +123,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -141,7 +141,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -159,7 +159,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "tension-400",
@@ -196,12 +196,12 @@
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:03:47.595236Z"
+    "created_at": "2026-08-13T10:56:43.679455Z"
   },
   {
     "finding_id": "arith-shares-001",
     "finding_type": "arithmetic",
-    "severity": "medium",
+    "severity": "high",
     "title": "Stated share total does not reconcile with identified holdings",
     "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
     "evidence": [
@@ -241,8 +241,8 @@
       "employment_cto-c0006",
       "cap_table-c0002"
     ],
-    "materiality": null,
-    "materiality_currency": null,
+    "materiality": "2058824",
+    "materiality_currency": "USD",
     "status": "confirmed",
     "challenge_reason": "The 350,000 share difference is highly likely to be held by undisclosed minority shareholders (such as employees or early-stage angel investors) who are not highlighted on page 1 of the cap table, rather than representing an arithmetic error or invalid cap table.",
     "confidence": 0.9,
@@ -251,12 +251,12 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.407910Z"
+    "created_at": "2026-08-13T10:56:43.667408Z"
   },
   {
     "finding_id": "gap-R-004",
     "finding_type": "missing_document",
-    "severity": "high",
+    "severity": "medium",
     "title": "Missing: Shareholders Agreement",
     "description": "No document satisfying this request was found in the data room. Governs transfer restrictions, drag-along and tag-along rights, any of which can block or complicate a sale.",
     "evidence": [],
@@ -272,12 +272,12 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-005",
     "finding_type": "missing_document",
-    "severity": "high",
+    "severity": "medium",
     "title": "Missing: Equity incentive plan document",
     "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"410,000 options have been granted to employees\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
     "evidence": [],
@@ -295,7 +295,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -316,7 +316,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -337,7 +337,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -358,12 +358,12 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "gap-R-014",
     "finding_type": "missing_document",
-    "severity": "high",
+    "severity": "medium",
     "title": "Missing: Tax returns for the last three years",
     "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
     "evidence": [],
@@ -379,12 +379,12 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.408914Z"
+    "created_at": "2026-08-13T10:56:43.669426Z"
   },
   {
     "finding_id": "tension-400",
     "finding_type": "latent_liability",
-    "severity": "high",
+    "severity": "critical",
     "title": "Customer with Change of Control termination represents 43% of total revenue",
     "description": "According to the contract, TitanRetail Group can terminate its agreement upon 30 days notice in the event of a change of control. Financial statements indicate that TitanRetail Group accounts for 43% of the total revenue. A change of control event during a merger could trigger this termination right, risking the loss of a major revenue streams that represents nearly half of the target's total revenue.",
     "evidence": [
@@ -419,6 +419,6 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:03:47.595236Z"
+    "created_at": "2026-08-13T10:56:43.679455Z"
   }
 ]

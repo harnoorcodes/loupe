@@ -14,11 +14,12 @@ import argparse
 import asyncio
 import sys
 import time
+from decimal import Decimal
 from pathlib import Path
 
 from agents import Agent, Runner
 
-from loupe.agents import approval, critic
+from loupe.agents import approval, classifier, critic, materiality
 from loupe.agents.extractor import extract_corpus
 from loupe.config.settings import settings
 from loupe.detect import arithmetic, gaps, temporal, tension
@@ -118,17 +119,28 @@ async def cmd_extract(docs_dir: Path, out_dir: Path, limit: int | None) -> int:
 
 
 async def cmd_detect(
-    run_dir: Path, docs_dir: Path, interactive: bool, fresh: bool
+    run_dir: Path,
+    docs_dir: Path,
+    interactive: bool,
+    fresh: bool,
+    deal_value: Decimal,
 ) -> int:
-    """Detect, adversarially review, and gate findings."""
+    """Classify, detect, review, score, and gate findings."""
     settings.assert_safe_for_real_data()
 
     if fresh:
-        ledger = run_dir / "findings.json"
-        ledger.unlink(missing_ok=True)
-        print(f"\nCleared previous findings from {ledger}")
+        (run_dir / "findings.json").unlink(missing_ok=True)
+        print("\nCleared previous findings")
 
-    store = _open_store(run_dir, docs_dir)
+    store = EvidenceStore(run_dir)
+    store.load()
+
+    print("\n--- Document classification (model) ---")
+    documents = await classifier.classify_all(load_directory(docs_dir))
+    for doc in documents:
+        store.add_document(doc)
+    for doc in documents:
+        print(f"  {doc.filename:<36} {doc.document_type.value}")
 
     if not store.claims:
         print(f"\nNo claims in {run_dir}. Run 'extract' first.\n")
@@ -171,6 +183,14 @@ async def cmd_detect(
     for finding in retracted:
         print(f"    withdrawn: {finding.title}")
 
+    print(f"\n--- Materiality scoring of {len(confirmed)} findings (model) ---")
+    scored = await materiality.score_all(confirmed, deal_value)
+    quantified = [f for f in scored if f.materiality is not None]
+    print(f"  {len(quantified)} of {len(scored)} quantified")
+
+    scored_by_id = {f.finding_id: f for f in scored}
+    reviewed = [scored_by_id.get(f.finding_id, f) for f in reviewed]
+
     reviewed = approval.gate(reviewed, interactive=interactive)
 
     for finding in proposed:
@@ -183,7 +203,16 @@ async def cmd_detect(
     print(f"\n=== {len(final)} confirmed findings ===\n")
     for finding in final:
         scope = "CROSS-DOC " if finding.is_cross_document else "single-doc"
-        print(f"[{finding.severity.value.upper():<8}] [{scope}] {finding.title}")
+        money = (
+            f"  ~{finding.materiality_currency.value} {finding.materiality:,.0f}"
+            if finding.materiality is not None
+            and finding.materiality_currency is not None
+            else ""
+        )
+        print(
+            f"[{finding.severity.value.upper():<8}] [{scope}] "
+            f"{finding.title}{money}"
+        )
         for span in finding.all_spans[:3]:
             print(f'    {span.citation()}  "{span.text[:60]}"')
         print()
@@ -232,6 +261,12 @@ def main() -> int:
     detect.add_argument(
         "--fresh", action="store_true", help="clear previous findings first"
     )
+    detect.add_argument(
+        "--deal-value",
+        type=Decimal,
+        default=Decimal("25000000"),
+        help="transaction value used as the materiality reference",
+    )
 
     memo_cmd = sub.add_parser("memo", help="write the findings memo")
     memo_cmd.add_argument("--run", type=Path, default=Path("data/run"))
@@ -255,6 +290,7 @@ def main() -> int:
                 args.docs,
                 interactive=not args.no_approval,
                 fresh=args.fresh,
+                deal_value=args.deal_value,
             )
         )
     if args.command == "memo":

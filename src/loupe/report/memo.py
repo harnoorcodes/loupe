@@ -42,6 +42,7 @@ def _summary_line(findings: tuple[Finding, ...]) -> str:
         for sev in (Severity.CRITICAL, Severity.HIGH, Severity.MEDIUM, Severity.LOW)
         if sev in counts
     ]
+
     cross = sum(1 for f in findings if f.is_cross_document)
     tail = (
         f" {cross} of these required evidence from more than one document."
@@ -51,9 +52,29 @@ def _summary_line(findings: tuple[Finding, ...]) -> str:
     return f"{len(findings)} confirmed findings: {', '.join(parts)}.{tail}"
 
 
+def _quantified_total(findings: tuple[Finding, ...]) -> str | None:
+    """Sum the findings that carry a monetary estimate, if any do."""
+    amounts = [
+        f for f in findings
+        if f.materiality is not None and f.materiality_currency is not None
+    ]
+    if not amounts:
+        return None
+    total = sum(f.materiality for f in amounts if f.materiality is not None)
+    currency = amounts[0].materiality_currency
+    assert currency is not None
+    return (
+        f"{len(amounts)} finding(s) carry a quantified impact totalling "
+        f"approximately {currency.value} {total:,.0f}. The remainder could not "
+        f"be quantified from the evidence available and are reported "
+        f"qualitatively."
+    )
+
+
 def _render_finding(finding: Finding, number: int) -> list[str]:
     """Render one finding as markdown."""
     scope = "cross-document" if finding.is_cross_document else "single document"
+
     lines = [
         f"### {number}. {finding.title}",
         "",
@@ -61,17 +82,21 @@ def _render_finding(finding: Finding, number: int) -> list[str]:
         f"**Type:** {finding.finding_type.value.replace('_', ' ')}  ",
         f"**Scope:** {scope}  ",
         f"**Raised by:** {finding.raised_by}",
-        "",
-        finding.description,
-        "",
     ]
 
+    if finding.materiality is not None and finding.materiality_currency is not None:
+        lines.append(
+            f"  \n**Estimated impact:** {finding.materiality_currency.value} "
+            f"{finding.materiality:,.0f}"
+        )
+
+    lines.extend(["", finding.description, ""])
+
     if finding.all_spans:
-        lines.append("**Evidence**")
-        lines.append("")
+        lines.extend(["**Evidence**", ""])
         for span in finding.all_spans:
             quote = span.text.replace("\n", " ").strip()
-            lines.append(f"- `{span.citation()}` — \"{quote[:300]}\"")
+            lines.append(f'- `{span.citation()}` — "{quote[:300]}"')
         lines.append("")
     else:
         lines.extend(
@@ -111,9 +136,7 @@ def build(store: EvidenceStore, deal_name: str = "Northwind Analytics Inc.") -> 
     """
     confirmed = store.confirmed_findings()
     retracted = [
-        f
-        for f in store.current_findings()
-        if f.status.value == "retracted"
+        f for f in store.current_findings() if f.status.value == "retracted"
     ]
     stats = store.stats()
     generated = datetime.now(UTC).strftime("%d %B %Y")
@@ -129,16 +152,25 @@ def build(store: EvidenceStore, deal_name: str = "Northwind Analytics Inc.") -> 
         "",
         _summary_line(confirmed),
         "",
-        f"Reviewed {stats['documents']} documents and extracted "
-        f"{stats['claims']} claims. Every finding below was challenged by an "
-        f"adversarial reviewing agent before being reported, and every "
-        f"citation was verified against its source document.",
-        "",
-        "---",
-        "",
-        "## Findings",
-        "",
     ]
+
+    total_line = _quantified_total(confirmed)
+    if total_line:
+        lines.extend([total_line, ""])
+
+    lines.extend(
+        [
+            f"Reviewed {stats['documents']} documents and extracted "
+            f"{stats['claims']} claims. Every finding below was challenged by "
+            f"an adversarial reviewing agent before being reported, and every "
+            f"citation was verified against its source document.",
+            "",
+            "---",
+            "",
+            "## Findings",
+            "",
+        ]
+    )
 
     if confirmed:
         for index, finding in enumerate(confirmed, start=1):
@@ -146,9 +178,7 @@ def build(store: EvidenceStore, deal_name: str = "Northwind Analytics Inc.") -> 
     else:
         lines.extend(["No confirmed findings.", ""])
 
-    gaps = [
-        f for f in confirmed if f.finding_type is FindingType.MISSING_DOCUMENT
-    ]
+    gaps = [f for f in confirmed if f.finding_type is FindingType.MISSING_DOCUMENT]
     if gaps:
         lines.extend(
             [
@@ -178,10 +208,14 @@ def build(store: EvidenceStore, deal_name: str = "Northwind Analytics Inc.") -> 
             ]
         )
         for finding in retracted:
-            lines.append(f"**{finding.title}**")
-            lines.append("")
-            lines.append(f"Withdrawn because: {finding.challenge_reason}")
-            lines.append("")
+            lines.extend(
+                [
+                    f"**{finding.title}**",
+                    "",
+                    f"Withdrawn because: {finding.challenge_reason}",
+                    "",
+                ]
+            )
 
     lines.extend(
         [
@@ -194,6 +228,10 @@ def build(store: EvidenceStore, deal_name: str = "Northwind Analytics Inc.") -> 
             "claims about the same entity drawn from different documents. "
             "Absent documents were identified by comparing the corpus against "
             "a standard diligence request list.",
+            "",
+            "Monetary estimates are derived only from figures appearing in the "
+            "cited evidence. Findings that could not be quantified from the "
+            "evidence are reported without a figure rather than estimated.",
             "",
             "This report identifies issues for human review. It does not "
             "provide legal advice, does not value the business, and does not "
