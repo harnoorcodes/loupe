@@ -49,7 +49,7 @@
     "confidence": 0.9,
     "raised_by": "arithmetic_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.667408Z"
+    "created_at": "2026-08-13T11:31:39.570483Z"
   },
   {
     "finding_id": "gap-R-004",
@@ -67,7 +67,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -87,7 +87,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -105,7 +105,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -123,7 +123,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -141,7 +141,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -159,7 +159,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "tension-400",
@@ -196,7 +196,7 @@
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-13T10:56:43.679455Z"
+    "created_at": "2026-08-13T11:31:39.580455Z"
   },
   {
     "finding_id": "arith-shares-001",
@@ -251,7 +251,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.667408Z"
+    "created_at": "2026-08-13T11:31:39.570483Z"
   },
   {
     "finding_id": "gap-R-004",
@@ -272,7 +272,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -295,7 +295,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-007",
@@ -316,7 +316,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-012",
@@ -337,7 +337,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-013",
@@ -358,7 +358,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -379,7 +379,7 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.669426Z"
+    "created_at": "2026-08-13T11:31:39.571480Z"
   },
   {
     "finding_id": "tension-400",
@@ -419,6 +419,6 @@
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-13T10:56:43.679455Z"
+    "created_at": "2026-08-13T11:31:39.580455Z"
   }
 ]
