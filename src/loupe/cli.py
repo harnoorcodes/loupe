@@ -17,6 +17,7 @@ from agents import Agent, Runner
 
 from loupe.agents.extractor import extract_corpus
 from loupe.config.settings import settings
+from loupe.detect import arithmetic, temporal, tension
 from loupe.ingestion import load_directory
 from loupe.llm.provider import ModelRole, describe_routing, get_model
 from loupe.observability.logging import configure_logging, get_logger
@@ -102,6 +103,52 @@ async def cmd_extract(docs_dir: Path, out_dir: Path, limit: int | None) -> int:
     return 0
 
 
+async def cmd_detect(run_dir: Path, docs_dir: Path) -> int:
+    """Run all detectors over an existing evidence store."""
+    settings.assert_safe_for_real_data()
+
+    store = EvidenceStore(run_dir)
+    store.load()
+    for doc in load_directory(docs_dir):
+        store.add_document(doc)
+
+    if not store.claims:
+        print(f"\nNo claims in {run_dir}. Run 'extract' first.\n")
+        return 1
+
+    print(f"\n{len(store.claims)} claims loaded from {len(store.documents)} documents")
+
+    print("\n--- Arithmetic checks (no LLM) ---")
+    arith = arithmetic.detect(store)
+    print(f"  {len(arith)} findings")
+
+    print("\n--- Temporal checks (no LLM) ---")
+    temp = temporal.detect(store)
+    print(f"  {len(temp)} findings")
+
+    print("\n--- Cross-document tension (LLM) ---")
+    started = time.monotonic()
+    cross = await tension.detect(store)
+    print(f"  {len(cross)} findings in {time.monotonic() - started:.1f}s")
+
+    for finding in [*arith, *temp, *cross]:
+        store.add_finding(finding)
+    store.save()
+
+    all_findings = store.current_findings()
+    print(f"\n=== {len(all_findings)} findings ===\n")
+    for finding in sorted(all_findings, key=lambda f: -f.severity_rank):
+        marker = "CROSS-DOC" if finding.is_cross_document else "single-doc"
+        print(f"[{finding.severity.value.upper():<8}] [{marker}] {finding.title}")
+        print(f"  type   : {finding.finding_type.value}")
+        print(f"  raised : {finding.raised_by}")
+        print(f"  {finding.description[:260]}")
+        for span in finding.all_spans[:3]:
+            print(f"    cite: {span.citation()} \"{span.text[:60]}\"")
+        print()
+
+    return 0
+
 def main() -> int:
     configure_logging()
     parser = argparse.ArgumentParser(prog="loupe")
@@ -113,6 +160,10 @@ def main() -> int:
     extract.add_argument("--docs", type=Path, default=Path("data/synthetic"))
     extract.add_argument("--out", type=Path, default=Path("data/run"))
     extract.add_argument("--limit", type=int, default=None)
+    
+    detect_cmd = sub.add_parser("detect", help="find contradictions in the claim graph")
+    detect_cmd.add_argument("--run", type=Path, default=Path("data/run"))
+    detect_cmd.add_argument("--docs", type=Path, default=Path("data/synthetic"))
 
     args = parser.parse_args()
 
@@ -120,6 +171,8 @@ def main() -> int:
         return asyncio.run(cmd_check())
     if args.command == "extract":
         return asyncio.run(cmd_extract(args.docs, args.out, args.limit))
+    if args.command == "detect":
+        return asyncio.run(cmd_detect(args.run, args.docs))
     return 2
 
 

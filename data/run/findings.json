@@ -1,1 +1,159 @@
-[]
+[
+  {
+    "finding_id": "arith-000",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with components",
+    "description": "The stated total is 4,250,000 (total issued and outstanding shares), but the individual holdings sum to 5,700,000 (1,800,000 + 900,000 + 1,800,000 + 1,200,000). The difference is 1,450,000 shares. An unreconciled cap table means the buyer cannot rely on the stated ownership percentages.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 194,
+        "char_end": 241,
+        "text": "Total issued and outstanding shares: 4,250,000."
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 301,
+        "text": "Sarah Chen holds 1,800,000 common shares."
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      },
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 338,
+        "char_end": 390,
+        "text": "The Executive holds 1,800,000 shares of common stock"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 345,
+        "char_end": 397,
+        "text": "The Executive holds 1,200,000 shares of common stock"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0000",
+      "cap_table-c0001",
+      "cap_table-c0002",
+      "employment_ceo-c0005",
+      "employment_cto-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-13T06:11:00.977867Z"
+  },
+  {
+    "finding_id": "arith-001",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with components",
+    "description": "The stated total is 410,000 (employee option grants outstanding), but the individual holdings sum to 5,700,000 (1,800,000 + 900,000 + 1,800,000 + 1,200,000). The difference is 5,290,000 shares. An unreconciled cap table means the buyer cannot rely on the stated ownership percentages.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 509,
+        "char_end": 555,
+        "text": "410,000 options have been granted to employees"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 301,
+        "text": "Sarah Chen holds 1,800,000 common shares."
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      },
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 338,
+        "char_end": 390,
+        "text": "The Executive holds 1,800,000 shares of common stock"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 345,
+        "char_end": 397,
+        "text": "The Executive holds 1,200,000 shares of common stock"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0005",
+      "cap_table-c0001",
+      "cap_table-c0002",
+      "employment_ceo-c0005",
+      "employment_cto-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-13T06:11:00.977867Z"
+  },
+  {
+    "finding_id": "tension-400",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Change of Control Termination Right for Major Revenue Contributor",
+    "description": "TitanRetail Group has the right to terminate its contract on 30 days' notice upon a change of control event. Because this customer represents 43% of the company's total revenue, the execution of this change of control clause during an acquisition poses a critical financial risk to the buyer.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 702,
+        "char_end": 738,
+        "text": "upon thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 395,
+        "char_end": 428,
+        "text": "representing 43% of total revenue"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-13T06:11:10.203550Z"
+  }
+]
