@@ -1184,5 +1184,2377 @@
       "red_team_critic"
     ],
     "created_at": "2026-08-15T12:10:22.895572Z"
+  },
+  {
+    "finding_id": "arith-shares-001",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with identified holdings",
+    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 194,
+        "char_end": 240,
+        "text": "Total issued and outstanding shares: 4,250,000"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 300,
+        "text": "Sarah Chen holds 1,800,000 common shares"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 407,
+        "char_end": 445,
+        "text": "holds 1,200,000 shares of common stock"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0000",
+      "cap_table-c0001",
+      "employment_cto-c0007",
+      "cap_table-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.613382Z"
+  },
+  {
+    "finding_id": "gap-R-005",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Equity incentive plan document",
+    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"The Board received a report on outstanding employee option grants\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [
+      "board_minutes_2025_06-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.615375Z"
+  },
+  {
+    "finding_id": "gap-R-014",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Tax returns for the last three years",
+    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.615375Z"
+  },
+  {
+    "finding_id": "tension-0200",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual subscription fee between contract and amendment",
+    "description": "According to contract_titanretail-c0003, the annual subscription fee for TitanRetail Group is USD 3,612,000. However, contract_titanretail_amendment_1-c0001 states the annual subscription fee is USD 4,100,000. The buyer should verify the effective date of the amendment and whether the increased rate has been successfully billed and recognized.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 355,
+        "char_end": 417,
+        "text": "Customer shall pay an annual subscription fee of USD 3,612,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "contract_titanretail_amendment_1",
+        "page": 1,
+        "char_start": 339,
+        "char_end": 401,
+        "text": "Customer shall pay an annual subscription fee of USD 4,100,000"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0003",
+      "contract_titanretail_amendment_1-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.632391Z"
+  },
+  {
+    "finding_id": "tension-0300",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual base salary for Chief Financial Officer",
+    "description": "The board minutes from September 2024 state that Priya Raghunathan was approved for an annual base salary of USD 240,000, whereas the CFO employment agreement defines the annual base salary as USD 260,000. This USD 20,000 discrepancy could represent an unauthorized salary level or an unresolved dispute regarding compensation terms.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.633389Z"
+  },
+  {
+    "finding_id": "pair-0000",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in CFO base salary",
+    "description": "Board minutes from September 2024 approve an annual base salary of USD 240,000 for Priya Raghunathan, but her employment agreement states she shall receive an annual base salary of USD 260,000. There is no explanation provided for this USD 20,000 discrepancy.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.661636Z"
+  },
+  {
+    "finding_id": "pair-0002",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in total deferred revenue",
+    "description": "The deferred revenue schedule reports total deferred revenue of USD 2,340,000 as of 31 December 2025, whereas the financial statements report USD 2,100,000 for the same date. This represents an unreconciled difference of USD 240,000.",
+    "evidence": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 154,
+        "char_end": 217,
+        "text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 534,
+        "char_end": 591,
+        "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000"
+      }
+    ],
+    "claim_ids": [
+      "deferred_revenue_schedule-c0001",
+      "financial_statements_2025-c0005"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.661636Z"
+  },
+  {
+    "finding_id": "pair-0205",
+    "finding_type": "undisclosed_relationship",
+    "severity": "high",
+    "title": "Contractor registered at CTO's residential address",
+    "description": "David Okonkwo (CTO) resides at 210 Cedar Street, Portland, Oregon, which is also the registered address of contractor Cedar Devshop LLC. This reveals an undisclosed related-party relationship and a material conflict of interest for a potential buyer.",
+    "evidence": [
+      {
+        "document_id": "contractor_agreement_devshop",
+        "page": 1,
+        "char_start": 206,
+        "char_end": 269,
+        "text": "whose registered address is 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "claim_ids": [
+      "contractor_agreement_devshop-c0003",
+      "employment_cto-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.665157Z"
+  },
+  {
+    "finding_id": "pair-0300",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Technology Officer",
+    "description": "Cedar Devshop LLC is registered at 210 Cedar Street, Portland, Oregon, which is the residential address of the company's CTO, David Okonkwo. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 174,
+        "char_end": 228,
+        "text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_cto-c0003",
+      "vendor_list-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0301",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Executive Officer",
+    "description": "CloudSpine Systems LLC is registered at 44 Lakeshore Drive, Portland, Oregon, which is the residential address of the CEO, Sarah Chen. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 132,
+        "char_end": 192,
+        "text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 48,
+        "char_end": 109,
+        "text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_ceo-c0003",
+      "vendor_list-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0302",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with material deferred revenue",
+    "description": "TitanRetail Group has a termination notice period of only 30 days, yet has USD 1,025,000 in associated deferred revenue. If the customer exercises this termination right, the company risks being unable to recognize or having to refund this material deferred revenue balance.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 234,
+        "char_end": 276,
+        "text": "USD 1,025,000 relates to TitanRetail Group"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "deferred_revenue_schedule-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0303",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2024 revenue",
+    "description": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024 but can terminate its contract on short notice (30 days), exposing the business to sudden and material revenue loss.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 170,
+        "char_end": 236,
+        "text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0304",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 38% of revenue",
+    "description": "TitanRetail Group can terminate its agreement on just 30 days' written notice, despite representing 38% of the company's total revenue in FY2024. This concentration of revenue paired with an immediate exit right represents an extreme business continuity risk.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 238,
+        "char_end": 272,
+        "text": "representing 38% of total revenue."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0305",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2025 revenue",
+    "description": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025 but has the right to terminate its agreement with only 30 days' notice, posing a severe threat to recurring revenue stream predictability.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 327,
+        "char_end": 393,
+        "text": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0400",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 43% of revenue",
+    "description": "TitanRetail Group represents 43% of total revenue in FY2025, yet has the right to terminate its contract with only thirty (30) days of written notice. This represents a significant revenue concentration risk where nearly half of the company's revenue can disappear on extremely short notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 395,
+        "char_end": 428,
+        "text": "representing 43% of total revenue"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.667748Z"
+  },
+  {
+    "finding_id": "pair-0401",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer representing USD 3.6M in revenue",
+    "description": "TitanRetail Group accounts for USD 3,612,000 in recognized revenue, but the agreement allows for termination with only thirty (30) days of written notice. This creates a latent liability as a substantial revenue stream can be terminated with very little notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "revenue_by_customer_2025",
+        "page": 1,
+        "char_start": 157,
+        "char_end": 190,
+        "text": "TitanRetail Group: USD 3,612,000."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "revenue_by_customer_2025-c0000"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:29:49.667748Z"
+  },
+  {
+    "finding_id": "arith-shares-001",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with identified holdings",
+    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 194,
+        "char_end": 240,
+        "text": "Total issued and outstanding shares: 4,250,000"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 300,
+        "text": "Sarah Chen holds 1,800,000 common shares"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 407,
+        "char_end": 445,
+        "text": "holds 1,200,000 shares of common stock"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0000",
+      "cap_table-c0001",
+      "employment_cto-c0007",
+      "cap_table-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The missing 350,000 shares might represent individual small shareholders who were omitted from this high-level summary page of the cap table rather than an actual accounting error.",
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.613382Z"
+  },
+  {
+    "finding_id": "gap-R-005",
+    "finding_type": "missing_document",
+    "severity": "medium",
+    "title": "Missing: Equity incentive plan document",
+    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"The Board received a report on outstanding employee option grants\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [
+      "board_minutes_2025_06-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "Employee options could have been granted through standalone board-approved agreements, which does not strictly require an overarching Equity Incentive Plan document.",
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.615375Z"
+  },
+  {
+    "finding_id": "gap-R-014",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Tax returns for the last three years",
+    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "Tax returns are historical filings, and the buyer can rely on robust tax representations, warranties, and indemnities in the purchase agreement instead of conducting a manual review of historical returns.",
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.615375Z"
+  },
+  {
+    "finding_id": "tension-0200",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual subscription fee between contract and amendment",
+    "description": "According to contract_titanretail-c0003, the annual subscription fee for TitanRetail Group is USD 3,612,000. However, contract_titanretail_amendment_1-c0001 states the annual subscription fee is USD 4,100,000. The buyer should verify the effective date of the amendment and whether the increased rate has been successfully billed and recognized.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 355,
+        "char_end": 417,
+        "text": "Customer shall pay an annual subscription fee of USD 3,612,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "contract_titanretail_amendment_1",
+        "page": 1,
+        "char_start": 339,
+        "char_end": 401,
+        "text": "Customer shall pay an annual subscription fee of USD 4,100,000"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0003",
+      "contract_titanretail_amendment_1-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This is a standard amendment process, not a contradiction or error. Unless there is evidence that the amendment is unsigned or contested, there is no real finding here.",
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.632391Z"
+  },
+  {
+    "finding_id": "tension-0300",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual base salary for Chief Financial Officer",
+    "description": "The board minutes from September 2024 state that Priya Raghunathan was approved for an annual base salary of USD 240,000, whereas the CFO employment agreement defines the annual base salary as USD 260,000. This USD 20,000 discrepancy could represent an unauthorized salary level or an unresolved dispute regarding compensation terms.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This is a duplicate of pair-0000. It should be eliminated to keep the report clean, with the issue tracked under pair-0000.",
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.633389Z"
+  },
+  {
+    "finding_id": "pair-0000",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "low",
+    "title": "Discrepancy in CFO base salary",
+    "description": "Board minutes from September 2024 approve an annual base salary of USD 240,000 for Priya Raghunathan, but her employment agreement states she shall receive an annual base salary of USD 260,000. There is no explanation provided for this USD 20,000 discrepancy.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": "20000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "The USD 20,000 difference could be a timing discrepancy or a post-board meeting adjustment negotiated during the finalization of the employment agreement.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.661636Z"
+  },
+  {
+    "finding_id": "pair-0002",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in total deferred revenue",
+    "description": "The deferred revenue schedule reports total deferred revenue of USD 2,340,000 as of 31 December 2025, whereas the financial statements report USD 2,100,000 for the same date. This represents an unreconciled difference of USD 240,000.",
+    "evidence": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 154,
+        "char_end": 217,
+        "text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 534,
+        "char_end": 591,
+        "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000"
+      }
+    ],
+    "claim_ids": [
+      "deferred_revenue_schedule-c0001",
+      "financial_statements_2025-c0005"
+    ],
+    "materiality": "240000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "The USD 240,000 variance could be an immaterial timing or cutoff difference between the billing sub-ledger and the general ledger adjustments.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.661636Z"
+  },
+  {
+    "finding_id": "pair-0205",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Contractor registered at CTO's residential address",
+    "description": "David Okonkwo (CTO) resides at 210 Cedar Street, Portland, Oregon, which is also the registered address of contractor Cedar Devshop LLC. This reveals an undisclosed related-party relationship and a material conflict of interest for a potential buyer.",
+    "evidence": [
+      {
+        "document_id": "contractor_agreement_devshop",
+        "page": 1,
+        "char_start": 206,
+        "char_end": 269,
+        "text": "whose registered address is 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "claim_ids": [
+      "contractor_agreement_devshop-c0003",
+      "employment_cto-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The shared address could be a home office registration for a contractor that was established before they began working for the company, and does not automatically imply a conflict of interest.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.665157Z"
+  },
+  {
+    "finding_id": "pair-0300",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Technology Officer",
+    "description": "Cedar Devshop LLC is registered at 210 Cedar Street, Portland, Oregon, which is the residential address of the company's CTO, David Okonkwo. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 174,
+        "char_end": 228,
+        "text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_cto-c0003",
+      "vendor_list-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This finding is redundant with pair-0205 and is removed to avoid duplicate reporting of the same issue.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0301",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Executive Officer",
+    "description": "CloudSpine Systems LLC is registered at 44 Lakeshore Drive, Portland, Oregon, which is the residential address of the CEO, Sarah Chen. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 132,
+        "char_end": 192,
+        "text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 48,
+        "char_end": 109,
+        "text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_ceo-c0003",
+      "vendor_list-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The vendor sharing the CEO's address could be a co-working space or temporary registration address with no material impact.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0302",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with material deferred revenue",
+    "description": "TitanRetail Group has a termination notice period of only 30 days, yet has USD 1,025,000 in associated deferred revenue. If the customer exercises this termination right, the company risks being unable to recognize or having to refund this material deferred revenue balance.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 234,
+        "char_end": 276,
+        "text": "USD 1,025,000 relates to TitanRetail Group"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "deferred_revenue_schedule-c0002"
+    ],
+    "materiality": "1025000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "A 30-day termination notice is standard commercial practice and the deferred revenue is already offset by cash received.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0303",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2024 revenue",
+    "description": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024 but can terminate its contract on short notice (30 days), exposing the business to sudden and material revenue loss.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 170,
+        "char_end": 236,
+        "text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "The risk is better and more precisely captured in pair-0302, which focuses on the concrete balance-sheet risk of deferred revenue. Having two findings for the same 30-day notice clause is redundant.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0304",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 38% of revenue",
+    "description": "TitanRetail Group can terminate its agreement on just 30 days' written notice, despite representing 38% of the company's total revenue in FY2024. This concentration of revenue paired with an immediate exit right represents an extreme business continuity risk.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 238,
+        "char_end": 272,
+        "text": "representing 38% of total revenue."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0305",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2025 revenue",
+    "description": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025 but has the right to terminate its agreement with only 30 days' notice, posing a severe threat to recurring revenue stream predictability.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 327,
+        "char_end": 393,
+        "text": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.666741Z"
+  },
+  {
+    "finding_id": "pair-0400",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 43% of revenue",
+    "description": "TitanRetail Group represents 43% of total revenue in FY2025, yet has the right to terminate its contract with only thirty (30) days of written notice. This represents a significant revenue concentration risk where nearly half of the company's revenue can disappear on extremely short notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 395,
+        "char_end": 428,
+        "text": "representing 43% of total revenue"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.667748Z"
+  },
+  {
+    "finding_id": "pair-0401",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer representing USD 3.6M in revenue",
+    "description": "TitanRetail Group accounts for USD 3,612,000 in recognized revenue, but the agreement allows for termination with only thirty (30) days of written notice. This creates a latent liability as a substantial revenue stream can be terminated with very little notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "revenue_by_customer_2025",
+        "page": 1,
+        "char_start": 157,
+        "char_end": 190,
+        "text": "TitanRetail Group: USD 3,612,000."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "revenue_by_customer_2025-c0000"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:29:49.667748Z"
+  },
+  {
+    "finding_id": "arith-shares-001",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with identified holdings",
+    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 194,
+        "char_end": 240,
+        "text": "Total issued and outstanding shares: 4,250,000"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 300,
+        "text": "Sarah Chen holds 1,800,000 common shares"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 407,
+        "char_end": 445,
+        "text": "holds 1,200,000 shares of common stock"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0000",
+      "cap_table-c0001",
+      "employment_cto-c0007",
+      "cap_table-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.807173Z"
+  },
+  {
+    "finding_id": "gap-R-005",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Equity incentive plan document",
+    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"The Board received a report on outstanding employee option grants\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [
+      "board_minutes_2025_06-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.810174Z"
+  },
+  {
+    "finding_id": "gap-R-014",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Tax returns for the last three years",
+    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.810174Z"
+  },
+  {
+    "finding_id": "tension-0200",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual subscription fee between contract and amendment",
+    "description": "According to contract_titanretail-c0003, the annual subscription fee for TitanRetail Group is USD 3,612,000. However, contract_titanretail_amendment_1-c0001 states the annual subscription fee is USD 4,100,000. The buyer should verify the effective date of the amendment and whether the increased rate has been successfully billed and recognized.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 355,
+        "char_end": 417,
+        "text": "Customer shall pay an annual subscription fee of USD 3,612,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "contract_titanretail_amendment_1",
+        "page": 1,
+        "char_start": 339,
+        "char_end": 401,
+        "text": "Customer shall pay an annual subscription fee of USD 4,100,000"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0003",
+      "contract_titanretail_amendment_1-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.826914Z"
+  },
+  {
+    "finding_id": "tension-0300",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual base salary for Chief Financial Officer",
+    "description": "The board minutes from September 2024 state that Priya Raghunathan was approved for an annual base salary of USD 240,000, whereas the CFO employment agreement defines the annual base salary as USD 260,000. This USD 20,000 discrepancy could represent an unauthorized salary level or an unresolved dispute regarding compensation terms.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.827913Z"
+  },
+  {
+    "finding_id": "pair-0000",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in CFO base salary",
+    "description": "Board minutes from September 2024 approve an annual base salary of USD 240,000 for Priya Raghunathan, but her employment agreement states she shall receive an annual base salary of USD 260,000. There is no explanation provided for this USD 20,000 discrepancy.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.859258Z"
+  },
+  {
+    "finding_id": "pair-0002",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in total deferred revenue",
+    "description": "The deferred revenue schedule reports total deferred revenue of USD 2,340,000 as of 31 December 2025, whereas the financial statements report USD 2,100,000 for the same date. This represents an unreconciled difference of USD 240,000.",
+    "evidence": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 154,
+        "char_end": 217,
+        "text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 534,
+        "char_end": 591,
+        "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000"
+      }
+    ],
+    "claim_ids": [
+      "deferred_revenue_schedule-c0001",
+      "financial_statements_2025-c0005"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.859258Z"
+  },
+  {
+    "finding_id": "pair-0205",
+    "finding_type": "undisclosed_relationship",
+    "severity": "high",
+    "title": "Contractor registered at CTO's residential address",
+    "description": "David Okonkwo (CTO) resides at 210 Cedar Street, Portland, Oregon, which is also the registered address of contractor Cedar Devshop LLC. This reveals an undisclosed related-party relationship and a material conflict of interest for a potential buyer.",
+    "evidence": [
+      {
+        "document_id": "contractor_agreement_devshop",
+        "page": 1,
+        "char_start": 206,
+        "char_end": 269,
+        "text": "whose registered address is 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "claim_ids": [
+      "contractor_agreement_devshop-c0003",
+      "employment_cto-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.862477Z"
+  },
+  {
+    "finding_id": "pair-0300",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Technology Officer",
+    "description": "Cedar Devshop LLC is registered at 210 Cedar Street, Portland, Oregon, which is the residential address of the company's CTO, David Okonkwo. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 174,
+        "char_end": 228,
+        "text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_cto-c0003",
+      "vendor_list-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0301",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Executive Officer",
+    "description": "CloudSpine Systems LLC is registered at 44 Lakeshore Drive, Portland, Oregon, which is the residential address of the CEO, Sarah Chen. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 132,
+        "char_end": 192,
+        "text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 48,
+        "char_end": 109,
+        "text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_ceo-c0003",
+      "vendor_list-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0302",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with material deferred revenue",
+    "description": "TitanRetail Group has a termination notice period of only 30 days, yet has USD 1,025,000 in associated deferred revenue. If the customer exercises this termination right, the company risks being unable to recognize or having to refund this material deferred revenue balance.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 234,
+        "char_end": 276,
+        "text": "USD 1,025,000 relates to TitanRetail Group"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "deferred_revenue_schedule-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0303",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2024 revenue",
+    "description": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024 but can terminate its contract on short notice (30 days), exposing the business to sudden and material revenue loss.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 170,
+        "char_end": 236,
+        "text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0304",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 38% of revenue",
+    "description": "TitanRetail Group can terminate its agreement on just 30 days' written notice, despite representing 38% of the company's total revenue in FY2024. This concentration of revenue paired with an immediate exit right represents an extreme business continuity risk.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 238,
+        "char_end": 272,
+        "text": "representing 38% of total revenue."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0305",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2025 revenue",
+    "description": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025 but has the right to terminate its agreement with only 30 days' notice, posing a severe threat to recurring revenue stream predictability.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 327,
+        "char_end": 393,
+        "text": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0400",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 43% of revenue",
+    "description": "TitanRetail Group represents 43% of total revenue in FY2025, yet has the right to terminate its contract with only thirty (30) days of written notice. This represents a significant revenue concentration risk where nearly half of the company's revenue can disappear on extremely short notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 395,
+        "char_end": 428,
+        "text": "representing 43% of total revenue"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.865309Z"
+  },
+  {
+    "finding_id": "pair-0401",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer representing USD 3.6M in revenue",
+    "description": "TitanRetail Group accounts for USD 3,612,000 in recognized revenue, but the agreement allows for termination with only thirty (30) days of written notice. This creates a latent liability as a substantial revenue stream can be terminated with very little notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "revenue_by_customer_2025",
+        "page": 1,
+        "char_start": 157,
+        "char_end": 190,
+        "text": "TitanRetail Group: USD 3,612,000."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "revenue_by_customer_2025-c0000"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [],
+    "created_at": "2026-08-15T12:40:54.865309Z"
+  },
+  {
+    "finding_id": "arith-shares-001",
+    "finding_type": "arithmetic",
+    "severity": "high",
+    "title": "Stated share total does not reconcile with identified holdings",
+    "description": "The cap table states 4,250,000 shares issued and outstanding, but identified holdings account for only 3,900,000 (1,800,000 + 1,200,000 + 900,000). 350,000 shares are unaccounted for against the identified holdings. Either a holder is undisclosed or the stated total is wrong; in either case the buyer cannot rely on the stated ownership percentages. Unexercised options are excluded from this reconciliation, as they are not issued shares.",
+    "evidence": [
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 194,
+        "char_end": 240,
+        "text": "Total issued and outstanding shares: 4,250,000"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 260,
+        "char_end": 300,
+        "text": "Sarah Chen holds 1,800,000 common shares"
+      },
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 407,
+        "char_end": 445,
+        "text": "holds 1,200,000 shares of common stock"
+      },
+      {
+        "document_id": "cap_table",
+        "page": 1,
+        "char_start": 367,
+        "char_end": 417,
+        "text": "Kestrel Ventures LP holds 900,000 preferred shares"
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [
+      "cap_table-c0000",
+      "cap_table-c0001",
+      "employment_cto-c0007",
+      "cap_table-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The missing 350,000 shares might represent individual small shareholders who were omitted from this high-level summary page of the cap table rather than an actual accounting error.",
+    "confidence": 0.9,
+    "raised_by": "arithmetic_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.807173Z"
+  },
+  {
+    "finding_id": "gap-R-005",
+    "finding_type": "missing_document",
+    "severity": "medium",
+    "title": "Missing: Equity incentive plan document",
+    "description": "No document satisfying this request was found in the data room. This document is required because the corpus states: \"The Board received a report on outstanding employee option grants\". Options granted without an adopted plan may be invalid, leaving the company exposed to claims from holders and the cap table materially misstated.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [
+      "board_minutes_2025_06-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "Employee options could have been granted through standalone board-approved agreements, which does not strictly require an overarching Equity Incentive Plan document.",
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.810174Z"
+  },
+  {
+    "finding_id": "gap-R-014",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Missing: Tax returns for the last three years",
+    "description": "No document satisfying this request was found in the data room. Unpaid or disputed tax transfers to the buyer.",
+    "evidence": [],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "Tax returns are historical filings, and the buyer can rely on robust tax representations, warranties, and indemnities in the purchase agreement instead of conducting a manual review of historical returns.",
+    "confidence": 0.95,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.810174Z"
+  },
+  {
+    "finding_id": "tension-0200",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual subscription fee between contract and amendment",
+    "description": "According to contract_titanretail-c0003, the annual subscription fee for TitanRetail Group is USD 3,612,000. However, contract_titanretail_amendment_1-c0001 states the annual subscription fee is USD 4,100,000. The buyer should verify the effective date of the amendment and whether the increased rate has been successfully billed and recognized.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 355,
+        "char_end": 417,
+        "text": "Customer shall pay an annual subscription fee of USD 3,612,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "contract_titanretail_amendment_1",
+        "page": 1,
+        "char_start": 339,
+        "char_end": 401,
+        "text": "Customer shall pay an annual subscription fee of USD 4,100,000"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0003",
+      "contract_titanretail_amendment_1-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This is a standard amendment process, not a contradiction or error. Unless there is evidence that the amendment is unsigned or contested, there is no real finding here.",
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.826914Z"
+  },
+  {
+    "finding_id": "tension-0300",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "high",
+    "title": "Inconsistent annual base salary for Chief Financial Officer",
+    "description": "The board minutes from September 2024 state that Priya Raghunathan was approved for an annual base salary of USD 240,000, whereas the CFO employment agreement defines the annual base salary as USD 260,000. This USD 20,000 discrepancy could represent an unauthorized salary level or an unresolved dispute regarding compensation terms.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This is a duplicate of pair-0000. It should be eliminated to keep the report clean, with the issue tracked under pair-0000.",
+    "confidence": 0.7,
+    "raised_by": "tension_detector",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.827913Z"
+  },
+  {
+    "finding_id": "pair-0000",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "low",
+    "title": "Discrepancy in CFO base salary",
+    "description": "Board minutes from September 2024 approve an annual base salary of USD 240,000 for Priya Raghunathan, but her employment agreement states she shall receive an annual base salary of USD 260,000. There is no explanation provided for this USD 20,000 discrepancy.",
+    "evidence": [
+      {
+        "document_id": "board_minutes_2024_09",
+        "page": 1,
+        "char_start": 259,
+        "char_end": 292,
+        "text": "annual base salary of USD 240,000"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 371,
+        "char_end": 435,
+        "text": "The Executive shall receive an annual base salary of USD 260,000"
+      }
+    ],
+    "claim_ids": [
+      "board_minutes_2024_09-c0002",
+      "employment_cfo-c0006"
+    ],
+    "materiality": "20000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "The USD 20,000 difference could be a timing discrepancy or a post-board meeting adjustment negotiated during the finalization of the employment agreement.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.859258Z"
+  },
+  {
+    "finding_id": "pair-0002",
+    "finding_type": "cross_doc_contradiction",
+    "severity": "medium",
+    "title": "Discrepancy in total deferred revenue",
+    "description": "The deferred revenue schedule reports total deferred revenue of USD 2,340,000 as of 31 December 2025, whereas the financial statements report USD 2,100,000 for the same date. This represents an unreconciled difference of USD 240,000.",
+    "evidence": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 154,
+        "char_end": 217,
+        "text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 534,
+        "char_end": 591,
+        "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000"
+      }
+    ],
+    "claim_ids": [
+      "deferred_revenue_schedule-c0001",
+      "financial_statements_2025-c0005"
+    ],
+    "materiality": "240000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "The USD 240,000 variance could be an immaterial timing or cutoff difference between the billing sub-ledger and the general ledger adjustments.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.859258Z"
+  },
+  {
+    "finding_id": "pair-0205",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Contractor registered at CTO's residential address",
+    "description": "David Okonkwo (CTO) resides at 210 Cedar Street, Portland, Oregon, which is also the registered address of contractor Cedar Devshop LLC. This reveals an undisclosed related-party relationship and a material conflict of interest for a potential buyer.",
+    "evidence": [
+      {
+        "document_id": "contractor_agreement_devshop",
+        "page": 1,
+        "char_start": 206,
+        "char_end": 269,
+        "text": "whose registered address is 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "claim_ids": [
+      "contractor_agreement_devshop-c0003",
+      "employment_cto-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The shared address could be a home office registration for a contractor that was established before they began working for the company, and does not automatically imply a conflict of interest.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.862477Z"
+  },
+  {
+    "finding_id": "pair-0300",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Technology Officer",
+    "description": "Cedar Devshop LLC is registered at 210 Cedar Street, Portland, Oregon, which is the residential address of the company's CTO, David Okonkwo. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_cto",
+        "page": 1,
+        "char_start": 150,
+        "char_end": 196,
+        "text": "residing at 210 Cedar Street, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 174,
+        "char_end": 228,
+        "text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_cto-c0003",
+      "vendor_list-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "This finding is redundant with pair-0205 and is removed to avoid duplicate reporting of the same issue.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0301",
+    "finding_type": "undisclosed_relationship",
+    "severity": "medium",
+    "title": "Vendor share address with Chief Executive Officer",
+    "description": "CloudSpine Systems LLC is registered at 44 Lakeshore Drive, Portland, Oregon, which is the residential address of the CEO, Sarah Chen. This indicates an undisclosed related-party transaction with a vendor.",
+    "evidence": [
+      {
+        "document_id": "employment_ceo",
+        "page": 1,
+        "char_start": 132,
+        "char_end": 192,
+        "text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "vendor_list",
+        "page": 1,
+        "char_start": 48,
+        "char_end": 109,
+        "text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon."
+      }
+    ],
+    "claim_ids": [
+      "employment_ceo-c0003",
+      "vendor_list-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The vendor sharing the CEO's address could be a co-working space or temporary registration address with no material impact.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0302",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with material deferred revenue",
+    "description": "TitanRetail Group has a termination notice period of only 30 days, yet has USD 1,025,000 in associated deferred revenue. If the customer exercises this termination right, the company risks being unable to recognize or having to refund this material deferred revenue balance.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "deferred_revenue_schedule",
+        "page": 1,
+        "char_start": 234,
+        "char_end": 276,
+        "text": "USD 1,025,000 relates to TitanRetail Group"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "deferred_revenue_schedule-c0002"
+    ],
+    "materiality": "1025000",
+    "materiality_currency": "USD",
+    "status": "confirmed",
+    "challenge_reason": "A 30-day termination notice is standard commercial practice and the deferred revenue is already offset by cash received.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0303",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2024 revenue",
+    "description": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024 but can terminate its contract on short notice (30 days), exposing the business to sudden and material revenue loss.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 170,
+        "char_end": 236,
+        "text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0001"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "retracted",
+    "challenge_reason": "The risk is better and more precisely captured in pair-0302, which focuses on the concrete balance-sheet risk of deferred revenue. Having two findings for the same 30-day notice clause is redundant.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0304",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 38% of revenue",
+    "description": "TitanRetail Group can terminate its agreement on just 30 days' written notice, despite representing 38% of the company's total revenue in FY2024. This concentration of revenue paired with an immediate exit right represents an extreme business continuity risk.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2024",
+        "page": 1,
+        "char_start": 238,
+        "char_end": 272,
+        "text": "representing 38% of total revenue."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2024-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0305",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer with significant FY2025 revenue",
+    "description": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025 but has the right to terminate its agreement with only 30 days' notice, posing a severe threat to recurring revenue stream predictability.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 327,
+        "char_end": 393,
+        "text": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0002"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.863615Z"
+  },
+  {
+    "finding_id": "pair-0400",
+    "finding_type": "latent_liability",
+    "severity": "critical",
+    "title": "Short termination notice for customer representing 43% of revenue",
+    "description": "TitanRetail Group represents 43% of total revenue in FY2025, yet has the right to terminate its contract with only thirty (30) days of written notice. This represents a significant revenue concentration risk where nearly half of the company's revenue can disappear on extremely short notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "financial_statements_2025",
+        "page": 1,
+        "char_start": 395,
+        "char_end": 428,
+        "text": "representing 43% of total revenue"
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "financial_statements_2025-c0003"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.865309Z"
+  },
+  {
+    "finding_id": "pair-0401",
+    "finding_type": "latent_liability",
+    "severity": "high",
+    "title": "Short termination notice for customer representing USD 3.6M in revenue",
+    "description": "TitanRetail Group accounts for USD 3,612,000 in recognized revenue, but the agreement allows for termination with only thirty (30) days of written notice. This creates a latent liability as a substantial revenue stream can be terminated with very little notice.",
+    "evidence": [
+      {
+        "document_id": "contract_titanretail",
+        "page": 1,
+        "char_start": 707,
+        "char_end": 738,
+        "text": "thirty (30) days written notice"
+      }
+    ],
+    "contradicts": [
+      {
+        "document_id": "revenue_by_customer_2025",
+        "page": 1,
+        "char_start": 157,
+        "char_end": 190,
+        "text": "TitanRetail Group: USD 3,612,000."
+      }
+    ],
+    "claim_ids": [
+      "contract_titanretail-c0004",
+      "revenue_by_customer_2025-c0000"
+    ],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
+    "confidence": 0.75,
+    "raised_by": "pair_adjudicator",
+    "reviewed_by": [
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-15T12:40:54.865309Z"
   }
 ]

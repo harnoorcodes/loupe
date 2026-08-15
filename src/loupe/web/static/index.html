@@ -3,512 +3,584 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Loupe — due diligence</title>
+<title>Loupe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1E2761;
-    --navy-deep: #141A45;
-    --ice: #CADCFC;
-    --ice-soft: #E8EFFB;
-    --amber: #E8A33D;
-    --red: #B03A3A;
-    --green: #2E7D5B;
-    --ink: #16182B;
-    --muted: #626A85;
-    --line: #E4EAF5;
-    --paper: #F7F9FD;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    font-family: Calibri, "Segoe UI", system-ui, sans-serif;
-    color: var(--ink);
-    background: #fff;
-    line-height: 1.5;
-  }
+:root{
+  --ink-900:#0B1029; --ink-800:#131A3D; --ink-700:#1E2755; --ink-600:#2E3A6E;
+  --slate-500:#5C6689; --slate-400:#8089A6; --slate-300:#AEB5C9;
+  --line:#E6E9F2; --line-soft:#F0F2F8;
+  --paper:#FBFAF8; --surface:#FFFFFF; --wash:#F4F6FC;
+  --amber:#D99441; --amber-soft:#FBF1E3;
+  --rose:#B23B3B; --rose-soft:#FBEDED;
+  --sea:#2C7A62; --sea-soft:#E9F4F0;
+  --azure:#3559A8; --azure-soft:#EBF0FB;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --rail:232px;
+}
+*{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{margin:0;background:var(--paper);color:var(--ink-900);
+  font-family:Inter,-apple-system,"Segoe UI",system-ui,sans-serif;
+  font-size:14px;line-height:1.6}
+.hidden{display:none !important}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:4px}
+::selection{background:var(--amber);color:#fff}
 
-  header {
-    background: var(--navy);
-    color: #fff;
-    padding: 26px 40px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-  }
-  .ring {
-    width: 38px; height: 38px; border-radius: 50%;
-    border: 2px solid var(--ice);
-    display: grid; place-items: center; flex: none;
-  }
-  .ring i {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 1.5px solid var(--amber); display: block;
-  }
-  header h1 {
-    margin: 0; font-family: Cambria, Georgia, serif;
-    font-size: 26px; letter-spacing: 3px;
-  }
-  header p { margin: 2px 0 0; color: var(--ice); font-size: 14px; }
+/* ─────────────────────────── rail ─────────────────────────── */
+.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);background:var(--ink-900);
+  display:flex;flex-direction:column;padding:26px 0;z-index:40}
+.brand{padding:0 24px 30px;display:flex;align-items:center;gap:13px}
+.mark{width:34px;height:34px;border-radius:50%;flex:none;position:relative;
+  border:1.5px solid rgba(255,255,255,.32);display:grid;place-items:center}
+.mark::after{content:"";width:13px;height:13px;border-radius:50%;
+  border:1.5px solid var(--amber);transition:transform .5s var(--ease)}
+.rail:hover .mark::after{transform:scale(1.35)}
+.brand h1{margin:0;font-family:Inter;font-size:15px;font-weight:700;
+  letter-spacing:.22em;color:#fff}
+.brand span{display:block;font-size:10.5px;color:var(--slate-400);
+  letter-spacing:.04em;margin-top:1px}
 
-  main { max-width: 1060px; margin: 0 auto; padding: 34px 24px 90px; }
-  .panel { margin-top: 34px; animation: rise .35s ease both; }
-  .hidden { display: none !important; }
+.nav{padding:0 12px;display:flex;flex-direction:column;gap:2px}
+.nav button{display:flex;align-items:center;gap:11px;width:100%;
+  padding:10px 12px;border-radius:9px;font-size:13.5px;font-weight:500;
+  color:var(--slate-300);transition:background .18s,color .18s;text-align:left}
+.nav button:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav button.on{background:rgba(255,255,255,.1);color:#fff;font-weight:600}
+.nav button .dot{width:5px;height:5px;border-radius:50%;background:currentColor;
+  opacity:0;transition:opacity .2s}
+.nav button.on .dot{opacity:1}
+.nav .glyph{width:17px;text-align:center;font-size:14px;opacity:.85}
 
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: none; }
-  }
+.rail-foot{margin-top:auto;padding:20px 24px 0;border-top:1px solid rgba(255,255,255,.07)}
+.rail-stat{display:flex;justify-content:space-between;align-items:baseline;
+  padding:5px 0;font-size:11.5px;color:var(--slate-400)}
+.rail-stat b{font-family:Newsreader,Georgia,serif;font-size:16px;
+  font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
+.live{display:flex;align-items:center;gap:7px;font-size:11px;
+  color:var(--amber);margin-top:10px}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--amber);
+  animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
 
-  h2 {
-    font-family: Cambria, Georgia, serif; font-size: 21px;
-    color: var(--navy); margin: 0 0 6px;
-  }
-  .sub { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+/* ─────────────────────────── shell ─────────────────────────── */
+.shell{margin-left:var(--rail);min-height:100vh;transition:margin-right .45s var(--ease)}
+.shell.paneled{margin-right:min(46vw,620px)}
+@media(max-width:1080px){.shell.paneled{margin-right:0}}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(251,250,248,.86);
+  backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
+  padding:17px 40px;display:flex;align-items:center;gap:14px}
+.crumb{font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--slate-400);font-weight:600}
+.topbar h2{margin:0;font-family:Newsreader,Georgia,serif;font-size:21px;
+  font-weight:500;letter-spacing:-.01em}
+.wrap{padding:34px 40px 90px;max-width:1000px}
+@media(max-width:760px){.rail{width:100%;height:auto;position:static;flex-direction:row;
+  align-items:center;padding:14px 18px;overflow-x:auto}
+  .brand{padding:0 18px 0 0}.nav{flex-direction:row;padding:0}
+  .rail-foot{display:none}.shell{margin-left:0}.wrap,.topbar{padding-left:20px;padding-right:20px}}
 
-  /* ---- upload ---- */
-  .drop {
-    border: 2px dashed var(--ice);
-    border-radius: 12px; background: var(--paper);
-    padding: 54px 24px; text-align: center; cursor: pointer;
-    transition: border-color .18s, background .18s, transform .18s;
-  }
-  .drop:hover { border-color: var(--amber); background: #fff; }
-  .drop.over { border-color: var(--amber); background: #fff; transform: scale(1.01); }
-  .drop strong { display: block; font-size: 19px; color: var(--navy); margin-bottom: 5px; }
-  .drop span { color: var(--muted); font-size: 14px; }
+.panel{animation:enter .55s var(--ease) both}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.lede{color:var(--slate-500);font-size:14px;max-width:60ch;margin:0 0 26px}
+h3.sec{font-family:Newsreader,Georgia,serif;font-size:18px;font-weight:500;
+  margin:36px 0 4px;letter-spacing:-.01em}
+h3.sec+p{color:var(--slate-500);font-size:13px;margin:0 0 16px}
 
-  .row { display: flex; gap: 12px; align-items: center; margin-top: 20px; flex-wrap: wrap; }
-  button {
-    font-family: inherit; font-size: 15px; font-weight: 600;
-    padding: 11px 22px; border-radius: 8px; border: 0; cursor: pointer;
-    transition: background .15s, transform .1s;
-  }
-  button:active { transform: translateY(1px); }
-  .primary { background: var(--navy); color: #fff; }
-  .primary:hover:not(:disabled) { background: var(--navy-deep); }
-  .primary:disabled { background: #B6BCCF; cursor: not-allowed; }
-  .ghost { background: #fff; color: var(--navy); border: 1px solid var(--ice); }
-  .ghost:hover { background: var(--paper); }
-  label.deal { font-size: 14px; color: var(--muted); margin-left: auto; }
-  input[type=text] {
-    font-family: inherit; font-size: 14px; padding: 10px 12px;
-    border: 1px solid var(--line); border-radius: 8px; width: 140px;
-  }
-  .filelist { margin-top: 14px; font-size: 13px; color: var(--muted); }
+/* ─────────────────────────── upload ─────────────────────────── */
+.hero{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  padding:52px 44px;box-shadow:0 1px 2px rgba(11,16,41,.04),0 14px 40px -22px rgba(11,16,41,.18)}
+.hero .kicker{font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--amber);font-weight:700;margin-bottom:14px}
+.hero h3{font-family:Newsreader,Georgia,serif;font-size:33px;font-weight:400;
+  letter-spacing:-.02em;margin:0 0 12px;line-height:1.22}
+.hero p{color:var(--slate-500);max-width:52ch;margin:0 0 30px}
+.drop{border:1.5px dashed var(--line);border-radius:13px;background:var(--wash);
+  padding:38px 24px;text-align:center;cursor:pointer;
+  transition:border-color .22s,background .22s,transform .22s var(--ease)}
+.drop:hover{border-color:var(--amber);background:var(--amber-soft)}
+.drop.over{border-color:var(--amber);background:var(--amber-soft);transform:scale(1.012)}
+.drop strong{display:block;font-size:15.5px;font-weight:600;margin-bottom:3px}
+.drop span{color:var(--slate-400);font-size:13px}
+.files{margin-top:13px;font-size:12.5px;color:var(--slate-500)}
+.row{display:flex;gap:10px;align-items:center;margin-top:22px;flex-wrap:wrap}
+.btn{padding:11px 21px;border-radius:10px;font-size:13.5px;font-weight:600;
+  transition:transform .16s var(--ease),box-shadow .2s,background .2s}
+.btn:active{transform:translateY(1px)}
+.btn-solid{background:var(--ink-900);color:#fff;
+  box-shadow:0 1px 2px rgba(11,16,41,.2),0 8px 20px -10px rgba(11,16,41,.5)}
+.btn-solid:hover:not(:disabled){background:var(--ink-800)}
+.btn-solid:disabled{background:var(--slate-300);box-shadow:none;cursor:not-allowed}
+.btn-line{border:1px solid var(--line);background:var(--surface)}
+.btn-line:hover{border-color:var(--slate-300);background:var(--wash)}
+.deal{margin-left:auto;font-size:12.5px;color:var(--slate-400);display:flex;
+  align-items:center;gap:9px}
+.deal input{font:inherit;font-size:13px;font-variant-numeric:tabular-nums;
+  padding:9px 12px;border:1px solid var(--line);border-radius:9px;width:132px;
+  background:var(--surface)}
 
-  /* ---- progress ---- */
-  .bar { height: 6px; background: var(--ice-soft); border-radius: 99px; overflow: hidden; }
-  .bar i {
-    display: block; height: 100%; width: 0%;
-    background: var(--navy); border-radius: 99px;
-    transition: width .5s ease;
-  }
-  .stages { list-style: none; margin: 18px 0 0; padding: 0; }
-  .stages li {
-    padding: 9px 0 9px 28px; position: relative; font-size: 14px;
-    color: var(--muted); border-bottom: 1px solid var(--line);
-    animation: rise .3s ease both;
-  }
-  .stages li::before {
-    content: "✓"; position: absolute; left: 2px;
-    color: var(--green); font-weight: 700;
-  }
-  .stages li.active { color: var(--ink); font-weight: 600; }
-  .stages li.active::before {
-    content: ""; width: 13px; height: 13px; top: 12px;
-    border: 2px solid var(--ice); border-top-color: var(--navy);
-    border-radius: 50%; animation: spin .8s linear infinite;
-  }
-  .stages li em { color: var(--muted); font-weight: 400; font-style: normal; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+/* ─────────────────────────── progress ─────────────────────────── */
+.track{height:3px;background:var(--line);border-radius:99px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:99px;width:0;
+  background:linear-gradient(90deg,var(--ink-700),var(--amber));
+  transition:width .7s var(--ease)}
+.steps{list-style:none;margin:22px 0 0;padding:0}
+.steps li{display:flex;align-items:baseline;gap:13px;padding:11px 0;
+  border-bottom:1px solid var(--line-soft);font-size:13.5px;color:var(--slate-500);
+  animation:enter .4s var(--ease) both}
+.steps li .tick{width:16px;flex:none;color:var(--sea);font-weight:700;font-size:12px}
+.steps li em{font-style:normal;color:var(--slate-400);font-size:12.5px}
+.steps li .t{margin-left:auto;font-size:11.5px;color:var(--slate-300);
+  font-variant-numeric:tabular-nums}
+.steps li.now{color:var(--ink-900);font-weight:600}
+.steps li.now .tick{color:var(--amber)}
+.steps li.now .tick::after{content:"";display:block;width:11px;height:11px;
+  border:1.5px solid var(--line);border-top-color:var(--amber);border-radius:50%;
+  animation:spin .75s linear infinite}
+.steps li.now .tick{font-size:0}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-  /* ---- stats ---- */
-  .stats { display: flex; gap: 13px; flex-wrap: wrap; margin-bottom: 24px; }
-  .stat {
-    background: var(--paper); border-radius: 11px;
-    padding: 17px 24px; min-width: 132px; flex: 1;
-    animation: rise .4s ease both;
-  }
-  .stat b {
-    display: block; font-family: Cambria, Georgia, serif;
-    font-size: 30px; color: var(--navy); line-height: 1.15;
-  }
-  .stat span { font-size: 12px; color: var(--muted); }
-  .stat.hero { background: var(--navy); }
-  .stat.hero b { color: #fff; }
-  .stat.hero span { color: var(--ice); }
+/* ─────────────────────────── stats ─────────────────────────── */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));
+  gap:12px;margin-bottom:30px}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:19px 20px;animation:enter .5s var(--ease) both;
+  transition:transform .22s var(--ease),box-shadow .22s}
+.fig:hover{transform:translateY(-2px);box-shadow:0 10px 30px -16px rgba(11,16,41,.3)}
+.fig b{display:block;font-family:Newsreader,Georgia,serif;font-size:31px;
+  font-weight:500;line-height:1.1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fig span{font-size:11.5px;color:var(--slate-400);display:block;margin-top:5px}
+.fig.accent{background:var(--ink-900);border-color:var(--ink-900)}
+.fig.accent b{color:#fff}.fig.accent span{color:var(--slate-300)}
 
-  /* ---- filters ---- */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
-  .filter {
-    font-size: 13px; font-weight: 600; padding: 7px 15px;
-    border-radius: 99px; border: 1px solid var(--line);
-    background: #fff; color: var(--muted); cursor: pointer;
-  }
-  .filter:hover { border-color: var(--ice); }
-  .filter.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+/* ─────────────────────────── findings ─────────────────────────── */
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.chip{padding:6px 14px;border-radius:99px;border:1px solid var(--line);
+  background:var(--surface);font-size:12.5px;font-weight:600;color:var(--slate-500);
+  transition:.18s}
+.chip:hover{border-color:var(--slate-300)}
+.chip.on{background:var(--ink-900);border-color:var(--ink-900);color:#fff}
 
-  /* ---- findings ---- */
-  .finding {
-    border: 1px solid var(--line); border-left: 4px solid var(--line);
-    border-radius: 10px; padding: 19px 22px; margin-bottom: 14px;
-    animation: rise .35s ease both;
-    transition: box-shadow .18s;
-  }
-  .finding:hover { box-shadow: 0 3px 14px rgba(30,39,97,.08); }
-  .finding.critical { border-left-color: var(--red); }
-  .finding.high { border-left-color: var(--amber); }
-  .finding.medium { border-left-color: var(--navy); }
-  .finding.low { border-left-color: var(--ice); }
+.find{background:var(--surface);border:1px solid var(--line);border-radius:15px;
+  padding:22px 24px 20px;margin-bottom:13px;position:relative;overflow:hidden;
+  animation:enter .5s var(--ease) both;
+  transition:transform .24s var(--ease),box-shadow .24s,border-color .24s}
+.find::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--line)}
+.find:hover{transform:translateY(-2px);border-color:var(--slate-300);
+  box-shadow:0 16px 44px -26px rgba(11,16,41,.42)}
+.find.critical::before{background:var(--rose)}
+.find.high::before{background:var(--amber)}
+.find.medium::before{background:var(--azure)}
+.find.low::before{background:var(--slate-300)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+.badge{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  padding:4px 9px;border-radius:6px}
+.b-critical{background:var(--rose-soft);color:var(--rose)}
+.b-high{background:var(--amber-soft);color:var(--amber)}
+.b-medium{background:var(--azure-soft);color:var(--azure)}
+.b-low{background:var(--wash);color:var(--slate-500)}
+.b-cross{background:var(--ink-900);color:#fff}
+.b-flat{background:var(--wash);color:var(--slate-500)}
+.b-money{background:var(--sea-soft);color:var(--sea)}
+.find h4{font-family:Newsreader,Georgia,serif;font-size:19px;font-weight:500;
+  letter-spacing:-.01em;margin:0 0 8px;line-height:1.32}
+.find>p{margin:0 0 15px;font-size:13.5px;color:var(--slate-500)}
 
-  .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 10px; }
-  .tag {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .7px;
-    padding: 4px 10px; border-radius: 99px; text-transform: uppercase;
-  }
-  .sev-critical { background: var(--red); color: #fff; }
-  .sev-high { background: var(--amber); color: var(--navy-deep); }
-  .sev-medium { background: var(--ice); color: var(--navy); }
-  .sev-low { background: var(--ice-soft); color: var(--muted); }
-  .tag-cross { background: var(--navy); color: #fff; }
-  .tag-plain { background: var(--ice-soft); color: var(--muted); }
-  .tag-money { background: var(--green); color: #fff; }
+.cite{display:flex;gap:12px;align-items:flex-start;background:var(--wash);
+  border-radius:10px;padding:11px 13px;margin-bottom:7px;
+  transition:background .18s,transform .18s var(--ease)}
+.cite:hover{background:var(--amber-soft);transform:translateX(2px)}
+.cite .src{font-size:11.5px;font-weight:700;color:var(--ink-700);white-space:nowrap;
+  border-bottom:1px dashed var(--slate-300);padding-bottom:1px;flex:none}
+.cite:hover .src{color:var(--amber);border-color:var(--amber)}
+.cite q{font-size:12.5px;color:var(--slate-500);font-style:italic;quotes:'"' '"'}
+.cite.none{color:var(--slate-400);font-size:12.5px;font-style:italic;display:block}
 
-  .finding h3 { margin: 0 0 9px; font-size: 17px; }
-  .finding > p { margin: 0 0 14px; font-size: 14.5px; }
+.objection{margin-top:14px;padding-top:13px;border-top:1px solid var(--line-soft);
+  font-size:12.5px;color:var(--slate-500)}
+.objection b{color:var(--ink-900);font-weight:600}
+.flow{display:flex;align-items:center;gap:6px;margin-top:10px;font-size:10.5px;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--slate-300)}
+.flow .done{color:var(--sea);font-weight:700}
 
-  .cite {
-    background: var(--paper); border-radius: 8px;
-    padding: 10px 13px; margin-bottom: 8px; font-size: 13px;
-    display: flex; gap: 10px; align-items: baseline;
-  }
-  .cite a {
-    color: var(--navy); font-weight: 700; text-decoration: none;
-    white-space: nowrap; border-bottom: 1px dotted var(--navy);
-  }
-  .cite a:hover { color: var(--amber); border-bottom-color: var(--amber); }
-  .cite em { color: var(--muted); }
-  .cite.flat { color: var(--muted); font-style: italic; }
+/* ─────────────────────────── side panel ─────────────────────────── */
+.viewer{position:fixed;inset:0 0 0 auto;width:min(46vw,620px);background:var(--surface);
+  border-left:1px solid var(--line);z-index:50;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .45s var(--ease);
+  box-shadow:-24px 0 60px -30px rgba(11,16,41,.4)}
+.viewer.open{transform:none}
+@media(max-width:1080px){.viewer{width:100%}}
+.viewer .head{background:var(--ink-900);color:#fff;padding:17px 22px;
+  display:flex;align-items:center;gap:12px}
+.viewer .head strong{font-size:13.5px;font-weight:600}
+.viewer .head span{display:block;font-size:11px;color:var(--slate-400);margin-top:1px}
+.viewer .head button{margin-left:auto;color:var(--slate-300);font-size:22px;
+  line-height:1;padding:2px 6px;border-radius:6px;transition:.16s}
+.viewer .head button:hover{background:rgba(255,255,255,.1);color:#fff}
+.viewer .pull{background:var(--amber-soft);border-bottom:1px solid var(--line);
+  padding:14px 22px;font-family:Newsreader,Georgia,serif;font-size:14.5px;
+  font-style:italic;color:var(--ink-800)}
+.viewer iframe{flex:1;border:0;width:100%;background:var(--wash)}
+.viewer .note{padding:26px 22px;font-size:13px;color:var(--slate-500)}
 
-  .objection {
-    border-top: 1px solid var(--line); margin-top: 13px; padding-top: 12px;
-    font-size: 13px; color: var(--muted);
-  }
-  .objection b { color: var(--ink); }
-  .objection .verdict { color: var(--green); font-weight: 700; }
+/* ─────────────────────────── tables ─────────────────────────── */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;
+  background:var(--surface);border:1px solid var(--line);border-radius:13px;
+  overflow:hidden;margin-bottom:26px}
+.tbl th{text-align:left;padding:11px 15px;background:var(--wash);
+  font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:700;color:var(--slate-500);border-bottom:1px solid var(--line)}
+.tbl td{padding:11px 15px;border-bottom:1px solid var(--line-soft);
+  font-variant-numeric:tabular-nums}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr{transition:background .15s}
+.tbl tbody tr:hover{background:var(--wash)}
+.tbl td.hit{color:var(--sea);font-weight:700}
+.tbl td.miss{color:var(--slate-300)}
+.meter{height:5px;background:var(--line);border-radius:99px;overflow:hidden;width:88px}
+.meter i{display:block;height:100%;background:var(--ink-700);border-radius:99px;
+  width:0;transition:width 1s var(--ease)}
+.pill{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10.5px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.p-easy{background:var(--sea-soft);color:var(--sea)}
+.p-medium{background:var(--amber-soft);color:var(--amber)}
+.p-hard{background:var(--rose-soft);color:var(--rose)}
 
-  .lifecycle { display: flex; gap: 6px; align-items: center; margin-top: 11px; font-size: 11px; }
-  .lifecycle span { color: var(--muted); }
-  .lifecycle b { color: var(--green); }
-
-  /* ---- docs + withdrawn ---- */
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  th {
-    text-align: left; padding: 9px 12px; background: var(--navy);
-    color: #fff; font-weight: 600; font-size: 12px;
-    letter-spacing: .5px; text-transform: uppercase;
-  }
-  th:first-child { border-radius: 8px 0 0 0; }
-  th:last-child { border-radius: 0 8px 0 0; }
-  td { padding: 9px 12px; border-bottom: 1px solid var(--line); }
-  td a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted; }
-  td a:hover { color: var(--amber); }
-
-  .withdrawn { background: var(--paper); border-radius: 10px; padding: 6px 20px; }
-  .withdrawn div { font-size: 13.5px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .withdrawn div:last-child { border-bottom: 0; }
-  .withdrawn b { color: var(--ink); }
-
-  .error {
-    background: #FDF2F2; border: 1px solid var(--red);
-    border-radius: 10px; padding: 17px 20px; color: var(--red); font-size: 14px;
-  }
-  .empty { color: var(--muted); font-size: 14px; padding: 30px 0; text-align: center; }
-
-  footer {
-    color: var(--muted); font-size: 12px;
-    padding: 0 40px 44px; max-width: 1060px; margin: 0 auto;
-  }
+.quiet{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:4px 22px}
+.quiet div{padding:16px 0;border-bottom:1px solid var(--line-soft);font-size:13px;
+  color:var(--slate-500)}
+.quiet div:last-child{border-bottom:0}
+.quiet b{color:var(--ink-900);display:block;margin-bottom:3px;font-weight:600}
+.alert{background:var(--rose-soft);border:1px solid var(--rose);border-radius:13px;
+  padding:18px 22px;color:var(--rose);font-size:13.5px}
+.blank{text-align:center;padding:56px 20px;color:var(--slate-400);font-size:13.5px}
+.blank .big{font-family:Newsreader,Georgia,serif;font-size:22px;color:var(--slate-500);
+  margin-bottom:6px;display:block}
+.foot{color:var(--slate-400);font-size:11.5px;padding:30px 40px 50px;
+  border-top:1px solid var(--line);margin-top:50px}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="ring"><i></i></div>
-  <div>
-    <h1>LOUPE</h1>
-    <p>Reads a data room. Finds what one document alone cannot tell you.</p>
+<aside class="rail">
+  <div class="brand">
+    <div class="mark"></div>
+    <div><h1>LOUPE</h1><span>Due diligence</span></div>
   </div>
-</header>
+  <div class="nav">
+    <button data-tab="analyse" class="on"><span class="glyph">◈</span>Analyse<span class="dot"></span></button>
+    <button data-tab="findings"><span class="glyph">◆</span>Findings<span class="dot"></span></button>
+    <button data-tab="evaluation"><span class="glyph">◇</span>Evaluation<span class="dot"></span></button>
+    <button data-tab="documents"><span class="glyph">▤</span>Documents<span class="dot"></span></button>
+  </div>
+  <div class="rail-foot" id="rail-foot"></div>
+</aside>
 
-<main>
-  <!-- upload -->
-  <div id="upload-panel">
-    <div class="drop" id="drop">
-      <strong>Drop your data room here</strong>
-      <span>PDF and DOCX — or click to choose files</span>
-    </div>
-    <input type="file" id="files" multiple accept=".pdf,.docx" class="hidden">
-    <div class="filelist" id="filelist"></div>
-    <div class="row">
-      <button class="primary" id="analyse" disabled>Analyse</button>
-      <button class="ghost" id="demo">Use the sample data room</button>
-      <label class="deal">Deal value USD
-        <input type="text" id="deal" value="25,000,000">
-      </label>
-    </div>
+<div class="shell" id="shell">
+  <div class="topbar">
+    <span class="crumb" id="crumb">Northwind Analytics</span>
+    <h2 id="title">New analysis</h2>
   </div>
 
-  <!-- progress -->
-  <div class="panel hidden" id="progress-panel">
-    <h2>Analysing</h2>
-    <p class="sub" id="stage-note">Starting up</p>
-    <div class="bar"><i id="bar"></i></div>
-    <ul class="stages" id="stages"></ul>
+  <div class="wrap">
+    <!-- ANALYSE -->
+    <section id="tab-analyse">
+      <div class="panel" id="upload-panel">
+        <div class="hero">
+          <div class="kicker">Cross-document review</div>
+          <h3>Findings live between documents,<br>not inside them.</h3>
+          <p>A termination clause is unremarkable. A termination clause held by
+             a customer worth 43% of revenue is a deal issue. Loupe reads the
+             whole data room and looks for the second kind.</p>
+          <div class="drop" id="drop">
+            <strong>Drop your data room here</strong>
+            <span>PDF and DOCX — or click to choose files</span>
+          </div>
+          <input type="file" id="files" multiple accept=".pdf,.docx" class="hidden">
+          <div class="files" id="filelist"></div>
+          <div class="row">
+            <button class="btn btn-solid" id="analyse" disabled>Analyse</button>
+            <button class="btn btn-line" id="demo">Use the sample data room</button>
+            <label class="deal">Deal value USD
+              <input type="text" id="deal" value="25,000,000"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel hidden" id="progress-panel">
+        <p class="lede" id="stage-note">Starting</p>
+        <div class="track"><i id="bar"></i></div>
+        <ul class="steps" id="steps"></ul>
+      </div>
+
+      <div class="panel hidden" id="error-panel">
+        <div class="alert" id="error-text"></div>
+        <div class="row"><button class="btn btn-line" id="retry">Start again</button></div>
+      </div>
+    </section>
+
+    <!-- FINDINGS -->
+    <section id="tab-findings" class="hidden">
+      <div class="figs" id="figs"></div>
+      <div class="chips" id="chips"></div>
+      <div id="findings"></div>
+      <div class="row">
+        <button class="btn btn-line" id="memo">Open the memo</button>
+        <button class="btn btn-line" id="again">New analysis</button>
+      </div>
+      <div class="hidden" id="withdrawn-panel">
+        <h3 class="sec">Considered and withdrawn</h3>
+        <p>Raised by a detector, then defeated during adversarial review.</p>
+        <div class="quiet" id="withdrawn"></div>
+      </div>
+    </section>
+
+    <!-- EVALUATION -->
+    <section id="tab-evaluation" class="hidden">
+      <div id="eval-body"><div class="blank"><span class="big">Nothing measured yet</span>
+        Run the sample data room to score against planted defects.</div></div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section id="tab-documents" class="hidden">
+      <div id="docs-body"><div class="blank"><span class="big">No documents yet</span>
+        Upload a data room or run the sample.</div></div>
+    </section>
   </div>
 
-  <!-- error -->
-  <div class="panel hidden" id="error-panel">
-    <h2>Something went wrong</h2>
-    <div class="error" id="error-text"></div>
-    <div class="row"><button class="ghost" id="retry">Start again</button></div>
-  </div>
+  <div class="foot">Findings are for human review. Loupe does not give legal
+    advice, value a business, or recommend whether to proceed.</div>
+</div>
 
-  <!-- results -->
-  <div class="panel hidden" id="results-panel">
-    <h2>Findings</h2>
-    <p class="sub">Every finding below survived an agent that tried to disprove it.</p>
-    <div class="stats" id="stats"></div>
-    <div class="filters" id="filters"></div>
-    <div id="findings"></div>
-    <div class="row">
-      <button class="ghost" id="memo">Open the full memo</button>
-      <button class="ghost" id="again">Analyse another data room</button>
-    </div>
+<div class="viewer" id="viewer">
+  <div class="head">
+    <div><strong id="v-name"></strong><span id="v-page"></span></div>
+    <button id="v-close" title="Close">×</button>
   </div>
-
-  <!-- withdrawn -->
-  <div class="panel hidden" id="withdrawn-panel">
-    <h2>Considered and withdrawn</h2>
-    <p class="sub">Raised by a detector, then defeated during adversarial review.</p>
-    <div class="withdrawn" id="withdrawn"></div>
-  </div>
-
-  <!-- documents -->
-  <div class="panel hidden" id="docs-panel">
-    <h2>Documents read</h2>
-    <p class="sub">Type was determined by reading each document, not from its filename.</p>
-    <table>
-      <thead><tr><th>Document</th><th>Type</th><th>Pages</th><th>Sections</th></tr></thead>
-      <tbody id="docs"></tbody>
-    </table>
-  </div>
-</main>
-
-<footer>
-  Findings are for human review. Loupe does not give legal advice, value a
-  business, or recommend whether to proceed with a transaction.
-</footer>
+  <div class="pull" id="v-quote"></div>
+  <iframe id="v-frame" title="Source document"></iframe>
+</div>
 
 <script>
-const $ = (id) => document.getElementById(id);
-let chosen = [], runId = null, timer = null;
-let allFindings = [], activeFilter = "all";
+const $=id=>document.getElementById(id);
+let chosen=[],runId=null,timer=null,data=null,filt="all";
+const TITLES={analyse:"New analysis",findings:"Findings",
+  evaluation:"Evaluation",documents:"Documents read"};
 
-/* ---------- file choosing ---------- */
-$("drop").addEventListener("click", () => $("files").click());
-["dragenter", "dragover"].forEach((e) =>
-  $("drop").addEventListener(e, (ev) => {
-    ev.preventDefault(); $("drop").classList.add("over");
-  }));
-["dragleave", "drop"].forEach((e) =>
-  $("drop").addEventListener(e, () => $("drop").classList.remove("over")));
-$("drop").addEventListener("drop", (e) => {
-  e.preventDefault(); setFiles([...e.dataTransfer.files]);
-});
-$("files").addEventListener("change", (e) => setFiles([...e.target.files]));
+document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x===b));
+  Object.keys(TITLES).forEach(t=>$("tab-"+t).classList.toggle("hidden",t!==b.dataset.tab));
+  $("title").textContent=TITLES[b.dataset.tab];
+  window.scrollTo({top:0,behavior:"smooth"});
+}));
+const go=n=>document.querySelector(`.nav button[data-tab="${n}"]`).click();
 
-function setFiles(list) {
-  chosen = list.filter((f) => /\.(pdf|docx)$/i.test(f.name));
-  $("filelist").textContent = chosen.length
-    ? chosen.length + " file" + (chosen.length > 1 ? "s" : "") + " ready: " +
-      chosen.map((f) => f.name).join(", ")
-    : "";
-  $("analyse").disabled = chosen.length === 0;
+/* files */
+$("drop").addEventListener("click",()=>$("files").click());
+["dragenter","dragover"].forEach(e=>$("drop").addEventListener(e,ev=>{
+  ev.preventDefault();$("drop").classList.add("over");}));
+["dragleave","drop"].forEach(e=>$("drop").addEventListener(e,()=>
+  $("drop").classList.remove("over")));
+$("drop").addEventListener("drop",e=>{e.preventDefault();
+  setFiles([...e.dataTransfer.files]);});
+$("files").addEventListener("change",e=>setFiles([...e.target.files]));
+function setFiles(l){
+  chosen=l.filter(f=>/\.(pdf|docx)$/i.test(f.name));
+  $("filelist").textContent=chosen.length?
+    `${chosen.length} file${chosen.length>1?"s":""} ready — ${chosen.map(f=>f.name).join(", ")}`:"";
+  $("analyse").disabled=!chosen.length;
 }
+$("deal").addEventListener("blur",e=>{
+  const n=e.target.value.replace(/[^0-9]/g,"");
+  e.target.value=n?Number(n).toLocaleString("en-US"):"25,000,000";});
 
-$("deal").addEventListener("blur", (e) => {
-  const n = e.target.value.replace(/[^0-9]/g, "");
-  e.target.value = n ? Number(n).toLocaleString("en-US") : "25,000,000";
-});
+/* start */
+$("analyse").addEventListener("click",()=>{
+  const b=new FormData();chosen.forEach(f=>b.append("files",f));
+  b.append("deal_value",$("deal").value.replace(/[^0-9]/g,"")||"25000000");
+  start("/api/runs",{method:"POST",body:b});});
+$("demo").addEventListener("click",()=>start("/api/runs/demo",{method:"POST"}));
+$("retry").addEventListener("click",reset);
+$("again").addEventListener("click",reset);
 
-/* ---------- starting ---------- */
-$("analyse").addEventListener("click", () => {
-  const body = new FormData();
-  chosen.forEach((f) => body.append("files", f));
-  body.append("deal_value", $("deal").value.replace(/[^0-9]/g, "") || "25000000");
-  start("/api/runs", { method: "POST", body });
-});
-$("demo").addEventListener("click", () => start("/api/runs/demo", { method: "POST" }));
-$("retry").addEventListener("click", resetAll);
-$("again").addEventListener("click", resetAll);
-
-async function start(url, opts) {
-  clearPanels();
+async function start(url,opts){
+  wipe();go("analyse");
   $("upload-panel").classList.add("hidden");
   $("progress-panel").classList.remove("hidden");
-  try {
-    const res = await fetch(url, opts);
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || "Could not start the run.");
-    runId = data.run_id;
-    timer = setInterval(poll, 1100);
-    poll();
-  } catch (err) { showError(err.message); }
+  try{
+    const r=await fetch(url,opts),d=await r.json();
+    if(!r.ok)throw new Error(d.detail||"Could not start.");
+    runId=d.run_id;timer=setInterval(poll,900);poll();
+  }catch(e){fail(e.message);}
 }
-
-function clearPanels() {
+function wipe(){
   clearInterval(timer);
-  ["progress-panel", "results-panel", "withdrawn-panel", "docs-panel", "error-panel"]
-    .forEach((id) => $(id).classList.add("hidden"));
-  $("stages").innerHTML = ""; $("findings").innerHTML = "";
-  $("stats").innerHTML = ""; $("filters").innerHTML = "";
-  $("bar").style.width = "0%";
+  ["progress-panel","error-panel","withdrawn-panel"].forEach(i=>$(i).classList.add("hidden"));
+  $("steps").innerHTML="";$("findings").innerHTML="";
+  $("figs").innerHTML="";$("chips").innerHTML="";$("bar").style.width="0";
+  $("rail-foot").innerHTML="";closeViewer();
 }
-
-function resetAll() {
-  clearPanels();
-  runId = null; chosen = []; allFindings = []; activeFilter = "all";
-  $("filelist").textContent = ""; $("analyse").disabled = true;
+function reset(){
+  wipe();runId=null;chosen=[];data=null;filt="all";
+  $("filelist").textContent="";$("analyse").disabled=true;
   $("upload-panel").classList.remove("hidden");
-  window.scrollTo({ top: 0 });
+  $("eval-body").innerHTML='<div class="blank"><span class="big">Nothing measured yet</span>Run the sample data room to score against planted defects.</div>';
+  $("docs-body").innerHTML='<div class="blank"><span class="big">No documents yet</span>Upload a data room or run the sample.</div>';
+  go("analyse");
 }
 
-/* ---------- polling ---------- */
-async function poll() {
-  if (!runId) return;
-  const res = await fetch("/api/runs/" + runId);
-  if (!res.ok) return;
-  const d = await res.json();
-
-  $("bar").style.width = d.progress + "%";
-  $("stage-note").textContent = d.stage;
-  $("stages").innerHTML = d.log.map((line, i) => {
-    const [stage, detail] = line.split("||");
-    const last = i === d.log.length - 1 && d.status === "running";
-    return '<li class="' + (last ? "active" : "") + '">' + esc(stage) +
-      (detail ? ' <em>— ' + esc(detail) + '</em>' : '') + '</li>';
-  }).join("");
-
-  if (d.status === "failed") { clearInterval(timer); showError(d.error); return; }
-  if (d.status === "done") { clearInterval(timer); render(d); }
+/* poll */
+async function poll(){
+  if(!runId)return;
+  const r=await fetch("/api/runs/"+runId);if(!r.ok)return;
+  const d=await r.json();
+  $("bar").style.width=d.progress+"%";
+  $("stage-note").textContent=d.stage;
+  $("steps").innerHTML=d.log.map((l,i)=>{
+    const[s,det,t]=l.split("||");
+    const now=i===d.log.length-1&&d.status==="running";
+    return `<li class="${now?"now":""}" style="animation-delay:${Math.min(i*40,300)}ms">
+      <span class="tick">✓</span><span>${esc(s)}${det?` <em>— ${esc(det)}</em>`:""}</span>
+      ${t?`<span class="t">${esc(t)}s</span>`:""}</li>`;}).join("");
+  railFoot(d);
+  if(d.status==="failed"){clearInterval(timer);fail(d.error);return;}
+  if(d.status==="done"){clearInterval(timer);data=d;paint(d);}
 }
-
-function showError(msg) {
-  clearInterval(timer);
-  $("progress-panel").classList.add("hidden");
-  $("error-text").textContent = msg || "The run failed.";
+function fail(m){
+  clearInterval(timer);$("progress-panel").classList.add("hidden");
+  $("error-text").textContent=m||"The run failed.";
   $("error-panel").classList.remove("hidden");
 }
+function railFoot(d){
+  const rows=[["Documents",d.documents.length||"—"],["Claims",d.stats.claims||"—"],
+    ["Findings",d.findings.length||"—"]];
+  $("rail-foot").innerHTML=rows.map(([k,v])=>
+    `<div class="rail-stat"><span>${k}</span><b>${v}</b></div>`).join("")+
+    (d.status==="running"?`<div class="live"><i></i>Analysing · ${d.elapsed}s</div>`:"");
+}
 
-/* ---------- rendering ---------- */
-function render(d) {
-  allFindings = d.findings;
-  const cross = d.findings.filter((f) => f.cross_document).length;
+/* paint */
+function paint(d){
+  const cross=d.findings.filter(f=>f.cross_document).length;
+  const figs=[];
+  if(d.evaluation)figs.push([`${d.evaluation.detected}/${d.evaluation.planted}`,"planted defects found",1]);
+  figs.push([d.findings.length,"findings confirmed"],[cross,"span two or more documents"],
+    [d.stats.claims||0,"claims extracted"],[d.retracted.length,"withdrawn on review"],
+    [d.elapsed+"s","elapsed"]);
+  $("figs").innerHTML=figs.map(([b,l,a],i)=>
+    `<div class="fig${a?" accent":""}" style="animation-delay:${i*55}ms">
+      <b>${esc(String(b))}</b><span>${esc(l)}</span></div>`).join("");
 
-  const cards = [];
-  if (d.score) {
-    cards.push([d.score.detected + "/" + d.score.planted, "planted defects found"]);
-  }
-  cards.push(
-    [d.findings.length, "findings confirmed"],
-    [cross, "needed two or more documents"],
-    [d.stats.claims || 0, "claims extracted"],
-    [d.retracted.length, "withdrawn on review"]
-  );
-  $("stats").innerHTML = cards.map(([big, label], i) =>
-    '<div class="stat' + (i === 0 && d.score ? ' hero' : '') +
-    '" style="animation-delay:' + (i * 60) + 'ms"><b>' + esc(String(big)) +
-    '</b><span>' + esc(label) + '</span></div>').join("");
+  const c={all:d.findings.length};
+  ["critical","high","medium","low"].forEach(s=>c[s]=d.findings.filter(f=>f.severity===s).length);
+  $("chips").innerHTML=["all","critical","high","medium","low"].filter(k=>c[k])
+    .map(k=>`<button class="chip${k===filt?" on":""}" data-f="${k}">${k} · ${c[k]}</button>`).join("");
+  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{
+    filt=b.dataset.f;paint(data);}));
 
-  const counts = { all: allFindings.length };
-  ["critical", "high", "medium", "low"].forEach((s) => {
-    counts[s] = allFindings.filter((f) => f.severity === s).length;
-  });
-  $("filters").innerHTML = ["all", "critical", "high", "medium", "low"]
-    .filter((k) => counts[k] > 0)
-    .map((k) => '<button class="filter' + (k === activeFilter ? " on" : "") +
-      '" data-f="' + k + '">' + k + " (" + counts[k] + ")</button>").join("");
-  [...document.querySelectorAll(".filter")].forEach((b) =>
-    b.addEventListener("click", () => { activeFilter = b.dataset.f; render(d); }));
+  const list=filt==="all"?d.findings:d.findings.filter(f=>f.severity===filt);
+  $("findings").innerHTML=list.length?list.map(card).join(""):
+    '<div class="blank"><span class="big">Nothing at this severity</span>Try another filter.</div>';
+  document.querySelectorAll("[data-cite]").forEach(b=>
+    b.addEventListener("click",()=>openViewer(JSON.parse(b.dataset.cite))));
 
-  const shown = activeFilter === "all"
-    ? allFindings : allFindings.filter((f) => f.severity === activeFilter);
-  $("findings").innerHTML = shown.length
-    ? shown.map(card).join("")
-    : '<div class="empty">No findings at this severity.</div>';
-  $("results-panel").classList.remove("hidden");
-
-  if (d.retracted.length) {
-    $("withdrawn").innerHTML = d.retracted.map((r) =>
-      "<div><b>" + esc(r.title) + "</b><br>Withdrawn: " + esc(r.reason) + "</div>"
-    ).join("");
+  if(d.retracted.length){
+    $("withdrawn").innerHTML=d.retracted.map(r=>
+      `<div><b>${esc(r.title)}</b>${esc(r.reason)}</div>`).join("");
     $("withdrawn-panel").classList.remove("hidden");
   }
-
-  if (d.documents.length) {
-    $("docs").innerHTML = d.documents.map((doc) =>
-      "<tr><td><a href='/api/runs/" + runId + "/source/" +
-        encodeURIComponent(doc.name) + "' target='_blank'>" + esc(doc.name) +
-      "</a></td><td>" + esc(doc.type) + "</td><td>" + doc.pages +
-      "</td><td>" + doc.blocks + "</td></tr>").join("");
-    $("docs-panel").classList.remove("hidden");
-  }
+  if(d.documents.length)paintDocs(d.documents);
+  if(d.evaluation)paintEval(d.evaluation);
+  railFoot(d);go("findings");
 }
 
-function card(f, i) {
-  const cites = f.citations.length
-    ? f.citations.map((c) => {
-        const isPdf = /\.pdf$/i.test(c.filename);
-        const href = "/api/runs/" + runId + "/source/" +
-          encodeURIComponent(c.filename) + (isPdf ? "#page=" + c.page : "");
-        return '<div class="cite"><a href="' + href + '" target="_blank" ' +
-          'title="Open the source document">' + esc(c.label) + ' ↗</a>' +
-          '<em>"' + esc(c.quote) + '"</em></div>';
-      }).join("")
-    : '<div class="cite flat">No evidence to cite — this finding concerns a ' +
-      'document that is absent from the data room.</div>';
-
-  const objection = f.objection
-    ? '<div class="objection"><b>The reviewing agent argued:</b> ' +
-      esc(f.objection) + '<div class="lifecycle"><span>proposed →</span>' +
-      '<span>challenged →</span><b>confirmed</b></div></div>'
-    : "";
-
-  const money = f.materiality
-    ? '<span class="tag tag-money">~' + esc(f.materiality) + '</span>' : "";
-
-  return '<div class="finding ' + esc(f.severity) +
-    '" style="animation-delay:' + (i * 55) + 'ms">' +
-    '<div class="tags">' +
-      '<span class="tag sev-' + esc(f.severity) + '">' + esc(f.severity) + '</span>' +
-      '<span class="tag ' + (f.cross_document ? "tag-cross" : "tag-plain") + '">' +
-        (f.cross_document ? "cross-document" : "single document") + '</span>' +
-      '<span class="tag tag-plain">' + esc(f.type) + '</span>' + money +
-    '</div>' +
-    '<h3>' + esc(f.title) + '</h3>' +
-    '<p>' + esc(f.description) + '</p>' + cites + objection +
-  '</div>';
+function card(f,i){
+  const cites=f.citations.length?f.citations.map(c=>
+    `<div class="cite" data-cite='${esc(JSON.stringify(c))}' role="button" tabindex="0">
+      <span class="src">${esc(c.label)} ↗</span><q>${esc(c.quote)}</q></div>`).join("")
+    :'<div class="cite none">No evidence to cite — this concerns a document absent from the data room.</div>';
+  const obj=f.objection?`<div class="objection"><b>The reviewing agent argued:</b>
+      ${esc(f.objection)}<div class="flow"><span>proposed</span><span>→</span>
+      <span>challenged</span><span>→</span><span class="done">confirmed</span></div></div>`:"";
+  const money=f.materiality?`<span class="badge b-money">≈ ${esc(f.materiality)}</span>`:"";
+  return `<div class="find ${esc(f.severity)}" style="animation-delay:${Math.min(i*45,320)}ms">
+    <div class="badges"><span class="badge b-${esc(f.severity)}">${esc(f.severity)}</span>
+      <span class="badge ${f.cross_document?"b-cross":"b-flat"}">
+        ${f.cross_document?"cross-document":"single document"}</span>
+      <span class="badge b-flat">${esc(f.type)}</span>${money}</div>
+    <h4>${esc(f.title)}</h4><p>${esc(f.description)}</p>${cites}${obj}</div>`;
 }
 
-$("memo").addEventListener("click", () =>
-  window.open("/api/runs/" + runId + "/memo", "_blank"));
-
-function esc(s) {
-  return String(s == null ? "" : s).replace(/[&<>"]/g,
-    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+/* viewer */
+function openViewer(c){
+  if(!c.filename)return;
+  $("v-name").textContent=c.filename;
+  $("v-page").textContent="page "+c.page;
+  $("v-quote").textContent='"'+c.quote+'"';
+  const url=`/api/runs/${runId}/source/${encodeURIComponent(c.filename)}`;
+  if(/\.pdf$/i.test(c.filename)){
+    $("v-frame").src=url+"#page="+c.page+"&view=FitH";
+    $("v-frame").classList.remove("hidden");
+  }else{$("v-frame").classList.add("hidden");window.open(url,"_blank");}
+  $("viewer").classList.add("open");$("shell").classList.add("paneled");
 }
+function closeViewer(){
+  $("viewer").classList.remove("open");$("shell").classList.remove("paneled");
+  setTimeout(()=>{$("v-frame").src="about:blank";},450);
+}
+$("v-close").addEventListener("click",closeViewer);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeViewer();});
+
+/* documents */
+function paintDocs(docs){
+  $("docs-body").innerHTML=`<p class="lede">Type determined by reading each
+    document, not from its filename.</p>
+    <table class="tbl"><thead><tr><th>Document</th><th>Type</th>
+    <th>Pages</th><th>Sections</th></tr></thead><tbody>${
+    docs.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.type)}</td>
+      <td>${d.pages}</td><td>${d.blocks}</td></tr>`).join("")}</tbody></table>`;
+}
+
+/* evaluation */
+function paintEval(e){
+  const rows=o=>Object.entries(o).map(([k,v])=>{
+    const p=v.planted?Math.round(100*v.found/v.planted):0;
+    return `<tr><td>${esc(k)}</td><td>${v.found} / ${v.planted}</td>
+      <td><div class="meter"><i data-w="${p}"></i></div></td><td>${p}%</td></tr>`;}).join("");
+  $("eval-body").innerHTML=`
+    <p class="lede">Measured against a corpus with defects planted at known
+      locations, so detection is verified rather than asserted.</p>
+    <div class="figs">
+      <div class="fig accent"><b>${e.detected}/${e.planted}</b><span>planted defects found</span></div>
+      <div class="fig"><b>${e.recall}%</b><span>overall recall</span></div>
+      <div class="fig"><b>${e.noise}/${e.total_findings}</b><span>matching nothing real</span></div>
+    </div>
+    <h3 class="sec">By defect class</h3><p>Which kinds of problem the system finds.</p>
+    <table class="tbl"><thead><tr><th>Class</th><th>Found</th><th></th><th>Recall</th></tr></thead>
+      <tbody>${rows(e.by_class)}</tbody></table>
+    <h3 class="sec">By difficulty</h3><p>Hard defects need capabilities not yet built.</p>
+    <table class="tbl"><thead><tr><th>Difficulty</th><th>Found</th><th></th><th>Recall</th></tr></thead>
+      <tbody>${rows(e.by_difficulty)}</tbody></table>
+    <h3 class="sec">Every planted defect</h3>
+    <p>Each row names the capability its detection depends on.</p>
+    <table class="tbl"><thead><tr><th>Defect</th><th>Difficulty</th>
+      <th>Requires</th><th>Found</th></tr></thead><tbody>${
+      e.defects.map(d=>`<tr><td>${esc(d.id)} · ${esc(d.name)}</td>
+        <td><span class="pill p-${esc(d.difficulty)}">${esc(d.difficulty)}</span></td>
+        <td>${esc(d.requires)}</td>
+        <td class="${d.detected?"hit":"miss"}">${d.detected?"yes":"—"}</td></tr>`).join("")}
+      </tbody></table>`;
+  requestAnimationFrame(()=>document.querySelectorAll(".meter i")
+    .forEach(m=>m.style.width=m.dataset.w+"%"));
+}
+
+$("memo").addEventListener("click",()=>window.open("/api/runs/"+runId+"/memo","_blank"));
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,
+  c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 </script>
 </body>
 </html>
