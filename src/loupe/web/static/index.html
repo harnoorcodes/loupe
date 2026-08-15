@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loupe — due diligence</title>
+<style>
+  :root {
+    --navy: #1E2761;
+    --navy-deep: #141A45;
+    --ice: #CADCFC;
+    --ice-soft: #E8EFFB;
+    --amber: #E8A33D;
+    --red: #B03A3A;
+    --green: #2E7D5B;
+    --ink: #16182B;
+    --muted: #626A85;
+    --line: #E4EAF5;
+    --paper: #F7F9FD;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Calibri, "Segoe UI", system-ui, sans-serif;
+    color: var(--ink);
+    background: #fff;
+    line-height: 1.5;
+  }
+
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 26px 40px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .ring {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 2px solid var(--ice);
+    display: grid; place-items: center; flex: none;
+  }
+  .ring i {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid var(--amber); display: block;
+  }
+  header h1 {
+    margin: 0; font-family: Cambria, Georgia, serif;
+    font-size: 26px; letter-spacing: 3px;
+  }
+  header p { margin: 2px 0 0; color: var(--ice); font-size: 14px; }
+
+  main { max-width: 1060px; margin: 0 auto; padding: 34px 24px 90px; }
+  .panel { margin-top: 34px; animation: rise .35s ease both; }
+  .hidden { display: none !important; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  h2 {
+    font-family: Cambria, Georgia, serif; font-size: 21px;
+    color: var(--navy); margin: 0 0 6px;
+  }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+
+  /* ---- upload ---- */
+  .drop {
+    border: 2px dashed var(--ice);
+    border-radius: 12px; background: var(--paper);
+    padding: 54px 24px; text-align: center; cursor: pointer;
+    transition: border-color .18s, background .18s, transform .18s;
+  }
+  .drop:hover { border-color: var(--amber); background: #fff; }
+  .drop.over { border-color: var(--amber); background: #fff; transform: scale(1.01); }
+  .drop strong { display: block; font-size: 19px; color: var(--navy); margin-bottom: 5px; }
+  .drop span { color: var(--muted); font-size: 14px; }
+
+  .row { display: flex; gap: 12px; align-items: center; margin-top: 20px; flex-wrap: wrap; }
+  button {
+    font-family: inherit; font-size: 15px; font-weight: 600;
+    padding: 11px 22px; border-radius: 8px; border: 0; cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  button:active { transform: translateY(1px); }
+  .primary { background: var(--navy); color: #fff; }
+  .primary:hover:not(:disabled) { background: var(--navy-deep); }
+  .primary:disabled { background: #B6BCCF; cursor: not-allowed; }
+  .ghost { background: #fff; color: var(--navy); border: 1px solid var(--ice); }
+  .ghost:hover { background: var(--paper); }
+  label.deal { font-size: 14px; color: var(--muted); margin-left: auto; }
+  input[type=text] {
+    font-family: inherit; font-size: 14px; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px; width: 140px;
+  }
+  .filelist { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+  /* ---- progress ---- */
+  .bar { height: 6px; background: var(--ice-soft); border-radius: 99px; overflow: hidden; }
+  .bar i {
+    display: block; height: 100%; width: 0%;
+    background: var(--navy); border-radius: 99px;
+    transition: width .5s ease;
+  }
+  .stages { list-style: none; margin: 18px 0 0; padding: 0; }
+  .stages li {
+    padding: 9px 0 9px 28px; position: relative; font-size: 14px;
+    color: var(--muted); border-bottom: 1px solid var(--line);
+    animation: rise .3s ease both;
+  }
+  .stages li::before {
+    content: "✓"; position: absolute; left: 2px;
+    color: var(--green); font-weight: 700;
+  }
+  .stages li.active { color: var(--ink); font-weight: 600; }
+  .stages li.active::before {
+    content: ""; width: 13px; height: 13px; top: 12px;
+    border: 2px solid var(--ice); border-top-color: var(--navy);
+    border-radius: 50%; animation: spin .8s linear infinite;
+  }
+  .stages li em { color: var(--muted); font-weight: 400; font-style: normal; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---- stats ---- */
+  .stats { display: flex; gap: 13px; flex-wrap: wrap; margin-bottom: 24px; }
+  .stat {
+    background: var(--paper); border-radius: 11px;
+    padding: 17px 24px; min-width: 132px; flex: 1;
+    animation: rise .4s ease both;
+  }
+  .stat b {
+    display: block; font-family: Cambria, Georgia, serif;
+    font-size: 30px; color: var(--navy); line-height: 1.15;
+  }
+  .stat span { font-size: 12px; color: var(--muted); }
+  .stat.hero { background: var(--navy); }
+  .stat.hero b { color: #fff; }
+  .stat.hero span { color: var(--ice); }
+
+  /* ---- filters ---- */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+  .filter {
+    font-size: 13px; font-weight: 600; padding: 7px 15px;
+    border-radius: 99px; border: 1px solid var(--line);
+    background: #fff; color: var(--muted); cursor: pointer;
+  }
+  .filter:hover { border-color: var(--ice); }
+  .filter.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+  /* ---- findings ---- */
+  .finding {
+    border: 1px solid var(--line); border-left: 4px solid var(--line);
+    border-radius: 10px; padding: 19px 22px; margin-bottom: 14px;
+    animation: rise .35s ease both;
+    transition: box-shadow .18s;
+  }
+  .finding:hover { box-shadow: 0 3px 14px rgba(30,39,97,.08); }
+  .finding.critical { border-left-color: var(--red); }
+  .finding.high { border-left-color: var(--amber); }
+  .finding.medium { border-left-color: var(--navy); }
+  .finding.low { border-left-color: var(--ice); }
+
+  .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 10px; }
+  .tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .7px;
+    padding: 4px 10px; border-radius: 99px; text-transform: uppercase;
+  }
+  .sev-critical { background: var(--red); color: #fff; }
+  .sev-high { background: var(--amber); color: var(--navy-deep); }
+  .sev-medium { background: var(--ice); color: var(--navy); }
+  .sev-low { background: var(--ice-soft); color: var(--muted); }
+  .tag-cross { background: var(--navy); color: #fff; }
+  .tag-plain { background: var(--ice-soft); color: var(--muted); }
+  .tag-money { background: var(--green); color: #fff; }
+
+  .finding h3 { margin: 0 0 9px; font-size: 17px; }
+  .finding > p { margin: 0 0 14px; font-size: 14.5px; }
+
+  .cite {
+    background: var(--paper); border-radius: 8px;
+    padding: 10px 13px; margin-bottom: 8px; font-size: 13px;
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .cite a {
+    color: var(--navy); font-weight: 700; text-decoration: none;
+    white-space: nowrap; border-bottom: 1px dotted var(--navy);
+  }
+  .cite a:hover { color: var(--amber); border-bottom-color: var(--amber); }
+  .cite em { color: var(--muted); }
+  .cite.flat { color: var(--muted); font-style: italic; }
+
+  .objection {
+    border-top: 1px solid var(--line); margin-top: 13px; padding-top: 12px;
+    font-size: 13px; color: var(--muted);
+  }
+  .objection b { color: var(--ink); }
+  .objection .verdict { color: var(--green); font-weight: 700; }
+
+  .lifecycle { display: flex; gap: 6px; align-items: center; margin-top: 11px; font-size: 11px; }
+  .lifecycle span { color: var(--muted); }
+  .lifecycle b { color: var(--green); }
+
+  /* ---- docs + withdrawn ---- */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th {
+    text-align: left; padding: 9px 12px; background: var(--navy);
+    color: #fff; font-weight: 600; font-size: 12px;
+    letter-spacing: .5px; text-transform: uppercase;
+  }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  td a { color: var(--navy); text-decoration: none; border-bottom: 1px dotted; }
+  td a:hover { color: var(--amber); }
+
+  .withdrawn { background: var(--paper); border-radius: 10px; padding: 6px 20px; }
+  .withdrawn div { font-size: 13.5px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .withdrawn div:last-child { border-bottom: 0; }
+  .withdrawn b { color: var(--ink); }
+
+  .error {
+    background: #FDF2F2; border: 1px solid var(--red);
+    border-radius: 10px; padding: 17px 20px; color: var(--red); font-size: 14px;
+  }
+  .empty { color: var(--muted); font-size: 14px; padding: 30px 0; text-align: center; }
+
+  footer {
+    color: var(--muted); font-size: 12px;
+    padding: 0 40px 44px; max-width: 1060px; margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="ring"><i></i></div>
+  <div>
+    <h1>LOUPE</h1>
+    <p>Reads a data room. Finds what one document alone cannot tell you.</p>
+  </div>
+</header>
+
+<main>
+  <!-- upload -->
+  <div id="upload-panel">
+    <div class="drop" id="drop">
+      <strong>Drop your data room here</strong>
+      <span>PDF and DOCX — or click to choose files</span>
+    </div>
+    <input type="file" id="files" multiple accept=".pdf,.docx" class="hidden">
+    <div class="filelist" id="filelist"></div>
+    <div class="row">
+      <button class="primary" id="analyse" disabled>Analyse</button>
+      <button class="ghost" id="demo">Use the sample data room</button>
+      <label class="deal">Deal value USD
+        <input type="text" id="deal" value="25,000,000">
+      </label>
+    </div>
+  </div>
+
+  <!-- progress -->
+  <div class="panel hidden" id="progress-panel">
+    <h2>Analysing</h2>
+    <p class="sub" id="stage-note">Starting up</p>
+    <div class="bar"><i id="bar"></i></div>
+    <ul class="stages" id="stages"></ul>
+  </div>
+
+  <!-- error -->
+  <div class="panel hidden" id="error-panel">
+    <h2>Something went wrong</h2>
+    <div class="error" id="error-text"></div>
+    <div class="row"><button class="ghost" id="retry">Start again</button></div>
+  </div>
+
+  <!-- results -->
+  <div class="panel hidden" id="results-panel">
+    <h2>Findings</h2>
+    <p class="sub">Every finding below survived an agent that tried to disprove it.</p>
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters"></div>
+    <div id="findings"></div>
+    <div class="row">
+      <button class="ghost" id="memo">Open the full memo</button>
+      <button class="ghost" id="again">Analyse another data room</button>
+    </div>
+  </div>
+
+  <!-- withdrawn -->
+  <div class="panel hidden" id="withdrawn-panel">
+    <h2>Considered and withdrawn</h2>
+    <p class="sub">Raised by a detector, then defeated during adversarial review.</p>
+    <div class="withdrawn" id="withdrawn"></div>
+  </div>
+
+  <!-- documents -->
+  <div class="panel hidden" id="docs-panel">
+    <h2>Documents read</h2>
+    <p class="sub">Type was determined by reading each document, not from its filename.</p>
+    <table>
+      <thead><tr><th>Document</th><th>Type</th><th>Pages</th><th>Sections</th></tr></thead>
+      <tbody id="docs"></tbody>
+    </table>
+  </div>
+</main>
+
+<footer>
+  Findings are for human review. Loupe does not give legal advice, value a
+  business, or recommend whether to proceed with a transaction.
+</footer>
+
+<script>
+const $ = (id) => document.getElementById(id);
+let chosen = [], runId = null, timer = null;
+let allFindings = [], activeFilter = "all";
+
+/* ---------- file choosing ---------- */
+$("drop").addEventListener("click", () => $("files").click());
+["dragenter", "dragover"].forEach((e) =>
+  $("drop").addEventListener(e, (ev) => {
+    ev.preventDefault(); $("drop").classList.add("over");
+  }));
+["dragleave", "drop"].forEach((e) =>
+  $("drop").addEventListener(e, () => $("drop").classList.remove("over")));
+$("drop").addEventListener("drop", (e) => {
+  e.preventDefault(); setFiles([...e.dataTransfer.files]);
+});
+$("files").addEventListener("change", (e) => setFiles([...e.target.files]));
+
+function setFiles(list) {
+  chosen = list.filter((f) => /\.(pdf|docx)$/i.test(f.name));
+  $("filelist").textContent = chosen.length
+    ? chosen.length + " file" + (chosen.length > 1 ? "s" : "") + " ready: " +
+      chosen.map((f) => f.name).join(", ")
+    : "";
+  $("analyse").disabled = chosen.length === 0;
+}
+
+$("deal").addEventListener("blur", (e) => {
+  const n = e.target.value.replace(/[^0-9]/g, "");
+  e.target.value = n ? Number(n).toLocaleString("en-US") : "25,000,000";
+});
+
+/* ---------- starting ---------- */
+$("analyse").addEventListener("click", () => {
+  const body = new FormData();
+  chosen.forEach((f) => body.append("files", f));
+  body.append("deal_value", $("deal").value.replace(/[^0-9]/g, "") || "25000000");
+  start("/api/runs", { method: "POST", body });
+});
+$("demo").addEventListener("click", () => start("/api/runs/demo", { method: "POST" }));
+$("retry").addEventListener("click", resetAll);
+$("again").addEventListener("click", resetAll);
+
+async function start(url, opts) {
+  clearPanels();
+  $("upload-panel").classList.add("hidden");
+  $("progress-panel").classList.remove("hidden");
+  try {
+    const res = await fetch(url, opts);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || "Could not start the run.");
+    runId = data.run_id;
+    timer = setInterval(poll, 1100);
+    poll();
+  } catch (err) { showError(err.message); }
+}
+
+function clearPanels() {
+  clearInterval(timer);
+  ["progress-panel", "results-panel", "withdrawn-panel", "docs-panel", "error-panel"]
+    .forEach((id) => $(id).classList.add("hidden"));
+  $("stages").innerHTML = ""; $("findings").innerHTML = "";
+  $("stats").innerHTML = ""; $("filters").innerHTML = "";
+  $("bar").style.width = "0%";
+}
+
+function resetAll() {
+  clearPanels();
+  runId = null; chosen = []; allFindings = []; activeFilter = "all";
+  $("filelist").textContent = ""; $("analyse").disabled = true;
+  $("upload-panel").classList.remove("hidden");
+  window.scrollTo({ top: 0 });
+}
+
+/* ---------- polling ---------- */
+async function poll() {
+  if (!runId) return;
+  const res = await fetch("/api/runs/" + runId);
+  if (!res.ok) return;
+  const d = await res.json();
+
+  $("bar").style.width = d.progress + "%";
+  $("stage-note").textContent = d.stage;
+  $("stages").innerHTML = d.log.map((line, i) => {
+    const [stage, detail] = line.split("||");
+    const last = i === d.log.length - 1 && d.status === "running";
+    return '<li class="' + (last ? "active" : "") + '">' + esc(stage) +
+      (detail ? ' <em>— ' + esc(detail) + '</em>' : '') + '</li>';
+  }).join("");
+
+  if (d.status === "failed") { clearInterval(timer); showError(d.error); return; }
+  if (d.status === "done") { clearInterval(timer); render(d); }
+}
+
+function showError(msg) {
+  clearInterval(timer);
+  $("progress-panel").classList.add("hidden");
+  $("error-text").textContent = msg || "The run failed.";
+  $("error-panel").classList.remove("hidden");
+}
+
+/* ---------- rendering ---------- */
+function render(d) {
+  allFindings = d.findings;
+  const cross = d.findings.filter((f) => f.cross_document).length;
+
+  const cards = [];
+  if (d.score) {
+    cards.push([d.score.detected + "/" + d.score.planted, "planted defects found"]);
+  }
+  cards.push(
+    [d.findings.length, "findings confirmed"],
+    [cross, "needed two or more documents"],
+    [d.stats.claims || 0, "claims extracted"],
+    [d.retracted.length, "withdrawn on review"]
+  );
+  $("stats").innerHTML = cards.map(([big, label], i) =>
+    '<div class="stat' + (i === 0 && d.score ? ' hero' : '') +
+    '" style="animation-delay:' + (i * 60) + 'ms"><b>' + esc(String(big)) +
+    '</b><span>' + esc(label) + '</span></div>').join("");
+
+  const counts = { all: allFindings.length };
+  ["critical", "high", "medium", "low"].forEach((s) => {
+    counts[s] = allFindings.filter((f) => f.severity === s).length;
+  });
+  $("filters").innerHTML = ["all", "critical", "high", "medium", "low"]
+    .filter((k) => counts[k] > 0)
+    .map((k) => '<button class="filter' + (k === activeFilter ? " on" : "") +
+      '" data-f="' + k + '">' + k + " (" + counts[k] + ")</button>").join("");
+  [...document.querySelectorAll(".filter")].forEach((b) =>
+    b.addEventListener("click", () => { activeFilter = b.dataset.f; render(d); }));
+
+  const shown = activeFilter === "all"
+    ? allFindings : allFindings.filter((f) => f.severity === activeFilter);
+  $("findings").innerHTML = shown.length
+    ? shown.map(card).join("")
+    : '<div class="empty">No findings at this severity.</div>';
+  $("results-panel").classList.remove("hidden");
+
+  if (d.retracted.length) {
+    $("withdrawn").innerHTML = d.retracted.map((r) =>
+      "<div><b>" + esc(r.title) + "</b><br>Withdrawn: " + esc(r.reason) + "</div>"
+    ).join("");
+    $("withdrawn-panel").classList.remove("hidden");
+  }
+
+  if (d.documents.length) {
+    $("docs").innerHTML = d.documents.map((doc) =>
+      "<tr><td><a href='/api/runs/" + runId + "/source/" +
+        encodeURIComponent(doc.name) + "' target='_blank'>" + esc(doc.name) +
+      "</a></td><td>" + esc(doc.type) + "</td><td>" + doc.pages +
+      "</td><td>" + doc.blocks + "</td></tr>").join("");
+    $("docs-panel").classList.remove("hidden");
+  }
+}
+
+function card(f, i) {
+  const cites = f.citations.length
+    ? f.citations.map((c) => {
+        const isPdf = /\.pdf$/i.test(c.filename);
+        const href = "/api/runs/" + runId + "/source/" +
+          encodeURIComponent(c.filename) + (isPdf ? "#page=" + c.page : "");
+        return '<div class="cite"><a href="' + href + '" target="_blank" ' +
+          'title="Open the source document">' + esc(c.label) + ' ↗</a>' +
+          '<em>"' + esc(c.quote) + '"</em></div>';
+      }).join("")
+    : '<div class="cite flat">No evidence to cite — this finding concerns a ' +
+      'document that is absent from the data room.</div>';
+
+  const objection = f.objection
+    ? '<div class="objection"><b>The reviewing agent argued:</b> ' +
+      esc(f.objection) + '<div class="lifecycle"><span>proposed →</span>' +
+      '<span>challenged →</span><b>confirmed</b></div></div>'
+    : "";
+
+  const money = f.materiality
+    ? '<span class="tag tag-money">~' + esc(f.materiality) + '</span>' : "";
+
+  return '<div class="finding ' + esc(f.severity) +
+    '" style="animation-delay:' + (i * 55) + 'ms">' +
+    '<div class="tags">' +
+      '<span class="tag sev-' + esc(f.severity) + '">' + esc(f.severity) + '</span>' +
+      '<span class="tag ' + (f.cross_document ? "tag-cross" : "tag-plain") + '">' +
+        (f.cross_document ? "cross-document" : "single document") + '</span>' +
+      '<span class="tag tag-plain">' + esc(f.type) + '</span>' + money +
+    '</div>' +
+    '<h3>' + esc(f.title) + '</h3>' +
+    '<p>' + esc(f.description) + '</p>' + cites + objection +
+  '</div>';
+}
+
+$("memo").addEventListener("click", () =>
+  window.open("/api/runs/" + runId + "/memo", "_blank"));
+
+function esc(s) {
+  return String(s == null ? "" : s).replace(/[&<>"]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+</script>
+</body>
+</html>

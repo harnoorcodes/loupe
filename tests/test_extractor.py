@@ -18,7 +18,7 @@ def cap_table(tmp_path_factory: pytest.TempPathFactory):
     sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
     from generate_corpus import write_pdf
 
-    from loupe.corpus.content import CAP_TABLE
+    from loupe.corpus.documents.corporate import CAP_TABLE
 
     out = tmp_path_factory.mktemp("extract")
     write_pdf(CAP_TABLE, out)

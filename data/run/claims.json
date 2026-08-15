@@ -4,7 +4,7 @@
     "document_id": "articles_of_incorporation",
     "claim_type": "status",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "was incorporated on",
+    "predicate": "incorporated in Delaware",
     "raw_text": "Northwind Analytics Inc. was incorporated in the State of Delaware on 19 June 2019.",
     "span": {
       "document_id": "articles_of_incorporation",
@@ -24,14 +24,14 @@
     "document_id": "articles_of_incorporation",
     "claim_type": "status",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "was incorporated in the State of Delaware",
-    "raw_text": "Northwind Analytics Inc. was incorporated in the State of Delaware",
+    "predicate": "date of incorporation",
+    "raw_text": "19 June 2019",
     "span": {
       "document_id": "articles_of_incorporation",
       "page": 1,
-      "char_start": 53,
-      "char_end": 119,
-      "text": "Northwind Analytics Inc. was incorporated in the State of Delaware"
+      "char_start": 123,
+      "char_end": 135,
+      "text": "19 June 2019"
     },
     "numeric_value": null,
     "currency": null,
@@ -44,14 +44,14 @@
     "document_id": "articles_of_incorporation",
     "claim_type": "quantity",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "authorised shares of common stock",
-    "raw_text": "The authorised capital of the corporation consists of 10,000,000 shares of common stock",
+    "predicate": "authorised common stock shares",
+    "raw_text": "10,000,000 shares of common stock",
     "span": {
       "document_id": "articles_of_incorporation",
       "page": 1,
-      "char_start": 137,
+      "char_start": 191,
       "char_end": 224,
-      "text": "The authorised capital of the corporation consists of 10,000,000 shares of common stock"
+      "text": "10,000,000 shares of common stock"
     },
     "numeric_value": "10000000",
     "currency": null,
@@ -64,7 +64,7 @@
     "document_id": "articles_of_incorporation",
     "claim_type": "quantity",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "authorised shares of preferred stock",
+    "predicate": "authorised preferred stock shares",
     "raw_text": "2,000,000 shares of preferred stock",
     "span": {
       "document_id": "articles_of_incorporation",
@@ -100,14 +100,34 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0000",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0000",
+    "document_id": "board_minutes_2024_03",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "date of Board of Directors meeting",
+    "raw_text": "14 March 2024",
+    "span": {
+      "document_id": "board_minutes_2024_03",
+      "page": 1,
+      "char_start": 62,
+      "char_end": 75,
+      "text": "14 March 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_03-c0001",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "status",
     "subject": "Sarah Chen",
     "predicate": "served as Chair",
     "raw_text": "Sarah Chen (Chair)",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
       "char_start": 85,
       "char_end": 103,
@@ -120,14 +140,14 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0001",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0002",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "relationship",
     "subject": "Rachel Imani",
     "predicate": "represented Kestrel Ventures LP",
     "raw_text": "Rachel Imani representing Kestrel Ventures LP",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
       "char_start": 124,
       "char_end": 169,
@@ -140,18 +160,18 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0002",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0003",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "quantity",
     "subject": "Northwind Analytics Inc.",
     "predicate": "approved issuance of Series A preferred shares",
-    "raw_text": "approved the issuance of 900,000 Series A preferred shares",
+    "raw_text": "900,000 Series A preferred shares",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
-      "char_start": 195,
+      "char_start": 220,
       "char_end": 253,
-      "text": "approved the issuance of 900,000 Series A preferred shares"
+      "text": "900,000 Series A preferred shares"
     },
     "numeric_value": "900000",
     "currency": null,
@@ -160,18 +180,18 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0003",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0004",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "monetary",
     "subject": "Series A preferred shares",
-    "predicate": "priced at per share",
-    "raw_text": "at USD 2.40 per share",
+    "predicate": "issuance price per share",
+    "raw_text": "USD 2.40",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
-      "char_start": 277,
-      "char_end": 298,
-      "text": "at USD 2.40 per share"
+      "char_start": 280,
+      "char_end": 288,
+      "text": "USD 2.40"
     },
     "numeric_value": "2.40",
     "currency": "USD",
@@ -180,14 +200,14 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0004",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0005",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "status",
     "subject": "Rachel Imani",
     "predicate": "appointed as a director",
     "raw_text": "appointment of Rachel Imani as a director",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
       "char_start": 337,
       "char_end": 378,
@@ -200,18 +220,358 @@
     "confidence": 0.6
   },
   {
-    "claim_id": "board_minutes_2024-c0005",
-    "document_id": "board_minutes_2024",
+    "claim_id": "board_minutes_2024_03-c0006",
+    "document_id": "board_minutes_2024_03",
     "claim_type": "obligation",
     "subject": "management",
     "predicate": "directed to prepare a draft plan document",
     "raw_text": "directed management to prepare a draft plan document",
     "span": {
-      "document_id": "board_minutes_2024",
+      "document_id": "board_minutes_2024_03",
       "page": 1,
       "char_start": 514,
       "char_end": 566,
       "text": "directed management to prepare a draft plan document"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_09-c0000",
+    "document_id": "board_minutes_2024_09",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "Board of Directors meeting date",
+    "raw_text": "4 September 2024",
+    "span": {
+      "document_id": "board_minutes_2024_09",
+      "page": 1,
+      "char_start": 62,
+      "char_end": 78,
+      "text": "4 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_09-c0001",
+    "document_id": "board_minutes_2024_09",
+    "claim_type": "relationship",
+    "subject": "Sarah Chen",
+    "predicate": "Chair of the Board",
+    "raw_text": "Sarah Chen (Chair)",
+    "span": {
+      "document_id": "board_minutes_2024_09",
+      "page": 1,
+      "char_start": 88,
+      "char_end": 106,
+      "text": "Sarah Chen (Chair)"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_09-c0002",
+    "document_id": "board_minutes_2024_09",
+    "claim_type": "monetary",
+    "subject": "Priya Raghunathan",
+    "predicate": "approved annual base salary",
+    "raw_text": "annual base salary of USD 240,000",
+    "span": {
+      "document_id": "board_minutes_2024_09",
+      "page": 1,
+      "char_start": 259,
+      "char_end": 292,
+      "text": "annual base salary of USD 240,000"
+    },
+    "numeric_value": "240000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_09-c0003",
+    "document_id": "board_minutes_2024_09",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "approved entry into a term loan facility with Meridian Bank",
+    "raw_text": "The Board approved entry into a term loan facility with Meridian Bank",
+    "span": {
+      "document_id": "board_minutes_2024_09",
+      "page": 1,
+      "char_start": 326,
+      "char_end": 395,
+      "text": "The Board approved entry into a term loan facility with Meridian Bank"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2024_09-c0004",
+    "document_id": "board_minutes_2024_09",
+    "claim_type": "obligation",
+    "subject": "Management",
+    "predicate": "directed to pursue diversification",
+    "raw_text": "Management was directed to pursue diversification",
+    "span": {
+      "document_id": "board_minutes_2024_09",
+      "page": 1,
+      "char_start": 581,
+      "char_end": 630,
+      "text": "Management was directed to pursue diversification"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0000",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "party",
+    "subject": "Sarah Chen",
+    "predicate": "served as Chair",
+    "raw_text": "Sarah Chen (Chair)",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 84,
+      "char_end": 102,
+      "text": "Sarah Chen (Chair)"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0001",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "party",
+    "subject": "David Okonkwo",
+    "predicate": "was present at the meeting",
+    "raw_text": "David Okonkwo",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 104,
+      "char_end": 117,
+      "text": "David Okonkwo"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0002",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "party",
+    "subject": "Rachel Imani",
+    "predicate": "was present at the meeting",
+    "raw_text": "Rachel Imani",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 119,
+      "char_end": 131,
+      "text": "Rachel Imani"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0003",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "party",
+    "subject": "Priya Raghunathan",
+    "predicate": "was in attendance",
+    "raw_text": "Priya Raghunathan in attendance.",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 133,
+      "char_end": 165,
+      "text": "Priya Raghunathan in attendance."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0004",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "relationship",
+    "subject": "Sterling Vance LLP",
+    "predicate": "appointed as auditors",
+    "raw_text": "The Board approved the appointment of Sterling Vance LLP as auditors",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 180,
+      "char_end": 248,
+      "text": "The Board approved the appointment of Sterling Vance LLP as auditors"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0005",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc. financial year",
+    "predicate": "ends",
+    "raw_text": "financial year ending 31 December 2025",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 257,
+      "char_end": 295,
+      "text": "financial year ending 31 December 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "board_minutes_2025_06-c0006",
+    "document_id": "board_minutes_2025_06",
+    "claim_type": "status",
+    "subject": "outstanding employee option grants report",
+    "predicate": "received by the Board",
+    "raw_text": "The Board received a report on outstanding employee option grants",
+    "span": {
+      "document_id": "board_minutes_2025_06",
+      "page": 1,
+      "char_start": 420,
+      "char_end": 485,
+      "text": "The Board received a report on outstanding employee option grants"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "bylaws-c0000",
+    "document_id": "bylaws",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc. Bylaws",
+    "predicate": "adopted on",
+    "raw_text": "These bylaws were adopted by the Board of Directors on 19 June 2019",
+    "span": {
+      "document_id": "bylaws",
+      "page": 1,
+      "char_start": 55,
+      "char_end": 122,
+      "text": "These bylaws were adopted by the Board of Directors on 19 June 2019"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "bylaws-c0001",
+    "document_id": "bylaws",
+    "claim_type": "quantity",
+    "subject": "Northwind Analytics Inc. Board of Directors",
+    "predicate": "minimum number of directors",
+    "raw_text": "The Board shall consist of not fewer than three",
+    "span": {
+      "document_id": "bylaws",
+      "page": 1,
+      "char_start": 165,
+      "char_end": 212,
+      "text": "The Board shall consist of not fewer than three"
+    },
+    "numeric_value": "3",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "bylaws-c0002",
+    "document_id": "bylaws",
+    "claim_type": "quantity",
+    "subject": "Northwind Analytics Inc. Board of Directors",
+    "predicate": "maximum number of directors",
+    "raw_text": "not more than seven directors",
+    "span": {
+      "document_id": "bylaws",
+      "page": 1,
+      "char_start": 217,
+      "char_end": 246,
+      "text": "not more than seven directors"
+    },
+    "numeric_value": "7",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "bylaws-c0003",
+    "document_id": "bylaws",
+    "claim_type": "condition",
+    "subject": "Northwind Analytics Inc. Board meeting quorum",
+    "predicate": "requires majority of directors in office",
+    "raw_text": "Quorum for a meeting of the Board is a majority of the directors then in office.",
+    "span": {
+      "document_id": "bylaws",
+      "page": 1,
+      "char_start": 417,
+      "char_end": 497,
+      "text": "Quorum for a meeting of the Board is a majority of the directors then in office."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "bylaws-c0004",
+    "document_id": "bylaws",
+    "claim_type": "condition",
+    "subject": "Northwind Analytics Inc. equity securities issuance",
+    "predicate": "requires prior Board approval",
+    "raw_text": "Any issuance of equity securities requires prior approval of the Board",
+    "span": {
+      "document_id": "bylaws",
+      "page": 1,
+      "char_start": 511,
+      "char_end": 581,
+      "text": "Any issuance of equity securities requires prior approval of the Board"
     },
     "numeric_value": null,
     "currency": null,
@@ -225,13 +585,13 @@
     "claim_type": "quantity",
     "subject": "Northwind Analytics Inc.",
     "predicate": "total issued and outstanding shares",
-    "raw_text": "Total issued and outstanding shares: 4,250,000.",
+    "raw_text": "Total issued and outstanding shares: 4,250,000",
     "span": {
       "document_id": "cap_table",
       "page": 1,
       "char_start": 194,
-      "char_end": 241,
-      "text": "Total issued and outstanding shares: 4,250,000."
+      "char_end": 240,
+      "text": "Total issued and outstanding shares: 4,250,000"
     },
     "numeric_value": "4250000",
     "currency": null,
@@ -244,14 +604,14 @@
     "document_id": "cap_table",
     "claim_type": "quantity",
     "subject": "Sarah Chen",
-    "predicate": "common shares held",
-    "raw_text": "Sarah Chen holds 1,800,000 common shares.",
+    "predicate": "holds common shares",
+    "raw_text": "Sarah Chen holds 1,800,000 common shares",
     "span": {
       "document_id": "cap_table",
       "page": 1,
       "char_start": 260,
-      "char_end": 301,
-      "text": "Sarah Chen holds 1,800,000 common shares."
+      "char_end": 300,
+      "text": "Sarah Chen holds 1,800,000 common shares"
     },
     "numeric_value": "1800000",
     "currency": null,
@@ -264,7 +624,7 @@
     "document_id": "cap_table",
     "claim_type": "quantity",
     "subject": "Kestrel Ventures LP",
-    "predicate": "preferred shares held",
+    "predicate": "holds preferred shares",
     "raw_text": "Kestrel Ventures LP holds 900,000 preferred shares",
     "span": {
       "document_id": "cap_table",
@@ -283,8 +643,8 @@
     "claim_id": "cap_table-c0003",
     "document_id": "cap_table",
     "claim_type": "status",
-    "subject": "Kestrel Ventures LP preferred shares",
-    "predicate": "issuance date",
+    "subject": "Kestrel Ventures LP",
+    "predicate": "preferred shares issuance date",
     "raw_text": "issued 14 March 2024",
     "span": {
       "document_id": "cap_table",
@@ -303,8 +663,8 @@
     "claim_id": "cap_table-c0004",
     "document_id": "cap_table",
     "claim_type": "monetary",
-    "subject": "Kestrel Ventures LP preferred shares",
-    "predicate": "issuance price per share",
+    "subject": "Series A preferred",
+    "predicate": "price per share",
     "raw_text": "price of USD 2.40 per share",
     "span": {
       "document_id": "cap_table",
@@ -360,11 +720,91 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "contract_bluepeak-c0000",
+    "document_id": "contract_bluepeak",
+    "claim_type": "status",
+    "subject": "Master Subscription Agreement",
+    "predicate": "is entered into on 19 August 2024",
+    "raw_text": "This Master Subscription Agreement is entered into on 19 August 2024",
+    "span": {
+      "document_id": "contract_bluepeak",
+      "page": 1,
+      "char_start": 48,
+      "char_end": 116,
+      "text": "This Master Subscription Agreement is entered into on 19 August 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_bluepeak-c0001",
+    "document_id": "contract_bluepeak",
+    "claim_type": "quantity",
+    "subject": "Agreement Term",
+    "predicate": "initial term is twelve months",
+    "raw_text": "The initial term is twelve (12) months",
+    "span": {
+      "document_id": "contract_bluepeak",
+      "page": 1,
+      "char_start": 200,
+      "char_end": 238,
+      "text": "The initial term is twelve (12) months"
+    },
+    "numeric_value": "12",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_bluepeak-c0002",
+    "document_id": "contract_bluepeak",
+    "claim_type": "status",
+    "subject": "Agreement Term",
+    "predicate": "renews automatically unless terminated",
+    "raw_text": "renews automatically unless terminated.",
+    "span": {
+      "document_id": "contract_bluepeak",
+      "page": 1,
+      "char_start": 276,
+      "char_end": 315,
+      "text": "renews automatically unless terminated."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_bluepeak-c0003",
+    "document_id": "contract_bluepeak",
+    "claim_type": "monetary",
+    "subject": "Bluepeak Health Systems Inc.",
+    "predicate": "shall pay an annual subscription fee",
+    "raw_text": "Customer shall pay an annual subscription fee of USD 756,000",
+    "span": {
+      "document_id": "contract_bluepeak",
+      "page": 1,
+      "char_start": 333,
+      "char_end": 393,
+      "text": "Customer shall pay an annual subscription fee of USD 756,000"
+    },
+    "numeric_value": "756000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "contract_meridian-c0000",
     "document_id": "contract_meridian",
     "claim_type": "status",
     "subject": "Master Subscription Agreement",
-    "predicate": "entered into",
+    "predicate": "entered into on",
     "raw_text": "This Master Subscription Agreement is entered into on 2 February 2025",
     "span": {
       "document_id": "contract_meridian",
@@ -383,8 +823,8 @@
     "claim_id": "contract_meridian-c0001",
     "document_id": "contract_meridian",
     "claim_type": "quantity",
-    "subject": "Master Subscription Agreement",
-    "predicate": "initial term in months",
+    "subject": "initial term",
+    "predicate": "is twenty-four (24) months",
     "raw_text": "The initial term is twenty-four (24) months",
     "span": {
       "document_id": "contract_meridian",
@@ -404,7 +844,7 @@
     "document_id": "contract_meridian",
     "claim_type": "monetary",
     "subject": "Meridian Logistics BV",
-    "predicate": "annual subscription fee",
+    "predicate": "pay annual subscription fee",
     "raw_text": "Customer shall pay an annual subscription fee of USD 1,008,000",
     "span": {
       "document_id": "contract_meridian",
@@ -420,11 +860,91 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "contract_novaclear-c0000",
+    "document_id": "contract_novaclear",
+    "claim_type": "status",
+    "subject": "Master Subscription Agreement",
+    "predicate": "entered into on",
+    "raw_text": "This Master Subscription Agreement is entered into on 15 June 2025",
+    "span": {
+      "document_id": "contract_novaclear",
+      "page": 1,
+      "char_start": 47,
+      "char_end": 113,
+      "text": "This Master Subscription Agreement is entered into on 15 June 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_novaclear-c0001",
+    "document_id": "contract_novaclear",
+    "claim_type": "quantity",
+    "subject": "Master Subscription Agreement",
+    "predicate": "initial term in months",
+    "raw_text": "The initial term is twenty-four (24) months",
+    "span": {
+      "document_id": "contract_novaclear",
+      "page": 1,
+      "char_start": 259,
+      "char_end": 302,
+      "text": "The initial term is twenty-four (24) months"
+    },
+    "numeric_value": "24",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_novaclear-c0002",
+    "document_id": "contract_novaclear",
+    "claim_type": "monetary",
+    "subject": "NovaClear GmbH",
+    "predicate": "annual subscription fee",
+    "raw_text": "Customer shall pay an annual subscription fee of USD 1,344,000",
+    "span": {
+      "document_id": "contract_novaclear",
+      "page": 1,
+      "char_start": 354,
+      "char_end": 416,
+      "text": "Customer shall pay an annual subscription fee of USD 1,344,000"
+    },
+    "numeric_value": "1344000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_novaclear-c0003",
+    "document_id": "contract_novaclear",
+    "claim_type": "obligation",
+    "subject": "Northwind Analytics Inc. and NovaClear GmbH",
+    "predicate": "cannot assign Agreement without prior written consent",
+    "raw_text": "Neither party may assign this Agreement without prior written consent.",
+    "span": {
+      "document_id": "contract_novaclear",
+      "page": 1,
+      "char_start": 581,
+      "char_end": 651,
+      "text": "Neither party may assign this Agreement without prior written consent."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "contract_titanretail-c0000",
     "document_id": "contract_titanretail",
     "claim_type": "status",
-    "subject": "Master Subscription Agreement",
-    "predicate": "was entered into on 8 May 2024",
+    "subject": "Northwind Analytics Inc. and TitanRetail Group Limited",
+    "predicate": "entered into the agreement on",
     "raw_text": "This Master Subscription Agreement is entered into on 8 May 2024",
     "span": {
       "document_id": "contract_titanretail",
@@ -443,15 +963,15 @@
     "claim_id": "contract_titanretail-c0001",
     "document_id": "contract_titanretail",
     "claim_type": "quantity",
-    "subject": "Master Subscription Agreement",
-    "predicate": "has an initial term of 36 months",
-    "raw_text": "The initial term is thirty-six (36) months",
+    "subject": "TitanRetail Group Limited",
+    "predicate": "initial term length in months",
+    "raw_text": "The initial term is thirty-six (36) months commencing on the Effective Date",
     "span": {
       "document_id": "contract_titanretail",
       "page": 1,
       "char_start": 196,
-      "char_end": 238,
-      "text": "The initial term is thirty-six (36) months"
+      "char_end": 271,
+      "text": "The initial term is thirty-six (36) months commencing on the Effective Date"
     },
     "numeric_value": "36",
     "currency": null,
@@ -463,8 +983,8 @@
     "claim_id": "contract_titanretail-c0002",
     "document_id": "contract_titanretail",
     "claim_type": "quantity",
-    "subject": "Master Subscription Agreement",
-    "predicate": "renews for successive 12 month periods",
+    "subject": "TitanRetail Group Limited",
+    "predicate": "automatic renewal term length in months",
     "raw_text": "renewing automatically for successive twelve (12) month periods.",
     "span": {
       "document_id": "contract_titanretail",
@@ -484,7 +1004,7 @@
     "document_id": "contract_titanretail",
     "claim_type": "monetary",
     "subject": "TitanRetail Group Limited",
-    "predicate": "must pay an annual subscription fee of USD 3,612,000",
+    "predicate": "annual subscription fee",
     "raw_text": "Customer shall pay an annual subscription fee of USD 3,612,000",
     "span": {
       "document_id": "contract_titanretail",
@@ -504,16 +1024,536 @@
     "document_id": "contract_titanretail",
     "claim_type": "quantity",
     "subject": "TitanRetail Group Limited",
-    "predicate": "termination notice period is 30 days upon change of control",
-    "raw_text": "upon thirty (30) days written notice",
+    "predicate": "termination notice period in days",
+    "raw_text": "thirty (30) days written notice",
     "span": {
       "document_id": "contract_titanretail",
       "page": 1,
-      "char_start": 702,
+      "char_start": 707,
       "char_end": 738,
-      "text": "upon thirty (30) days written notice"
+      "text": "thirty (30) days written notice"
     },
     "numeric_value": "30",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_1-c0000",
+    "document_id": "contract_titanretail_amendment_1",
+    "claim_type": "status",
+    "subject": "Amendment No. 1",
+    "predicate": "is dated",
+    "raw_text": "This Amendment No. 1 is dated 12 January 2025",
+    "span": {
+      "document_id": "contract_titanretail_amendment_1",
+      "page": 1,
+      "char_start": 69,
+      "char_end": 114,
+      "text": "This Amendment No. 1 is dated 12 January 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_1-c0001",
+    "document_id": "contract_titanretail_amendment_1",
+    "claim_type": "monetary",
+    "subject": "TitanRetail Group Limited",
+    "predicate": "shall pay annual subscription fee of",
+    "raw_text": "Customer shall pay an annual subscription fee of USD 4,100,000",
+    "span": {
+      "document_id": "contract_titanretail_amendment_1",
+      "page": 1,
+      "char_start": 339,
+      "char_end": 401,
+      "text": "Customer shall pay an annual subscription fee of USD 4,100,000"
+    },
+    "numeric_value": "4100000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_1-c0002",
+    "document_id": "contract_titanretail_amendment_1",
+    "claim_type": "obligation",
+    "subject": "TitanRetail Group Limited",
+    "predicate": "shall pay subscription fee quarterly in advance",
+    "raw_text": "Customer shall pay an annual subscription fee of USD 4,100,000 payable quarterly in advance",
+    "span": {
+      "document_id": "contract_titanretail_amendment_1",
+      "page": 1,
+      "char_start": 339,
+      "char_end": 430,
+      "text": "Customer shall pay an annual subscription fee of USD 4,100,000 payable quarterly in advance"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_1-c0003",
+    "document_id": "contract_titanretail_amendment_1",
+    "claim_type": "status",
+    "subject": "annual subscription fee",
+    "predicate": "effective from",
+    "raw_text": "effective from 1 February 2025",
+    "span": {
+      "document_id": "contract_titanretail_amendment_1",
+      "page": 1,
+      "char_start": 432,
+      "char_end": 462,
+      "text": "effective from 1 February 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_2-c0000",
+    "document_id": "contract_titanretail_amendment_2",
+    "claim_type": "status",
+    "subject": "Amendment No. 2",
+    "predicate": "is dated 3 November 2024",
+    "raw_text": "This Amendment No. 2 is dated 3 November 2024",
+    "span": {
+      "document_id": "contract_titanretail_amendment_2",
+      "page": 1,
+      "char_start": 69,
+      "char_end": 114,
+      "text": "This Amendment No. 2 is dated 3 November 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contract_titanretail_amendment_2-c0001",
+    "document_id": "contract_titanretail_amendment_2",
+    "claim_type": "status",
+    "subject": "Master Subscription Agreement",
+    "predicate": "all other terms remain in full force and effect",
+    "raw_text": "All other terms of the Agreement as amended remain in full force and effect.",
+    "span": {
+      "document_id": "contract_titanretail_amendment_2",
+      "page": 1,
+      "char_start": 500,
+      "char_end": 576,
+      "text": "All other terms of the Agreement as amended remain in full force and effect."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0000",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "status",
+    "subject": "Independent Contractor Agreement",
+    "predicate": "is made on",
+    "raw_text": "This Independent Contractor Agreement is made on 1 March 2025",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 54,
+      "char_end": 115,
+      "text": "This Independent Contractor Agreement is made on 1 March 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0001",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "relationship",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "enters into agreement with Cedar Devshop LLC",
+    "raw_text": "This Independent Contractor Agreement is made on 1 March 2025 between Northwind Analytics Inc. and Cedar Devshop LLC",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 54,
+      "char_end": 170,
+      "text": "This Independent Contractor Agreement is made on 1 March 2025 between Northwind Analytics Inc. and Cedar Devshop LLC"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0002",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "party",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "has principal",
+    "raw_text": "whose principal is S. Okonkwo",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 172,
+      "char_end": 201,
+      "text": "whose principal is S. Okonkwo"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0003",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "party",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "has registered address",
+    "raw_text": "whose registered address is 210 Cedar Street, Portland, Oregon.",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 206,
+      "char_end": 269,
+      "text": "whose registered address is 210 Cedar Street, Portland, Oregon."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0004",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "obligation",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "shall provide software engineering services",
+    "raw_text": "Contractor shall provide software engineering services relating to the analytics engine and associated data pipelines.",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 278,
+      "char_end": 396,
+      "text": "Contractor shall provide software engineering services relating to the analytics engine and associated data pipelines."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0005",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "shall pay fee per month",
+    "raw_text": "Customer shall pay USD 18,000 per month",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 404,
+      "char_end": 443,
+      "text": "Customer shall pay USD 18,000 per month"
+    },
+    "numeric_value": "18000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0006",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "obligation",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "assigns all work product to the Company",
+    "raw_text": "All work product created by Contractor is assigned to the Company",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 504,
+      "char_end": 569,
+      "text": "All work product created by Contractor is assigned to the Company"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0007",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "status",
+    "subject": "assignment of work product",
+    "predicate": "is effective from",
+    "raw_text": "such assignment being effective from 1 March 2025.",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 571,
+      "char_end": 621,
+      "text": "such assignment being effective from 1 March 2025."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0008",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "right",
+    "subject": "either party",
+    "predicate": "may terminate the agreement on written notice",
+    "raw_text": "terminated by either party on thirty (30) days written notice.",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 660,
+      "char_end": 722,
+      "text": "terminated by either party on thirty (30) days written notice."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "contractor_agreement_devshop-c0009",
+    "document_id": "contractor_agreement_devshop",
+    "claim_type": "quantity",
+    "subject": "termination notice period",
+    "predicate": "is number of days",
+    "raw_text": "thirty (30) days",
+    "span": {
+      "document_id": "contractor_agreement_devshop",
+      "page": 1,
+      "char_start": 690,
+      "char_end": 706,
+      "text": "thirty (30) days"
+    },
+    "numeric_value": "30",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "data_processing_agreement-c0000",
+    "document_id": "data_processing_agreement",
+    "claim_type": "status",
+    "subject": "Data Processing Agreement",
+    "predicate": "is entered into on 19 August 2024",
+    "raw_text": "This Data Processing Agreement is entered into on 19 August 2024",
+    "span": {
+      "document_id": "data_processing_agreement",
+      "page": 1,
+      "char_start": 53,
+      "char_end": 117,
+      "text": "This Data Processing Agreement is entered into on 19 August 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "data_processing_agreement-c0001",
+    "document_id": "data_processing_agreement",
+    "claim_type": "party",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "acts as processor in respect of personal data provided by the customer",
+    "raw_text": "Northwind Analytics Inc. acts as processor in respect of personal data provided by the customer.",
+    "span": {
+      "document_id": "data_processing_agreement",
+      "page": 1,
+      "char_start": 204,
+      "char_end": 300,
+      "text": "Northwind Analytics Inc. acts as processor in respect of personal data provided by the customer."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "data_processing_agreement-c0002",
+    "document_id": "data_processing_agreement",
+    "claim_type": "condition",
+    "subject": "Sub-processing",
+    "predicate": "is permitted only with prior written notice",
+    "raw_text": "Sub-processing is permitted only with prior written notice.",
+    "span": {
+      "document_id": "data_processing_agreement",
+      "page": 1,
+      "char_start": 301,
+      "char_end": 360,
+      "text": "Sub-processing is permitted only with prior written notice."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "data_processing_agreement-c0003",
+    "document_id": "data_processing_agreement",
+    "claim_type": "status",
+    "subject": "Personal data",
+    "predicate": "is retained for the duration of the subscription",
+    "raw_text": "Personal data is retained for the duration of the subscription",
+    "span": {
+      "document_id": "data_processing_agreement",
+      "page": 1,
+      "char_start": 450,
+      "char_end": 512,
+      "text": "Personal data is retained for the duration of the subscription"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0000",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "status",
+    "subject": "Deferred Revenue Schedule",
+    "predicate": "effective date",
+    "raw_text": "as at 31 December 2025",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 177,
+      "char_end": 199,
+      "text": "as at 31 December 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0001",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "monetary",
+    "subject": "Total deferred revenue",
+    "predicate": "amount as of 31 December 2025",
+    "raw_text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000.",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 154,
+      "char_end": 217,
+      "text": "Total deferred revenue as at 31 December 2025 is USD 2,340,000."
+    },
+    "numeric_value": "2340000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0002",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "monetary",
+    "subject": "TitanRetail Group",
+    "predicate": "related deferred revenue amount",
+    "raw_text": "USD 1,025,000 relates to TitanRetail Group",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 234,
+      "char_end": 276,
+      "text": "USD 1,025,000 relates to TitanRetail Group"
+    },
+    "numeric_value": "1025000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0003",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "monetary",
+    "subject": "NovaClear GmbH",
+    "predicate": "related deferred revenue amount",
+    "raw_text": "USD 615,000 relates to NovaClear GmbH",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 351,
+      "char_end": 388,
+      "text": "USD 615,000 relates to NovaClear GmbH"
+    },
+    "numeric_value": "615000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0004",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "relationship",
+    "subject": "NovaClear GmbH deferred revenue",
+    "predicate": "associated prepayment",
+    "raw_text": "under an annual prepayment received in June 2025.",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 389,
+      "char_end": 438,
+      "text": "under an annual prepayment received in June 2025."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "deferred_revenue_schedule-c0005",
+    "document_id": "deferred_revenue_schedule",
+    "claim_type": "relationship",
+    "subject": "the balance of deferred revenue",
+    "predicate": "relates to a range of smaller subscription customers",
+    "raw_text": "The balance relates to a range of smaller subscription customers.",
+    "span": {
+      "document_id": "deferred_revenue_schedule",
+      "page": 1,
+      "char_start": 439,
+      "char_end": 504,
+      "text": "The balance relates to a range of smaller subscription customers."
+    },
+    "numeric_value": null,
     "currency": null,
     "date_value": null,
     "extracted_by": "claim_extractor",
@@ -523,8 +1563,8 @@
     "claim_id": "employment_ceo-c0000",
     "document_id": "employment_ceo",
     "claim_type": "status",
-    "subject": "Northwind Analytics Inc. and Sarah Chen Employment Agreement",
-    "predicate": "was made on",
+    "subject": "Employment Agreement",
+    "predicate": "date of agreement",
     "raw_text": "This Employment Agreement is made on 19 June 2019",
     "span": {
       "document_id": "employment_ceo",
@@ -542,16 +1582,16 @@
   {
     "claim_id": "employment_ceo-c0001",
     "document_id": "employment_ceo",
-    "claim_type": "relationship",
+    "claim_type": "party",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "entered into an agreement with Sarah Chen",
-    "raw_text": "between Northwind Analytics Inc. and Sarah Chen.",
+    "predicate": "party to agreement",
+    "raw_text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and Sarah Chen",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 95,
-      "char_end": 143,
-      "text": "between Northwind Analytics Inc. and Sarah Chen."
+      "char_start": 45,
+      "char_end": 142,
+      "text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and Sarah Chen"
     },
     "numeric_value": null,
     "currency": null,
@@ -562,16 +1602,16 @@
   {
     "claim_id": "employment_ceo-c0002",
     "document_id": "employment_ceo",
-    "claim_type": "status",
+    "claim_type": "party",
     "subject": "Sarah Chen",
-    "predicate": "shall serve as Chief Executive Officer",
-    "raw_text": "The Executive shall serve as Chief Executive Officer.",
+    "predicate": "party to agreement",
+    "raw_text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and Sarah Chen",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 155,
-      "char_end": 208,
-      "text": "The Executive shall serve as Chief Executive Officer."
+      "char_start": 45,
+      "char_end": 142,
+      "text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and Sarah Chen"
     },
     "numeric_value": null,
     "currency": null,
@@ -582,19 +1622,19 @@
   {
     "claim_id": "employment_ceo-c0003",
     "document_id": "employment_ceo",
-    "claim_type": "monetary",
+    "claim_type": "status",
     "subject": "Sarah Chen",
-    "predicate": "receives an annual base salary",
-    "raw_text": "The Executive shall receive an annual base salary of USD 240,000",
+    "predicate": "residence address",
+    "raw_text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 224,
-      "char_end": 288,
-      "text": "The Executive shall receive an annual base salary of USD 240,000"
+      "char_start": 132,
+      "char_end": 192,
+      "text": "Sarah Chen, residing at 44 Lakeshore Drive, Portland, Oregon"
     },
-    "numeric_value": "240000",
-    "currency": "USD",
+    "numeric_value": null,
+    "currency": null,
     "date_value": null,
     "extracted_by": "claim_extractor",
     "confidence": 0.6
@@ -602,16 +1642,16 @@
   {
     "claim_id": "employment_ceo-c0004",
     "document_id": "employment_ceo",
-    "claim_type": "condition",
-    "subject": "Sarah Chen's annual base salary",
-    "predicate": "is subject to annual review by the Board",
-    "raw_text": "subject to annual review by the Board.",
+    "claim_type": "status",
+    "subject": "Sarah Chen",
+    "predicate": "position",
+    "raw_text": "The Executive shall serve as Chief Executive Officer.",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 290,
-      "char_end": 328,
-      "text": "subject to annual review by the Board."
+      "char_start": 205,
+      "char_end": 258,
+      "text": "The Executive shall serve as Chief Executive Officer."
     },
     "numeric_value": null,
     "currency": null,
@@ -622,19 +1662,19 @@
   {
     "claim_id": "employment_ceo-c0005",
     "document_id": "employment_ceo",
-    "claim_type": "quantity",
+    "claim_type": "monetary",
     "subject": "Sarah Chen",
-    "predicate": "holds shares of common stock",
-    "raw_text": "The Executive holds 1,800,000 shares of common stock",
+    "predicate": "annual base salary",
+    "raw_text": "The Executive shall receive an annual base salary of USD 240,000",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 338,
-      "char_end": 390,
-      "text": "The Executive holds 1,800,000 shares of common stock"
+      "char_start": 274,
+      "char_end": 338,
+      "text": "The Executive shall receive an annual base salary of USD 240,000"
     },
-    "numeric_value": "1800000",
-    "currency": null,
+    "numeric_value": "240000",
+    "currency": "USD",
     "date_value": null,
     "extracted_by": "claim_extractor",
     "confidence": 0.6
@@ -643,15 +1683,15 @@
     "claim_id": "employment_ceo-c0006",
     "document_id": "employment_ceo",
     "claim_type": "condition",
-    "subject": "Sarah Chen's shares of common stock",
-    "predicate": "are subject to a vesting schedule",
-    "raw_text": "subject to a four year vesting schedule commencing on the date of this Agreement.",
+    "subject": "Sarah Chen",
+    "predicate": "salary subject to annual review",
+    "raw_text": "subject to annual review by the Board.",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 391,
-      "char_end": 472,
-      "text": "subject to a four year vesting schedule commencing on the date of this Agreement."
+      "char_start": 340,
+      "char_end": 378,
+      "text": "subject to annual review by the Board."
     },
     "numeric_value": null,
     "currency": null,
@@ -662,18 +1702,18 @@
   {
     "claim_id": "employment_ceo-c0007",
     "document_id": "employment_ceo",
-    "claim_type": "right",
-    "subject": "Northwind Analytics Inc. and Sarah Chen",
-    "predicate": "may terminate the Agreement on written notice",
-    "raw_text": "Either party may terminate this Agreement on ninety (90) days written notice.",
+    "claim_type": "quantity",
+    "subject": "Sarah Chen",
+    "predicate": "shares of common stock held",
+    "raw_text": "The Executive holds 1,800,000 shares of common stock",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 487,
-      "char_end": 564,
-      "text": "Either party may terminate this Agreement on ninety (90) days written notice."
+      "char_start": 388,
+      "char_end": 440,
+      "text": "The Executive holds 1,800,000 shares of common stock"
     },
-    "numeric_value": null,
+    "numeric_value": "1800000",
     "currency": null,
     "date_value": null,
     "extracted_by": "claim_extractor",
@@ -683,17 +1723,277 @@
     "claim_id": "employment_ceo-c0008",
     "document_id": "employment_ceo",
     "claim_type": "quantity",
-    "subject": "termination notice",
-    "predicate": "requires ninety days",
-    "raw_text": "ninety (90) days",
+    "subject": "Sarah Chen",
+    "predicate": "shares vesting schedule duration",
+    "raw_text": "four year vesting schedule",
     "span": {
       "document_id": "employment_ceo",
       "page": 1,
-      "char_start": 532,
-      "char_end": 548,
-      "text": "ninety (90) days"
+      "char_start": 454,
+      "char_end": 480,
+      "text": "four year vesting schedule"
+    },
+    "numeric_value": "4",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_ceo-c0009",
+    "document_id": "employment_ceo",
+    "claim_type": "condition",
+    "subject": "Sarah Chen",
+    "predicate": "vesting schedule commencement date",
+    "raw_text": "commencing on the date of this Agreement.",
+    "span": {
+      "document_id": "employment_ceo",
+      "page": 1,
+      "char_start": 481,
+      "char_end": 522,
+      "text": "commencing on the date of this Agreement."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_ceo-c0010",
+    "document_id": "employment_ceo",
+    "claim_type": "right",
+    "subject": "Either party",
+    "predicate": "termination on written notice",
+    "raw_text": "Either party may terminate this Agreement on ninety (90) days written notice.",
+    "span": {
+      "document_id": "employment_ceo",
+      "page": 1,
+      "char_start": 537,
+      "char_end": 614,
+      "text": "Either party may terminate this Agreement on ninety (90) days written notice."
     },
     "numeric_value": "90",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0000",
+    "document_id": "employment_cfo",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "entered into agreement on",
+    "raw_text": "This Employment Agreement is made on 16 September 2024",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 52,
+      "char_end": 106,
+      "text": "This Employment Agreement is made on 16 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0001",
+    "document_id": "employment_cfo",
+    "claim_type": "party",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "party to the agreement",
+    "raw_text": "between Northwind Analytics Inc. and Priya Raghunathan",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 107,
+      "char_end": 161,
+      "text": "between Northwind Analytics Inc. and Priya Raghunathan"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0002",
+    "document_id": "employment_cfo",
+    "claim_type": "party",
+    "subject": "Priya Raghunathan",
+    "predicate": "party to the agreement",
+    "raw_text": "between Northwind Analytics Inc. and Priya Raghunathan",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 107,
+      "char_end": 161,
+      "text": "between Northwind Analytics Inc. and Priya Raghunathan"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0003",
+    "document_id": "employment_cfo",
+    "claim_type": "status",
+    "subject": "Priya Raghunathan",
+    "predicate": "residing at",
+    "raw_text": "Priya Raghunathan, residing at 88 Alder Way, Seattle, Washington",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 144,
+      "char_end": 208,
+      "text": "Priya Raghunathan, residing at 88 Alder Way, Seattle, Washington"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0004",
+    "document_id": "employment_cfo",
+    "claim_type": "status",
+    "subject": "Priya Raghunathan",
+    "predicate": "shall serve as Chief Financial Officer",
+    "raw_text": "The Executive shall serve as Chief Financial Officer",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 221,
+      "char_end": 273,
+      "text": "The Executive shall serve as Chief Financial Officer"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0005",
+    "document_id": "employment_cfo",
+    "claim_type": "status",
+    "subject": "Board of Directors",
+    "predicate": "written consent date",
+    "raw_text": "written consent of the Board of Directors dated 9 September 2024",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 290,
+      "char_end": 354,
+      "text": "written consent of the Board of Directors dated 9 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0006",
+    "document_id": "employment_cfo",
+    "claim_type": "monetary",
+    "subject": "Priya Raghunathan",
+    "predicate": "annual base salary",
+    "raw_text": "The Executive shall receive an annual base salary of USD 260,000",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 371,
+      "char_end": 435,
+      "text": "The Executive shall receive an annual base salary of USD 260,000"
+    },
+    "numeric_value": "260000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0007",
+    "document_id": "employment_cfo",
+    "claim_type": "quantity",
+    "subject": "Priya Raghunathan",
+    "predicate": "granted options over shares of common stock",
+    "raw_text": "The Executive shall be granted options over 120,000 shares of common stock",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 485,
+      "char_end": 559,
+      "text": "The Executive shall be granted options over 120,000 shares of common stock"
+    },
+    "numeric_value": "120000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0008",
+    "document_id": "employment_cfo",
+    "claim_type": "right",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "may terminate agreement",
+    "raw_text": "Either party may terminate this Agreement on sixty (60) days written notice.",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 600,
+      "char_end": 676,
+      "text": "Either party may terminate this Agreement on sixty (60) days written notice."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0009",
+    "document_id": "employment_cfo",
+    "claim_type": "right",
+    "subject": "Priya Raghunathan",
+    "predicate": "may terminate agreement",
+    "raw_text": "Either party may terminate this Agreement on sixty (60) days written notice.",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 600,
+      "char_end": 676,
+      "text": "Either party may terminate this Agreement on sixty (60) days written notice."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cfo-c0010",
+    "document_id": "employment_cfo",
+    "claim_type": "quantity",
+    "subject": "termination notice",
+    "predicate": "required written notice days",
+    "raw_text": "Either party may terminate this Agreement on sixty (60) days written notice.",
+    "span": {
+      "document_id": "employment_cfo",
+      "page": 1,
+      "char_start": 600,
+      "char_end": 676,
+      "text": "Either party may terminate this Agreement on sixty (60) days written notice."
+    },
+    "numeric_value": "60",
     "currency": null,
     "date_value": null,
     "extracted_by": "claim_extractor",
@@ -704,7 +2004,7 @@
     "document_id": "employment_cto",
     "claim_type": "status",
     "subject": "Employment Agreement",
-    "predicate": "made on",
+    "predicate": "was made on",
     "raw_text": "This Employment Agreement is made on 19 June 2019",
     "span": {
       "document_id": "employment_cto",
@@ -724,14 +2024,14 @@
     "document_id": "employment_cto",
     "claim_type": "party",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "party to agreement",
-    "raw_text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and David Okonkwo.",
+    "predicate": "is a party to the agreement",
+    "raw_text": "Northwind Analytics Inc.",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
-      "char_start": 48,
-      "char_end": 149,
-      "text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and David Okonkwo."
+      "char_start": 106,
+      "char_end": 130,
+      "text": "Northwind Analytics Inc."
     },
     "numeric_value": null,
     "currency": null,
@@ -744,14 +2044,14 @@
     "document_id": "employment_cto",
     "claim_type": "party",
     "subject": "David Okonkwo",
-    "predicate": "party to agreement",
-    "raw_text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and David Okonkwo.",
+    "predicate": "is a party to the agreement",
+    "raw_text": "David Okonkwo",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
-      "char_start": 48,
-      "char_end": 149,
-      "text": "This Employment Agreement is made on 19 June 2019 between Northwind Analytics Inc. and David Okonkwo."
+      "char_start": 135,
+      "char_end": 148,
+      "text": "David Okonkwo"
     },
     "numeric_value": null,
     "currency": null,
@@ -764,14 +2064,14 @@
     "document_id": "employment_cto",
     "claim_type": "status",
     "subject": "David Okonkwo",
-    "predicate": "shall serve as Chief Technology Officer",
-    "raw_text": "The Executive shall serve as Chief Technology Officer.",
+    "predicate": "resides at",
+    "raw_text": "residing at 210 Cedar Street, Portland, Oregon",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
-      "char_start": 161,
-      "char_end": 215,
-      "text": "The Executive shall serve as Chief Technology Officer."
+      "char_start": 150,
+      "char_end": 196,
+      "text": "residing at 210 Cedar Street, Portland, Oregon"
     },
     "numeric_value": null,
     "currency": null,
@@ -782,36 +2082,16 @@
   {
     "claim_id": "employment_cto-c0004",
     "document_id": "employment_cto",
-    "claim_type": "monetary",
+    "claim_type": "status",
     "subject": "David Okonkwo",
-    "predicate": "receives annual base salary",
-    "raw_text": "The Executive shall receive an annual base salary of USD 225,000",
+    "predicate": "shall serve as Chief Technology Officer",
+    "raw_text": "The Executive shall serve as Chief Technology Officer",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
-      "char_start": 231,
-      "char_end": 295,
-      "text": "The Executive shall receive an annual base salary of USD 225,000"
-    },
-    "numeric_value": "225000",
-    "currency": "USD",
-    "date_value": null,
-    "extracted_by": "claim_extractor",
-    "confidence": 0.6
-  },
-  {
-    "claim_id": "employment_cto-c0005",
-    "document_id": "employment_cto",
-    "claim_type": "condition",
-    "subject": "annual base salary",
-    "predicate": "subject to annual review by the Board",
-    "raw_text": "subject to annual review by the Board.",
-    "span": {
-      "document_id": "employment_cto",
-      "page": 1,
-      "char_start": 297,
-      "char_end": 335,
-      "text": "subject to annual review by the Board."
+      "char_start": 209,
+      "char_end": 262,
+      "text": "The Executive shall serve as Chief Technology Officer"
     },
     "numeric_value": null,
     "currency": null,
@@ -820,20 +2100,40 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "employment_cto-c0005",
+    "document_id": "employment_cto",
+    "claim_type": "monetary",
+    "subject": "David Okonkwo",
+    "predicate": "shall receive an annual base salary",
+    "raw_text": "annual base salary of USD 225,000",
+    "span": {
+      "document_id": "employment_cto",
+      "page": 1,
+      "char_start": 310,
+      "char_end": 343,
+      "text": "annual base salary of USD 225,000"
+    },
+    "numeric_value": "225000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "employment_cto-c0006",
     "document_id": "employment_cto",
-    "claim_type": "quantity",
-    "subject": "David Okonkwo",
-    "predicate": "holds shares of common stock",
-    "raw_text": "The Executive holds 1,200,000 shares of common stock",
+    "claim_type": "condition",
+    "subject": "annual base salary",
+    "predicate": "is subject to annual review by the Board",
+    "raw_text": "subject to annual review by the Board",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
       "char_start": 345,
-      "char_end": 397,
-      "text": "The Executive holds 1,200,000 shares of common stock"
+      "char_end": 382,
+      "text": "subject to annual review by the Board"
     },
-    "numeric_value": "1200000",
+    "numeric_value": null,
     "currency": null,
     "date_value": null,
     "extracted_by": "claim_extractor",
@@ -842,16 +2142,196 @@
   {
     "claim_id": "employment_cto-c0007",
     "document_id": "employment_cto",
-    "claim_type": "condition",
-    "subject": "common stock",
-    "predicate": "subject to four year vesting schedule",
-    "raw_text": "subject to a four year vesting schedule commencing on the date of this Agreement.",
+    "claim_type": "quantity",
+    "subject": "David Okonkwo",
+    "predicate": "holds shares of common stock",
+    "raw_text": "holds 1,200,000 shares of common stock",
     "span": {
       "document_id": "employment_cto",
       "page": 1,
-      "char_start": 398,
-      "char_end": 479,
-      "text": "subject to a four year vesting schedule commencing on the date of this Agreement."
+      "char_start": 407,
+      "char_end": 445,
+      "text": "holds 1,200,000 shares of common stock"
+    },
+    "numeric_value": "1200000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cto-c0008",
+    "document_id": "employment_cto",
+    "claim_type": "status",
+    "subject": "common stock shares",
+    "predicate": "are subject to a four year vesting schedule",
+    "raw_text": "subject to a four year vesting schedule",
+    "span": {
+      "document_id": "employment_cto",
+      "page": 1,
+      "char_start": 446,
+      "char_end": 485,
+      "text": "subject to a four year vesting schedule"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "employment_cto-c0009",
+    "document_id": "employment_cto",
+    "claim_type": "status",
+    "subject": "vesting schedule",
+    "predicate": "commences on the date of this Agreement",
+    "raw_text": "commencing on the date of this Agreement",
+    "span": {
+      "document_id": "employment_cto",
+      "page": 1,
+      "char_start": 486,
+      "char_end": 526,
+      "text": "commencing on the date of this Agreement"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0000",
+    "document_id": "financial_statements_2024",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "total revenue for the financial year ended 31 December 2024",
+    "raw_text": "Total revenue for the financial year ended 31 December 2024 was USD 6,270,000.",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 67,
+      "char_end": 145,
+      "text": "Total revenue for the financial year ended 31 December 2024 was USD 6,270,000."
+    },
+    "numeric_value": "6270000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0001",
+    "document_id": "financial_statements_2024",
+    "claim_type": "monetary",
+    "subject": "TitanRetail Group",
+    "predicate": "revenue accounted for in FY2024",
+    "raw_text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 170,
+      "char_end": 236,
+      "text": "TitanRetail Group accounted for USD 2,408,000 of revenue in FY2024"
+    },
+    "numeric_value": "2408000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0002",
+    "document_id": "financial_statements_2024",
+    "claim_type": "quantity",
+    "subject": "TitanRetail Group",
+    "predicate": "percentage of total revenue in FY2024",
+    "raw_text": "representing 38% of total revenue.",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 238,
+      "char_end": 272,
+      "text": "representing 38% of total revenue."
+    },
+    "numeric_value": "38",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0003",
+    "document_id": "financial_statements_2024",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "deferred revenue as at 31 December 2024",
+    "raw_text": "Deferred revenue as at 31 December 2024 was USD 1,480,000.",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 273,
+      "char_end": 331,
+      "text": "Deferred revenue as at 31 December 2024 was USD 1,480,000."
+    },
+    "numeric_value": "1480000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0004",
+    "document_id": "financial_statements_2024",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "cash and cash equivalents at year end",
+    "raw_text": "Cash and cash equivalents at year end totalled USD 2,610,000.",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 332,
+      "char_end": 393,
+      "text": "Cash and cash equivalents at year end totalled USD 2,610,000."
+    },
+    "numeric_value": "2610000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0005",
+    "document_id": "financial_statements_2024",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "outstanding borrowings at 31 December 2024",
+    "raw_text": "The company had no borrowings outstanding at 31 December 2024.",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 394,
+      "char_end": 456,
+      "text": "The company had no borrowings outstanding at 31 December 2024."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "financial_statements_2024-c0006",
+    "document_id": "financial_statements_2024",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "financial year end date",
+    "raw_text": "31 December 2024",
+    "span": {
+      "document_id": "financial_statements_2024",
+      "page": 1,
+      "char_start": 110,
+      "char_end": 126,
+      "text": "31 December 2024"
     },
     "numeric_value": null,
     "currency": null,
@@ -864,7 +2344,7 @@
     "document_id": "financial_statements_2025",
     "claim_type": "monetary",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "total revenue for financial year ended 31 December 2025",
+    "predicate": "total revenue for the financial year ended 31 December 2025",
     "raw_text": "Total revenue for the financial year ended 31 December 2025 was USD 8,400,000",
     "span": {
       "document_id": "financial_statements_2025",
@@ -884,7 +2364,7 @@
     "document_id": "financial_statements_2025",
     "claim_type": "status",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "financial year end date",
+    "predicate": "financial year ended",
     "raw_text": "31 December 2025",
     "span": {
       "document_id": "financial_statements_2025",
@@ -904,7 +2384,7 @@
     "document_id": "financial_statements_2025",
     "claim_type": "monetary",
     "subject": "TitanRetail Group",
-    "predicate": "revenue accounted for in FY2025",
+    "predicate": "accounted for revenue in FY2025",
     "raw_text": "TitanRetail Group accounted for USD 3,612,000 of revenue in FY2025",
     "span": {
       "document_id": "financial_statements_2025",
@@ -924,7 +2404,7 @@
     "document_id": "financial_statements_2025",
     "claim_type": "quantity",
     "subject": "TitanRetail Group",
-    "predicate": "percentage of total revenue",
+    "predicate": "percentage of total revenue in FY2025",
     "raw_text": "representing 43% of total revenue",
     "span": {
       "document_id": "financial_statements_2025",
@@ -964,14 +2444,14 @@
     "document_id": "financial_statements_2025",
     "claim_type": "monetary",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "deferred revenue",
-    "raw_text": "Deferred revenue as at 31 December 2025 was USD 2,100,000.",
+    "predicate": "deferred revenue as at 31 December 2025",
+    "raw_text": "Deferred revenue as at 31 December 2025 was USD 2,100,000",
     "span": {
       "document_id": "financial_statements_2025",
       "page": 1,
       "char_start": 534,
-      "char_end": 592,
-      "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000."
+      "char_end": 591,
+      "text": "Deferred revenue as at 31 December 2025 was USD 2,100,000"
     },
     "numeric_value": "2100000",
     "currency": "USD",
@@ -985,13 +2465,13 @@
     "claim_type": "monetary",
     "subject": "Northwind Analytics Inc.",
     "predicate": "cash and cash equivalents at year end",
-    "raw_text": "Cash and cash equivalents at year end totalled USD 1,940,000.",
+    "raw_text": "Cash and cash equivalents at year end totalled USD 1,940,000",
     "span": {
       "document_id": "financial_statements_2025",
       "page": 1,
       "char_start": 593,
-      "char_end": 654,
-      "text": "Cash and cash equivalents at year end totalled USD 1,940,000."
+      "char_end": 653,
+      "text": "Cash and cash equivalents at year end totalled USD 1,940,000"
     },
     "numeric_value": "1940000",
     "currency": "USD",
@@ -1000,11 +2480,31 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "financial_statements_2025-c0007",
+    "document_id": "financial_statements_2025",
+    "claim_type": "relationship",
+    "subject": "Borrowings",
+    "predicate": "comprise a term loan facility with Meridian Bank",
+    "raw_text": "Borrowings comprise a term loan facility with Meridian Bank",
+    "span": {
+      "document_id": "financial_statements_2025",
+      "page": 1,
+      "char_start": 655,
+      "char_end": 714,
+      "text": "Borrowings comprise a term loan facility with Meridian Bank"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "insurance_policy-c0000",
     "document_id": "insurance_policy",
-    "claim_type": "relationship",
+    "claim_type": "party",
     "subject": "Northwind Analytics Inc.",
-    "predicate": "issued a Certificate of Insurance",
+    "predicate": "is the subject of the Certificate of Insurance",
     "raw_text": "Certificate of Insurance - Northwind Analytics Inc.",
     "span": {
       "document_id": "insurance_policy",
@@ -1023,7 +2523,7 @@
     "claim_id": "insurance_policy-c0001",
     "document_id": "insurance_policy",
     "claim_type": "status",
-    "subject": "Northwind Analytics Inc.",
+    "subject": "Northwind Analytics Inc. general liability policy",
     "predicate": "has policy number NW-2025-4471",
     "raw_text": "Policy number NW-2025-4471",
     "span": {
@@ -1043,7 +2543,7 @@
     "claim_id": "insurance_policy-c0002",
     "document_id": "insurance_policy",
     "claim_type": "status",
-    "subject": "Northwind Analytics Inc. Policy NW-2025-4471",
+    "subject": "Northwind Analytics Inc. insurance policy",
     "predicate": "policy period start date",
     "raw_text": "1 January 2025",
     "span": {
@@ -1063,7 +2563,7 @@
     "claim_id": "insurance_policy-c0003",
     "document_id": "insurance_policy",
     "claim_type": "status",
-    "subject": "Northwind Analytics Inc. Policy NW-2025-4471",
+    "subject": "Northwind Analytics Inc. insurance policy",
     "predicate": "policy period end date",
     "raw_text": "31 December 2025",
     "span": {
@@ -1080,11 +2580,31 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "insurance_policy-c0004",
+    "document_id": "insurance_policy",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "technology errors and omissions coverage aggregate limit",
+    "raw_text": "Technology errors and omissions coverage is provided with an aggregate limit of USD 3,000,000.",
+    "span": {
+      "document_id": "insurance_policy",
+      "page": 1,
+      "char_start": 341,
+      "char_end": 435,
+      "text": "Technology errors and omissions coverage is provided with an aggregate limit of USD 3,000,000."
+    },
+    "numeric_value": "3000000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "ip_assignment-c0000",
     "document_id": "ip_assignment",
-    "claim_type": "relationship",
+    "claim_type": "party",
     "subject": "Sarah Chen",
-    "predicate": "assigns intellectual property to Northwind Analytics Inc.",
+    "predicate": "assignor",
     "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
     "span": {
       "document_id": "ip_assignment",
@@ -1102,9 +2622,9 @@
   {
     "claim_id": "ip_assignment-c0001",
     "document_id": "ip_assignment",
-    "claim_type": "relationship",
+    "claim_type": "party",
     "subject": "David Okonkwo",
-    "predicate": "assigns intellectual property to Northwind Analytics Inc.",
+    "predicate": "assignor",
     "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
     "span": {
       "document_id": "ip_assignment",
@@ -1121,46 +2641,6 @@
   },
   {
     "claim_id": "ip_assignment-c0002",
-    "document_id": "ip_assignment",
-    "claim_type": "party",
-    "subject": "Sarah Chen",
-    "predicate": "assignor",
-    "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
-    "span": {
-      "document_id": "ip_assignment",
-      "page": 1,
-      "char_start": 44,
-      "char_end": 225,
-      "text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement."
-    },
-    "numeric_value": null,
-    "currency": null,
-    "date_value": null,
-    "extracted_by": "claim_extractor",
-    "confidence": 0.6
-  },
-  {
-    "claim_id": "ip_assignment-c0003",
-    "document_id": "ip_assignment",
-    "claim_type": "party",
-    "subject": "David Okonkwo",
-    "predicate": "assignor",
-    "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
-    "span": {
-      "document_id": "ip_assignment",
-      "page": 1,
-      "char_start": 44,
-      "char_end": 225,
-      "text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement."
-    },
-    "numeric_value": null,
-    "currency": null,
-    "date_value": null,
-    "extracted_by": "claim_extractor",
-    "confidence": 0.6
-  },
-  {
-    "claim_id": "ip_assignment-c0004",
     "document_id": "ip_assignment",
     "claim_type": "party",
     "subject": "Northwind Analytics Inc.",
@@ -1180,10 +2660,50 @@
     "confidence": 0.6
   },
   {
+    "claim_id": "ip_assignment-c0003",
+    "document_id": "ip_assignment",
+    "claim_type": "relationship",
+    "subject": "Sarah Chen",
+    "predicate": "assigns intellectual property to Northwind Analytics Inc.",
+    "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
+    "span": {
+      "document_id": "ip_assignment",
+      "page": 1,
+      "char_start": 44,
+      "char_end": 225,
+      "text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "ip_assignment-c0004",
+    "document_id": "ip_assignment",
+    "claim_type": "relationship",
+    "subject": "David Okonkwo",
+    "predicate": "assigns intellectual property to Northwind Analytics Inc.",
+    "raw_text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement.",
+    "span": {
+      "document_id": "ip_assignment",
+      "page": 1,
+      "char_start": 44,
+      "char_end": 225,
+      "text": "Each of Sarah Chen and David Okonkwo hereby assigns to Northwind Analytics Inc. all right, title and interest in any intellectual property created in the course of their engagement."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
     "claim_id": "ip_assignment-c0005",
     "document_id": "ip_assignment",
     "claim_type": "status",
-    "subject": "Intellectual Property Assignment Agreement",
+    "subject": "Northwind Analytics Inc. Intellectual Property Assignment",
     "predicate": "effective date",
     "raw_text": "This assignment is effective from 19 June 2019 and covers all inventions, software, designs and works of authorship.",
     "span": {
@@ -1203,8 +2723,8 @@
     "claim_id": "ip_assignment-c0006",
     "document_id": "ip_assignment",
     "claim_type": "status",
-    "subject": "Intellectual Property Assignment Agreement",
-    "predicate": "covers inventions, software, designs, and works of authorship",
+    "subject": "Northwind Analytics Inc. Intellectual Property Assignment",
+    "predicate": "covers inventions, software, designs and works of authorship",
     "raw_text": "This assignment is effective from 19 June 2019 and covers all inventions, software, designs and works of authorship.",
     "span": {
       "document_id": "ip_assignment",
@@ -1212,6 +2732,1906 @@
       "char_start": 227,
       "char_end": 343,
       "text": "This assignment is effective from 19 June 2019 and covers all inventions, software, designs and works of authorship."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "ip_assignment-c0007",
+    "document_id": "ip_assignment",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc. Intellectual Property Assignment",
+    "predicate": "does not extend to work product created by third party contractors",
+    "raw_text": "This assignment does not extend to work product created by third party contractors, which is addressed in the relevant contractor agreements.",
+    "span": {
+      "document_id": "ip_assignment",
+      "page": 1,
+      "char_start": 345,
+      "char_end": 486,
+      "text": "This assignment does not extend to work product created by third party contractors, which is addressed in the relevant contractor agreements."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "ip_assignment-c0008",
+    "document_id": "ip_assignment",
+    "claim_type": "status",
+    "subject": "third party contractor work product",
+    "predicate": "addressed in relevant contractor agreements",
+    "raw_text": "This assignment does not extend to work product created by third party contractors, which is addressed in the relevant contractor agreements.",
+    "span": {
+      "document_id": "ip_assignment",
+      "page": 1,
+      "char_start": 345,
+      "char_end": 486,
+      "text": "This assignment does not extend to work product created by third party contractors, which is addressed in the relevant contractor agreements."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "litigation_summary-c0000",
+    "document_id": "litigation_summary",
+    "claim_type": "status",
+    "subject": "The Company",
+    "predicate": "is not party to any pending litigation as at the date of this summary",
+    "raw_text": "The company is not party to any pending litigation as at the date of this summary.",
+    "span": {
+      "document_id": "litigation_summary",
+      "page": 1,
+      "char_start": 55,
+      "char_end": 137,
+      "text": "The company is not party to any pending litigation as at the date of this summary."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "litigation_summary-c0001",
+    "document_id": "litigation_summary",
+    "claim_type": "quantity",
+    "subject": "commercial disputes",
+    "predicate": "number of disputes settled during 2025",
+    "raw_text": "One commercial dispute was settled during 2025.",
+    "span": {
+      "document_id": "litigation_summary",
+      "page": 1,
+      "char_start": 138,
+      "char_end": 185,
+      "text": "One commercial dispute was settled during 2025."
+    },
+    "numeric_value": "1",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "litigation_summary-c0002",
+    "document_id": "litigation_summary",
+    "claim_type": "monetary",
+    "subject": "commercial dispute",
+    "predicate": "settled for",
+    "raw_text": "the matter settled for USD 62,000 without admission of liability.",
+    "span": {
+      "document_id": "litigation_summary",
+      "page": 1,
+      "char_start": 248,
+      "char_end": 313,
+      "text": "the matter settled for USD 62,000 without admission of liability."
+    },
+    "numeric_value": "62000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "litigation_summary-c0003",
+    "document_id": "litigation_summary",
+    "claim_type": "status",
+    "subject": "The Company",
+    "predicate": "has received no regulatory enquiries",
+    "raw_text": "The company has received no regulatory enquiries during the period covered by this summary.",
+    "span": {
+      "document_id": "litigation_summary",
+      "page": 1,
+      "char_start": 314,
+      "char_end": 405,
+      "text": "The company has received no regulatory enquiries during the period covered by this summary."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0000",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "status",
+    "subject": "Term Loan Agreement",
+    "predicate": "is dated 20 September 2024",
+    "raw_text": "This Term Loan Agreement is dated 20 September 2024",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 65,
+      "char_end": 116,
+      "text": "This Term Loan Agreement is dated 20 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0001",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "party",
+    "subject": "Meridian Bank NA",
+    "predicate": "is the lender",
+    "raw_text": "Meridian Bank NA as lender",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 125,
+      "char_end": 151,
+      "text": "Meridian Bank NA as lender"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0002",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "party",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "is the borrower",
+    "raw_text": "Northwind Analytics Inc. as borrower",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 156,
+      "char_end": 192,
+      "text": "Northwind Analytics Inc. as borrower"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0003",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "interest accrues at 8.5% per annum",
+    "raw_text": "Interest accrues at a rate of eight and one half percent (8.5%) per annum",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 326,
+      "char_end": 399,
+      "text": "Interest accrues at a rate of eight and one half percent (8.5%) per annum"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0004",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "obligation",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "interest is payable quarterly",
+    "raw_text": "payable quarterly.",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 401,
+      "char_end": 419,
+      "text": "payable quarterly."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "loan_agreement_meridian_bank-c0005",
+    "document_id": "loan_agreement_meridian_bank",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "principal is repayable in full on 20 September 2029",
+    "raw_text": "The principal is repayable in full on 20 September 2029",
+    "span": {
+      "document_id": "loan_agreement_meridian_bank",
+      "page": 1,
+      "char_start": 442,
+      "char_end": 497,
+      "text": "The principal is repayable in full on 20 September 2029"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0000",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "monetary",
+    "subject": "Company",
+    "predicate": "revenue for the quarter",
+    "raw_text": "Revenue for the quarter was USD 2,310,000",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 50,
+      "char_end": 91,
+      "text": "Revenue for the quarter was USD 2,310,000"
+    },
+    "numeric_value": "2310000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0001",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "monetary",
+    "subject": "Company",
+    "predicate": "internal plan revenue",
+    "raw_text": "internal plan of USD 2,180,000",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 106,
+      "char_end": 136,
+      "text": "internal plan of USD 2,180,000"
+    },
+    "numeric_value": "2180000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0002",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "status",
+    "subject": "Engineering costs",
+    "predicate": "include final instalment for analytics engine rewrite",
+    "raw_text": "Engineering costs include the final instalment for the analytics engine rewrite",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 138,
+      "char_end": 217,
+      "text": "Engineering costs include the final instalment for the analytics engine rewrite"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0003",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "status",
+    "subject": "analytics engine rewrite",
+    "predicate": "capitalised over following periods",
+    "raw_text": "capitalised over the following periods",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 284,
+      "char_end": 322,
+      "text": "capitalised over the following periods"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0004",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "monetary",
+    "subject": "Company",
+    "predicate": "cash at 31 March 2026 stood at",
+    "raw_text": "Cash at 31 March 2026 stood at USD 1,620,000",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 324,
+      "char_end": 368,
+      "text": "Cash at 31 March 2026 stood at USD 1,620,000"
+    },
+    "numeric_value": "1620000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0005",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "relationship",
+    "subject": "Company",
+    "predicate": "has facility with",
+    "raw_text": "Meridian Bank facility",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 417,
+      "char_end": 439,
+      "text": "Meridian Bank facility"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0006",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "quantity",
+    "subject": "Company",
+    "predicate": "headcount of full time employees",
+    "raw_text": "34 full time employees",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 470,
+      "char_end": 492,
+      "text": "34 full time employees"
+    },
+    "numeric_value": "34",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0007",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "quantity",
+    "subject": "Company",
+    "predicate": "headcount of contractors",
+    "raw_text": "6 contractors",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 497,
+      "char_end": 510,
+      "text": "6 contractors"
+    },
+    "numeric_value": "6",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "management_accounts_q1_2026-c0008",
+    "document_id": "management_accounts_q1_2026",
+    "claim_type": "status",
+    "subject": "largest customer relationship",
+    "predicate": "remains under negotiation for renewal",
+    "raw_text": "largest customer relationship remains under negotiation for renewal",
+    "span": {
+      "document_id": "management_accounts_q1_2026",
+      "page": 1,
+      "char_start": 538,
+      "char_end": 605,
+      "text": "largest customer relationship remains under negotiation for renewal"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0000",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Employee Option Grant Schedule",
+    "predicate": "effective date",
+    "raw_text": "as at 31 December 2025",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 33,
+      "char_end": 55,
+      "text": "as at 31 December 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0001",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Priya Raghunathan",
+    "predicate": "role is Chief Financial Officer",
+    "raw_text": "Priya Raghunathan, Chief Financial Officer",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 151,
+      "char_end": 193,
+      "text": "Priya Raghunathan, Chief Financial Officer"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0002",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "Priya Raghunathan",
+    "predicate": "number of options granted",
+    "raw_text": "120,000 options",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 195,
+      "char_end": 210,
+      "text": "120,000 options"
+    },
+    "numeric_value": "120000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0003",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Priya Raghunathan option grant",
+    "predicate": "date of grant",
+    "raw_text": "16 September 2024",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 219,
+      "char_end": 236,
+      "text": "16 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0004",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Marcus Ferrell",
+    "predicate": "role is VP Engineering",
+    "raw_text": "Marcus Ferrell, VP Engineering",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 239,
+      "char_end": 269,
+      "text": "Marcus Ferrell, VP Engineering"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0005",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "Marcus Ferrell",
+    "predicate": "number of options granted",
+    "raw_text": "95,000 options",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 271,
+      "char_end": 285,
+      "text": "95,000 options"
+    },
+    "numeric_value": "95000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0006",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Marcus Ferrell option grant",
+    "predicate": "date of grant",
+    "raw_text": "3 May 2023",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 294,
+      "char_end": 304,
+      "text": "3 May 2023"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0007",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Anneke Vos",
+    "predicate": "role is VP Sales",
+    "raw_text": "Anneke Vos, VP Sales",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 307,
+      "char_end": 327,
+      "text": "Anneke Vos, VP Sales"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0008",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "Anneke Vos",
+    "predicate": "number of options granted",
+    "raw_text": "80,000 options",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 329,
+      "char_end": 343,
+      "text": "80,000 options"
+    },
+    "numeric_value": "80000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0009",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Anneke Vos option grant",
+    "predicate": "date of grant",
+    "raw_text": "12 October 2023",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 352,
+      "char_end": 367,
+      "text": "12 October 2023"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0010",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Tomas Berg",
+    "predicate": "role is Head of Product",
+    "raw_text": "Tomas Berg, Head of Product",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 370,
+      "char_end": 397,
+      "text": "Tomas Berg, Head of Product"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0011",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "Tomas Berg",
+    "predicate": "number of options granted",
+    "raw_text": "75,000 options",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 399,
+      "char_end": 413,
+      "text": "75,000 options"
+    },
+    "numeric_value": "75000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0012",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Tomas Berg option grant",
+    "predicate": "date of grant",
+    "raw_text": "1 February 2024",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 422,
+      "char_end": 437,
+      "text": "1 February 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0013",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Leila Haddad",
+    "predicate": "role is Head of Customer Success",
+    "raw_text": "Leila Haddad, Head of Customer Success",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 440,
+      "char_end": 478,
+      "text": "Leila Haddad, Head of Customer Success"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0014",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "Leila Haddad",
+    "predicate": "number of options granted",
+    "raw_text": "45,000 options",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 480,
+      "char_end": 494,
+      "text": "45,000 options"
+    },
+    "numeric_value": "45000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0015",
+    "document_id": "option_grant_schedule",
+    "claim_type": "status",
+    "subject": "Leila Haddad option grant",
+    "predicate": "date of grant",
+    "raw_text": "20 June 2024",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 503,
+      "char_end": 515,
+      "text": "20 June 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0016",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "other employees",
+    "predicate": "number of other employees holding option grants",
+    "raw_text": "Eleven other employees hold grants",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 518,
+      "char_end": 552,
+      "text": "Eleven other employees hold grants"
+    },
+    "numeric_value": "11",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "option_grant_schedule-c0017",
+    "document_id": "option_grant_schedule",
+    "claim_type": "quantity",
+    "subject": "option grants",
+    "predicate": "aggregate number of options",
+    "raw_text": "totalling 30,000 options in aggregate",
+    "span": {
+      "document_id": "option_grant_schedule",
+      "page": 1,
+      "char_start": 553,
+      "char_end": 590,
+      "text": "totalling 30,000 options in aggregate"
+    },
+    "numeric_value": "30000",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0000",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "monetary",
+    "subject": "Total trade receivables outstanding",
+    "predicate": "were USD 1,180,000",
+    "raw_text": "Total trade receivables outstanding at 31 December 2025 were USD 1,180,000.",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 52,
+      "char_end": 127,
+      "text": "Total trade receivables outstanding at 31 December 2025 were USD 1,180,000."
+    },
+    "numeric_value": "1180000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0001",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "monetary",
+    "subject": "Amounts current and not yet due",
+    "predicate": "were USD 742,000",
+    "raw_text": "Amounts current and not yet due: USD 742,000.",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 128,
+      "char_end": 173,
+      "text": "Amounts current and not yet due: USD 742,000."
+    },
+    "numeric_value": "742000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0002",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "monetary",
+    "subject": "Amounts overdue between 31 and 60 days",
+    "predicate": "were USD 218,000",
+    "raw_text": "Amounts overdue between 31 and 60 days: USD 218,000.",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 174,
+      "char_end": 226,
+      "text": "Amounts overdue between 31 and 60 days: USD 218,000."
+    },
+    "numeric_value": "218000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0003",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "monetary",
+    "subject": "Amounts overdue between 61 and 90 days",
+    "predicate": "were USD 145,000",
+    "raw_text": "Amounts overdue between 61 and 90 days: USD 145,000.",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 227,
+      "char_end": 279,
+      "text": "Amounts overdue between 61 and 90 days: USD 145,000."
+    },
+    "numeric_value": "145000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0004",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "monetary",
+    "subject": "Amounts overdue by more than 90 days",
+    "predicate": "were USD 75,000",
+    "raw_text": "Amounts overdue by more than 90 days: USD 75,000",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 280,
+      "char_end": 328,
+      "text": "Amounts overdue by more than 90 days: USD 75,000"
+    },
+    "numeric_value": "75000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "receivables_ageing_2025-c0005",
+    "document_id": "receivables_ageing_2025",
+    "claim_type": "status",
+    "subject": "Single customer overdue debt",
+    "predicate": "is the subject of ongoing collection correspondence",
+    "raw_text": "is the subject of ongoing collection correspondence.",
+    "span": {
+      "document_id": "receivables_ageing_2025",
+      "page": 1,
+      "char_start": 383,
+      "char_end": 435,
+      "text": "is the subject of ongoing collection correspondence."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "reseller_agreement_pacifica-c0000",
+    "document_id": "reseller_agreement_pacifica",
+    "claim_type": "status",
+    "subject": "Reseller Agreement",
+    "predicate": "entered into on",
+    "raw_text": "This Reseller Agreement is entered into on 1 March 2025",
+    "span": {
+      "document_id": "reseller_agreement_pacifica",
+      "page": 1,
+      "char_start": 56,
+      "char_end": 111,
+      "text": "This Reseller Agreement is entered into on 1 March 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "reseller_agreement_pacifica-c0001",
+    "document_id": "reseller_agreement_pacifica",
+    "claim_type": "quantity",
+    "subject": "Reseller Agreement",
+    "predicate": "initial term duration in months",
+    "raw_text": "The initial term is thirty-six (36) months",
+    "span": {
+      "document_id": "reseller_agreement_pacifica",
+      "page": 1,
+      "char_start": 610,
+      "char_end": 652,
+      "text": "The initial term is thirty-six (36) months"
+    },
+    "numeric_value": "36",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "reseller_agreement_pacifica-c0002",
+    "document_id": "reseller_agreement_pacifica",
+    "claim_type": "status",
+    "subject": "Reseller Agreement",
+    "predicate": "initial term commencement date",
+    "raw_text": "commencing 1 March 2025",
+    "span": {
+      "document_id": "reseller_agreement_pacifica",
+      "page": 1,
+      "char_start": 653,
+      "char_end": 676,
+      "text": "commencing 1 March 2025"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0000",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "TitanRetail Group",
+    "predicate": "recognised revenue",
+    "raw_text": "TitanRetail Group: USD 3,612,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 157,
+      "char_end": 190,
+      "text": "TitanRetail Group: USD 3,612,000."
+    },
+    "numeric_value": "3612000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0001",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "NovaClear GmbH",
+    "predicate": "recognised revenue",
+    "raw_text": "NovaClear GmbH: USD 1,344,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 191,
+      "char_end": 221,
+      "text": "NovaClear GmbH: USD 1,344,000."
+    },
+    "numeric_value": "1344000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0002",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "Meridian Logistics BV",
+    "predicate": "recognised revenue",
+    "raw_text": "Meridian Logistics BV: USD 1,008,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 222,
+      "char_end": 259,
+      "text": "Meridian Logistics BV: USD 1,008,000."
+    },
+    "numeric_value": "1008000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0003",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "Pacifica Systems Pte Ltd",
+    "predicate": "recognised revenue",
+    "raw_text": "Pacifica Systems Pte Ltd: USD 890,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 260,
+      "char_end": 298,
+      "text": "Pacifica Systems Pte Ltd: USD 890,000."
+    },
+    "numeric_value": "890000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0004",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "Bluepeak Health",
+    "predicate": "revenue",
+    "raw_text": "Bluepeak Health: USD 756,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 299,
+      "char_end": 328,
+      "text": "Bluepeak Health: USD 756,000."
+    },
+    "numeric_value": "756000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "revenue_by_customer_2025-c0005",
+    "document_id": "revenue_by_customer_2025",
+    "claim_type": "monetary",
+    "subject": "All other customers in aggregate",
+    "predicate": "aggregate revenue",
+    "raw_text": "All other customers in aggregate: USD 1,000,000.",
+    "span": {
+      "document_id": "revenue_by_customer_2025",
+      "page": 1,
+      "char_start": 329,
+      "char_end": 377,
+      "text": "All other customers in aggregate: USD 1,000,000."
+    },
+    "numeric_value": "1000000",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0000",
+    "document_id": "severance_policy",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc. Executive Severance Policy",
+    "predicate": "was adopted by the Board on 4 September 2024",
+    "raw_text": "This policy was adopted by the Board on 4 September 2024",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 55,
+      "char_end": 111,
+      "text": "This policy was adopted by the Board on 4 September 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0001",
+    "document_id": "severance_policy",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc. Executive Severance Policy",
+    "predicate": "applies to executive officers of the company",
+    "raw_text": "applies to executive officers of the company.",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 116,
+      "char_end": 161,
+      "text": "applies to executive officers of the company."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0002",
+    "document_id": "severance_policy",
+    "claim_type": "right",
+    "subject": "executive officer",
+    "predicate": "entitled to twelve months base salary paid as severance on termination without cause",
+    "raw_text": "On termination without cause, an executive officer is entitled to twelve (12) months of base salary paid as severance.",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 163,
+      "char_end": 281,
+      "text": "On termination without cause, an executive officer is entitled to twelve (12) months of base salary paid as severance."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0003",
+    "document_id": "severance_policy",
+    "claim_type": "quantity",
+    "subject": "executive officer",
+    "predicate": "months of base salary entitlement on termination without cause",
+    "raw_text": "twelve (12)",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 229,
+      "char_end": 240,
+      "text": "twelve (12)"
+    },
+    "numeric_value": "12",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0004",
+    "document_id": "severance_policy",
+    "claim_type": "right",
+    "subject": "executive officer",
+    "predicate": "entitled to eighteen months base salary and full equity acceleration following change of control and termination",
+    "raw_text": "On a change of control of the company followed by termination without cause within twelve months, an executive officer is entitled to eighteen (18) months of base salary and full acceleration of unvested equity.",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 283,
+      "char_end": 494,
+      "text": "On a change of control of the company followed by termination without cause within twelve months, an executive officer is entitled to eighteen (18) months of base salary and full acceleration of unvested equity."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0005",
+    "document_id": "severance_policy",
+    "claim_type": "quantity",
+    "subject": "executive officer",
+    "predicate": "months of base salary entitlement on change of control followed by termination",
+    "raw_text": "eighteen (18)",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 417,
+      "char_end": 430,
+      "text": "eighteen (18)"
+    },
+    "numeric_value": "18",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0006",
+    "document_id": "severance_policy",
+    "claim_type": "quantity",
+    "subject": "termination without cause period following change of control",
+    "predicate": "within twelve months",
+    "raw_text": "within twelve months",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 359,
+      "char_end": 379,
+      "text": "within twelve months"
+    },
+    "numeric_value": "12",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0007",
+    "document_id": "severance_policy",
+    "claim_type": "right",
+    "subject": "the Board",
+    "predicate": "may amend the policy at any time",
+    "raw_text": "This policy may be amended by the Board at any time",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 496,
+      "char_end": 547,
+      "text": "This policy may be amended by the Board at any time"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "severance_policy-c0008",
+    "document_id": "severance_policy",
+    "claim_type": "obligation",
+    "subject": "the Board",
+    "predicate": "no amendment shall reduce an entitlement that has already accrued",
+    "raw_text": "no amendment shall reduce an entitlement that has already accrued.",
+    "span": {
+      "document_id": "severance_policy",
+      "page": 1,
+      "char_start": 559,
+      "char_end": 625,
+      "text": "no amendment shall reduce an entitlement that has already accrued."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "shareholders_agreement-c0000",
+    "document_id": "shareholders_agreement",
+    "claim_type": "status",
+    "subject": "Shareholders Agreement",
+    "predicate": "is dated 14 March 2024",
+    "raw_text": "This Shareholders Agreement is dated 14 March 2024",
+    "span": {
+      "document_id": "shareholders_agreement",
+      "page": 1,
+      "char_start": 50,
+      "char_end": 100,
+      "text": "This Shareholders Agreement is dated 14 March 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "shareholders_agreement-c0001",
+    "document_id": "shareholders_agreement",
+    "claim_type": "quantity",
+    "subject": "outstanding shares approval threshold",
+    "predicate": "is sixty percent (60%)",
+    "raw_text": "holders of more than sixty percent (60%) of the outstanding shares",
+    "span": {
+      "document_id": "shareholders_agreement",
+      "page": 1,
+      "char_start": 354,
+      "char_end": 420,
+      "text": "holders of more than sixty percent (60%) of the outstanding shares"
+    },
+    "numeric_value": "60",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "shareholders_agreement-c0002",
+    "document_id": "shareholders_agreement",
+    "claim_type": "condition",
+    "subject": "Kestrel Ventures LP",
+    "predicate": "holds preferred shares",
+    "raw_text": "For so long as Kestrel Ventures LP holds preferred shares",
+    "span": {
+      "document_id": "shareholders_agreement",
+      "page": 1,
+      "char_start": 550,
+      "char_end": 607,
+      "text": "For so long as Kestrel Ventures LP holds preferred shares"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "shareholders_agreement-c0003",
+    "document_id": "shareholders_agreement",
+    "claim_type": "status",
+    "subject": "Shareholders Agreement",
+    "predicate": "is governed by the laws of the State of Delaware",
+    "raw_text": "This Agreement is governed by the laws of the State of Delaware.",
+    "span": {
+      "document_id": "shareholders_agreement",
+      "page": 1,
+      "char_start": 766,
+      "char_end": 830,
+      "text": "This Agreement is governed by the laws of the State of Delaware."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0000",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "party",
+    "subject": "Certificate CS-001",
+    "predicate": "issued to Sarah Chen",
+    "raw_text": "Certificate CS-001 was issued to Sarah Chen",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 52,
+      "char_end": 95,
+      "text": "Certificate CS-001 was issued to Sarah Chen"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0001",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "status",
+    "subject": "Certificate CS-001",
+    "predicate": "date of issuance",
+    "raw_text": "Certificate CS-001 was issued to Sarah Chen on 19 June 2019",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 52,
+      "char_end": 111,
+      "text": "Certificate CS-001 was issued to Sarah Chen on 19 June 2019"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0002",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "party",
+    "subject": "Certificate CS-002",
+    "predicate": "issued to David Okonkwo",
+    "raw_text": "Certificate CS-002 was issued to David Okonkwo",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 150,
+      "char_end": 196,
+      "text": "Certificate CS-002 was issued to David Okonkwo"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0003",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "status",
+    "subject": "Certificate CS-002",
+    "predicate": "date of issuance",
+    "raw_text": "Certificate CS-002 was issued to David Okonkwo on 19 June 2019",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 150,
+      "char_end": 212,
+      "text": "Certificate CS-002 was issued to David Okonkwo on 19 June 2019"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0004",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "party",
+    "subject": "Certificate PS-001",
+    "predicate": "issued to Kestrel Ventures LP",
+    "raw_text": "Certificate PS-001 was issued to Kestrel Ventures LP",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 251,
+      "char_end": 303,
+      "text": "Certificate PS-001 was issued to Kestrel Ventures LP"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0005",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "status",
+    "subject": "Certificate PS-001",
+    "predicate": "date of issuance",
+    "raw_text": "Certificate PS-001 was issued to Kestrel Ventures LP on 14 March 2024",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 251,
+      "char_end": 320,
+      "text": "Certificate PS-001 was issued to Kestrel Ventures LP on 14 March 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "stock_certificate_ledger-c0006",
+    "document_id": "stock_certificate_ledger",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "no further certificates issued",
+    "raw_text": "No further certificates have been issued as at the date of this ledger.",
+    "span": {
+      "document_id": "stock_certificate_ledger",
+      "page": 1,
+      "char_start": 360,
+      "char_end": 431,
+      "text": "No further certificates have been issued as at the date of this ledger."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "supplier_cloudspine-c0000",
+    "document_id": "supplier_cloudspine",
+    "claim_type": "status",
+    "subject": "Infrastructure Services Agreement",
+    "predicate": "entered into on 5 January 2024",
+    "raw_text": "This Infrastructure Services Agreement is entered into on 5 January 2024",
+    "span": {
+      "document_id": "supplier_cloudspine",
+      "page": 1,
+      "char_start": 59,
+      "char_end": 131,
+      "text": "This Infrastructure Services Agreement is entered into on 5 January 2024"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "supplier_cloudspine-c0001",
+    "document_id": "supplier_cloudspine",
+    "claim_type": "monetary",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "shall pay a monthly fee of USD 47,500",
+    "raw_text": "Customer shall pay a monthly fee of USD 47,500",
+    "span": {
+      "document_id": "supplier_cloudspine",
+      "page": 1,
+      "char_start": 432,
+      "char_end": 478,
+      "text": "Customer shall pay a monthly fee of USD 47,500"
+    },
+    "numeric_value": "47500",
+    "currency": "USD",
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "supplier_cloudspine-c0002",
+    "document_id": "supplier_cloudspine",
+    "claim_type": "condition",
+    "subject": "monthly fee",
+    "predicate": "subject to annual review",
+    "raw_text": "subject to annual review",
+    "span": {
+      "document_id": "supplier_cloudspine",
+      "page": 1,
+      "char_start": 480,
+      "char_end": 504,
+      "text": "subject to annual review"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "supplier_cloudspine-c0003",
+    "document_id": "supplier_cloudspine",
+    "claim_type": "quantity",
+    "subject": "initial term",
+    "predicate": "is thirty-six (36) months",
+    "raw_text": "The initial term is thirty-six (36) months",
+    "span": {
+      "document_id": "supplier_cloudspine",
+      "page": 1,
+      "char_start": 523,
+      "char_end": 565,
+      "text": "The initial term is thirty-six (36) months"
+    },
+    "numeric_value": "36",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "supplier_cloudspine-c0004",
+    "document_id": "supplier_cloudspine",
+    "claim_type": "quantity",
+    "subject": "renewal period",
+    "predicate": "is twelve months",
+    "raw_text": "twelve month periods",
+    "span": {
+      "document_id": "supplier_cloudspine",
+      "page": 1,
+      "char_start": 606,
+      "char_end": 626,
+      "text": "twelve month periods"
+    },
+    "numeric_value": "12",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0000",
+    "document_id": "trademark_registration",
+    "claim_type": "quantity",
+    "subject": "Northwind Analytics",
+    "predicate": "has trademark registration number",
+    "raw_text": "Registration number 6,214,889",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 57,
+      "char_end": 86,
+      "text": "Registration number 6,214,889"
+    },
+    "numeric_value": "6214889",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0001",
+    "document_id": "trademark_registration",
+    "claim_type": "status",
+    "subject": "Northwind Analytics",
+    "predicate": "trademark registration granted on",
+    "raw_text": "was granted on 4 February 2022",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 87,
+      "char_end": 117,
+      "text": "was granted on 4 February 2022"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0002",
+    "document_id": "trademark_registration",
+    "claim_type": "quantity",
+    "subject": "Northwind Analytics",
+    "predicate": "is registered in international class",
+    "raw_text": "international class 42",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 159,
+      "char_end": 181,
+      "text": "international class 42"
+    },
+    "numeric_value": "42",
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0003",
+    "document_id": "trademark_registration",
+    "claim_type": "party",
+    "subject": "Northwind Analytics",
+    "predicate": "has registrant of record",
+    "raw_text": "The registrant of record is Northwind Analytics Inc.",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 183,
+      "char_end": 235,
+      "text": "The registrant of record is Northwind Analytics Inc."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0004",
+    "document_id": "trademark_registration",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "is a Delaware corporation",
+    "raw_text": "Northwind Analytics Inc., a Delaware corporation",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 211,
+      "char_end": 259,
+      "text": "Northwind Analytics Inc., a Delaware corporation"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0005",
+    "document_id": "trademark_registration",
+    "claim_type": "status",
+    "subject": "Northwind Analytics",
+    "predicate": "trademark registration is valid until",
+    "raw_text": "The registration is valid until 4 February 2032",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 261,
+      "char_end": 308,
+      "text": "The registration is valid until 4 February 2032"
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "trademark_registration-c0006",
+    "document_id": "trademark_registration",
+    "claim_type": "status",
+    "subject": "Northwind Analytics",
+    "predicate": "had no opposition proceedings filed",
+    "raw_text": "No opposition proceedings were filed during the publication period.",
+    "span": {
+      "document_id": "trademark_registration",
+      "page": 1,
+      "char_start": 374,
+      "char_end": 441,
+      "text": "No opposition proceedings were filed during the publication period."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0000",
+    "document_id": "vendor_list",
+    "claim_type": "status",
+    "subject": "Northwind Analytics Inc.",
+    "predicate": "has approved vendor list",
+    "raw_text": "Approved Vendor List - Northwind Analytics Inc.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 0,
+      "char_end": 47,
+      "text": "Approved Vendor List - Northwind Analytics Inc."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0001",
+    "document_id": "vendor_list",
+    "claim_type": "party",
+    "subject": "CloudSpine Systems LLC",
+    "predicate": "is located at 44 Lakeshore Drive, Portland, Oregon",
+    "raw_text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 48,
+      "char_end": 109,
+      "text": "CloudSpine Systems LLC, 44 Lakeshore Drive, Portland, Oregon."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0002",
+    "document_id": "vendor_list",
+    "claim_type": "status",
+    "subject": "CloudSpine Systems LLC",
+    "predicate": "provides infrastructure hosting",
+    "raw_text": "Infrastructure hosting.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 110,
+      "char_end": 133,
+      "text": "Infrastructure hosting."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0003",
+    "document_id": "vendor_list",
+    "claim_type": "party",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "is located at 210 Cedar Street, Portland, Oregon",
+    "raw_text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 174,
+      "char_end": 228,
+      "text": "Cedar Devshop LLC, 210 Cedar Street, Portland, Oregon."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0004",
+    "document_id": "vendor_list",
+    "claim_type": "status",
+    "subject": "Cedar Devshop LLC",
+    "predicate": "provides contract software engineering",
+    "raw_text": "Contract software engineering.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 229,
+      "char_end": 259,
+      "text": "Contract software engineering."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0005",
+    "document_id": "vendor_list",
+    "claim_type": "party",
+    "subject": "Sterling Vance LLP",
+    "predicate": "is located at 1 Market Plaza, San Francisco, California",
+    "raw_text": "Sterling Vance LLP, 1 Market Plaza, San Francisco, California.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 300,
+      "char_end": 362,
+      "text": "Sterling Vance LLP, 1 Market Plaza, San Francisco, California."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0006",
+    "document_id": "vendor_list",
+    "claim_type": "status",
+    "subject": "Sterling Vance LLP",
+    "predicate": "provides audit and assurance",
+    "raw_text": "Audit and assurance.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 363,
+      "char_end": 383,
+      "text": "Audit and assurance."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0007",
+    "document_id": "vendor_list",
+    "claim_type": "party",
+    "subject": "Halden Recruitment Partners",
+    "predicate": "is located at 300 Pine Street, Seattle, Washington",
+    "raw_text": "Halden Recruitment Partners, 300 Pine Street, Seattle, Washington.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 423,
+      "char_end": 489,
+      "text": "Halden Recruitment Partners, 300 Pine Street, Seattle, Washington."
+    },
+    "numeric_value": null,
+    "currency": null,
+    "date_value": null,
+    "extracted_by": "claim_extractor",
+    "confidence": 0.6
+  },
+  {
+    "claim_id": "vendor_list-c0008",
+    "document_id": "vendor_list",
+    "claim_type": "status",
+    "subject": "Halden Recruitment Partners",
+    "predicate": "provides technical recruitment",
+    "raw_text": "Technical recruitment.",
+    "span": {
+      "document_id": "vendor_list",
+      "page": 1,
+      "char_start": 490,
+      "char_end": 512,
+      "text": "Technical recruitment."
     },
     "numeric_value": null,
     "currency": null,

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from loupe.corpus.content import ALL_DOCUMENTS, PLANTED_DEFECTS
+from loupe.corpus.registry import ALL_DOCUMENTS, PLANTED_DEFECTS
 from loupe.ingestion import load_directory, load_document, page_for_offset
 from loupe.models.document import DocumentType, ParseStatus
 from loupe.models.span import Span, validate_span

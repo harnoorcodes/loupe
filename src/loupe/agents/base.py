@@ -32,9 +32,9 @@ log = get_logger(__name__)
 
 T = TypeVar("T", bound=BaseModel)
 
-MAX_CONCURRENT_CALLS = 1
+MAX_CONCURRENT_CALLS = 6
 MAX_ATTEMPTS = 3
-BASE_BACKOFF_SECONDS = 5.0
+BASE_BACKOFF_SECONDS = 2.0
 
 _semaphore = asyncio.Semaphore(MAX_CONCURRENT_CALLS)
 

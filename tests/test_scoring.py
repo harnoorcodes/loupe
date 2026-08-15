@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from loupe.corpus.content import PLANTED_DEFECTS
+from loupe.corpus.registry import PLANTED_DEFECTS
 from loupe.eval.scoring import matches, render, score
 from loupe.models.finding import Finding, FindingType, Severity
 from loupe.models.span import Span
@@ -107,9 +107,12 @@ class TestMatching:
 
 class TestScoring:
     def test_all_three_detected(self) -> None:
+        """Three findings should detect exactly the three defects they match."""
         card = score((d001(), d002(), d003()))
         assert card.detected_count == 3
-        assert card.recall == 1.0
+        assert card.planted_count == len(PLANTED_DEFECTS)
+        detected = {r.defect_id for r in card.results if r.detected}
+        assert detected == {"D-001", "D-002", "D-003"}
 
     def test_none_detected(self) -> None:
         card = score(())
@@ -119,7 +122,7 @@ class TestScoring:
     def test_partial_detection(self) -> None:
         card = score((d001(),))
         assert card.detected_count == 1
-        assert card.planted_count == 3
+        assert card.planted_count == len(PLANTED_DEFECTS)
 
     def test_expected_gap_is_not_noise(self) -> None:
         """A real absence that was never planted must not count as an error."""
@@ -145,9 +148,11 @@ class TestScoring:
         assert card.detected_count == 1
 
     def test_render_contains_recall(self) -> None:
-        text = render(score((d001(), d002(), d003())))
-        assert "3/3" in text
+        card = score((d001(), d002(), d003()))
+        text = render(card)
+        assert f"3/{len(PLANTED_DEFECTS)}" in text
         assert "D-001" in text
+        assert "D-015" in text
 
 
 class TestMemo:

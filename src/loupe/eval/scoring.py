@@ -22,9 +22,11 @@ from __future__ import annotations
 
 from typing import NamedTuple
 
-from loupe.corpus.content import EXPECTED_GAPS, PLANTED_DEFECTS, PlantedDefect
+from loupe.corpus.registry import EXPECTED_GAPS, PLANTED_DEFECTS, PlantedDefect
 from loupe.models.finding import Finding
 from loupe.observability.logging import get_logger
+
+from loupe.corpus.registry import EXPECTED_GAPS, PLANTED_DEFECTS, PlantedDefect
 
 log = get_logger(__name__)
 
@@ -153,47 +155,92 @@ def score(findings: tuple[Finding, ...]) -> ScoreCard:
 
 
 def render(card: ScoreCard) -> str:
-    """Format a score card as a markdown report."""
+    """Format a score card as a markdown report with per-class breakdown."""
+    from loupe.corpus.defects import primary_class
+
+    by_id = {d.defect_id: d for d in PLANTED_DEFECTS}
+    results_by_id = {r.defect_id: r for r in card.results}
+
     lines = [
         "# Evaluation",
         "",
         "Measured against a synthetic corpus with defects planted at known",
         "locations, so detection is verified rather than asserted.",
         "",
-        "## Planted defects",
+        "## By defect class",
         "",
-        "| Defect | Detected | Found by |",
-        "| --- | --- | --- |",
+        "| Class | Found | Planted | Recall |",
+        "| --- | --- | --- | --- |",
     ]
 
-    for result in card.results:
-        mark = "yes" if result.detected else "NO"
-        found_by = result.finding_title or "-"
-        lines.append(f"| {result.defect_id} | {mark} | {found_by} |")
+    classes: dict[str, list[str]] = {}
+    for defect in PLANTED_DEFECTS:
+        classes.setdefault(primary_class(defect), []).append(defect.defect_id)
+
+    for cls, ids in sorted(classes.items()):
+        found = sum(1 for i in ids if results_by_id[i].detected)
+        pct = f"{found / len(ids):.0%}" if ids else "-"
+        label = cls.replace("_", " ")
+        lines.append(f"| {label} | {found} | {len(ids)} | {pct} |")
 
     lines.extend(
         [
             "",
-            f"**Recall: {card.detected_count}/{card.planted_count} "
+            "## By difficulty",
+            "",
+            "| Difficulty | Found | Planted | Recall |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+
+    for level in ("easy", "medium", "hard"):
+        ids = [d.defect_id for d in PLANTED_DEFECTS if d.difficulty == level]
+        if not ids:
+            continue
+        found = sum(1 for i in ids if results_by_id[i].detected)
+        pct = f"{found / len(ids):.0%}"
+        lines.append(f"| {level} | {found} | {len(ids)} | {pct} |")
+
+    lines.extend(
+        [
+            "",
+            "## Every defect",
+            "",
+            "| Defect | Difficulty | Requires | Detected |",
+            "| --- | --- | --- | --- |",
+        ]
+    )
+
+    for result in card.results:
+        defect = by_id[result.defect_id]
+        mark = "yes" if result.detected else "no"
+        lines.append(
+            f"| {defect.defect_id} {defect.name} | {defect.difficulty} | "
+            f"{defect.requires} | {mark} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            f"**Overall recall: {card.detected_count}/{card.planted_count} "
             f"({card.recall:.0%})**",
             "",
             "## Other findings",
             "",
             f"- {len(card.extra_valid)} genuine absences that were never "
-            f"planted. The synthetic corpus contains no shareholders "
-            f"agreement, receivables schedule, or tax returns, so reporting "
-            f"them missing is correct behaviour.",
-            f"- {len(card.extra_noise)} findings corresponding to nothing "
-            f"real.",
+            f"planted. Reporting them is correct behaviour.",
+            f"- {len(card.extra_noise)} findings corresponding to nothing real.",
             "",
             f"**Noise rate: {len(card.extra_noise)}/{card.total_findings} "
             f"({card.noise_rate:.0%})**",
             "",
-            "## Caveat",
+            "## Note",
             "",
-            "A ten-document corpus makes gap detection easy, so the low noise",
-            "rate is not a strong claim. Recall on the three planted defects,",
-            "particularly the cross-document one, is the meaningful result.",
+            "Four defects are marked hard and are expected to fail against",
+            "the current implementation: they need version handling,",
+            "coreference resolution, or a three-document reasoning chain.",
+            "They are included so the benchmark measures the system rather",
+            "than confirming it.",
             "",
         ]
     )

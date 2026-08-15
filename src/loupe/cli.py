@@ -31,6 +31,8 @@ from loupe.models.finding import Finding, FindingStatus
 from loupe.observability.logging import configure_logging, get_logger
 from loupe.report import memo
 from loupe.store.evidence import EvidenceStore
+from loupe.detect import adjudicate, arithmetic, gaps, pairs, temporal, tension
+from loupe.eval import ablation
 
 log = get_logger(__name__)
 
@@ -171,6 +173,14 @@ async def cmd_detect(
     proposed.extend(found)
     print(f"  {len(found)} proposed in {time.monotonic() - started:.1f}s")
 
+    print("\n--- Targeted pair analysis (model) ---")
+    started = time.monotonic()
+    candidates = pairs.generate(store)
+    print(f"  {len(candidates)} candidate pairs from deterministic rules")
+    found = await adjudicate.adjudicate(candidates)
+    proposed.extend(found)
+    print(f"  {len(found)} proposed in {time.monotonic() - started:.1f}s")
+
     print(f"\n--- Adversarial review of {len(proposed)} findings (model) ---")
     started = time.monotonic()
     reviewed = await critic.review_all(proposed, store)
@@ -242,6 +252,64 @@ def cmd_score(run_dir: Path, docs_dir: Path) -> int:
     return 0
 
 
+def cmd_pairs(run_dir: Path, docs_dir: Path) -> int:
+    """Show candidate pairs without calling any model.
+
+    Candidate generation is deterministic and free, so the pairs the system
+    would spend money adjudicating can be inspected first.
+    """
+    store = _open_store(run_dir, docs_dir)
+    if not store.claims:
+        print(f"\nNo claims in {run_dir}. Run 'extract' first.\n")
+        return 1
+
+    candidates = pairs.generate(store)
+    counts = pairs.summarise(candidates)
+
+    print(f"\n{len(candidates)} candidate pairs from {len(store.claims)} claims\n")
+    for strategy, count in sorted(counts.items()):
+        print(f"  {strategy:<24} {count}")
+
+    print()
+    for index, pair in enumerate(candidates, start=1):
+        print(f"{index:>3}. [{pair.strategy}]")
+        print(f"     {pair.reason[:150]}")
+        print(f"     A ({pair.claim_a.document_id}): {pair.claim_a.raw_text[:90]}")
+        print(f"     B ({pair.claim_b.document_id}): {pair.claim_b.raw_text[:90]}")
+        print()
+
+    print(f"Adjudicating these would cost roughly "
+          f"{max(1, len(candidates) // 6)} model calls.\n")
+    return 0
+
+
+async def cmd_ablate(run_dir: Path, docs_dir: Path, out_path: Path) -> int:
+    """Run the ablation study and write the report."""
+    settings.assert_safe_for_real_data()
+
+    store = _open_store(run_dir, docs_dir)
+    if not store.claims:
+        print(f"\nNo claims in {run_dir}. Run 'extract' first.\n")
+        return 1
+
+    print(f"\nRunning {len(ablation.CONFIGURATIONS)} configurations over "
+        f"{len(store.claims)} claims.")
+    print("Most configurations are subsets of the full run, so their model "
+        "calls are already cached.\n")
+
+    started = time.monotonic()
+    results = await ablation.run_all(store)
+    elapsed = time.monotonic() - started
+
+    report = ablation.render(results)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(report, encoding="utf-8")
+
+    print(report)
+    print(ablation.summarise_contributions(results))
+    print(f"\nCompleted in {elapsed:.1f}s. Written to {out_path}\n")
+    return 0
+
 def main() -> int:
     configure_logging()
     parser = argparse.ArgumentParser(prog="loupe")
@@ -276,6 +344,13 @@ def main() -> int:
     score_cmd = sub.add_parser("score", help="score against planted defects")
     score_cmd.add_argument("--run", type=Path, default=Path("data/run"))
     score_cmd.add_argument("--docs", type=Path, default=Path("data/synthetic"))
+    pairs_cmd = sub.add_parser("pairs", help="show candidate pairs, no model calls")
+    pairs_cmd.add_argument("--run", type=Path, default=Path("data/run"))
+    pairs_cmd.add_argument("--docs", type=Path, default=Path("data/synthetic"))
+    ablate_cmd = sub.add_parser("ablate", help="measure what each component contributes")
+    ablate_cmd.add_argument("--run", type=Path, default=Path("data/run"))
+    ablate_cmd.add_argument("--docs", type=Path, default=Path("data/synthetic"))
+    ablate_cmd.add_argument("--out", type=Path, default=Path("data/ablation.md"))
 
     args = parser.parse_args()
 
@@ -297,6 +372,10 @@ def main() -> int:
         return cmd_memo(args.run, args.docs, args.out)
     if args.command == "score":
         return cmd_score(args.run, args.docs)
+    if args.command == "pairs":
+        return cmd_pairs(args.run, args.docs)
+    if args.command == "ablate":
+        return asyncio.run(cmd_ablate(args.run, args.docs, args.out))
     return 2
 
 
