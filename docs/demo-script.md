@@ -1,184 +1,201 @@
 # Demo video script
 
-**Target length:** 7 minutes (assignment allows 5–10)
-**Format:** screen recording with voiceover
+**Target length:** 8 minutes (assignment allows 5–10)
+**Format:** screen recording with voiceover, driven by the web interface
 **Tool:** OBS Studio, Loom, or Windows Game Bar (`Win + G`)
+
+The interface carries the demo. The terminal appears twice and briefly.
 
 ---
 
 ## Before you record
 
-Run this once so every model call is cached. The recorded run then completes in under a second with no network dependency:
+### Warm the cache
+
+Every model call must be cached so the recorded run completes in seconds with no network dependency.
 
 ```bash
 python -m loupe.cli detect --fresh --no-approval
+python -m loupe.cli ablate
 ```
 
-Then reset for the take:
+Then start the server:
 
 ```bash
-rm -f data/run/findings.json
-clear
+python -m loupe.web.app
 ```
 
-**Checklist**
+Open **http://127.0.0.1:8000** and click **"Use the sample data room"** once, all the way through. That warms the web path specifically. Then reload the page so you start clean.
 
-- [ ] Terminal font enlarged (Ctrl + Shift + `+` in most terminals) — small text is unreadable in a compressed video
-- [ ] Terminal maximised, notifications silenced
-- [ ] These files open in tabs, ready to switch to: `data/synthetic/contract_titanretail.pdf`, `data/synthetic/financial_statements_2025.pdf`, `data/memo.md`
+### Checklist
+
+- [ ] Browser at 100% zoom, window maximised, bookmarks bar hidden
+- [ ] Notifications silenced, second monitor for this script
+- [ ] These two PDFs open in separate tabs for the opening: `data/synthetic/contract_titanretail.pdf` and `data/synthetic/financial_statements_2025.pdf`
+- [ ] Terminal open in a second window, font enlarged, for the two moments it appears
 - [ ] Microphone tested
-- [ ] This script on a second screen or printed
 
-**Recording tip:** record in one take if you can. Small stumbles are fine and read as authentic. A heavily edited video reads as rehearsed.
+**Record in one take if you can.** Small stumbles read as authentic. A heavily edited video reads as rehearsed.
 
 ---
 
-## 0:00–0:50 — The problem
+## 0:00–0:55 — The problem, in two documents
 
-**Show:** the two PDFs side by side, scrolled to the relevant sections.
+**Show:** the two PDFs side by side, scrolled to the relevant clauses.
 
 > "When one company buys another, the buyer gets a few weeks to read several hundred documents. I want to show you the kind of thing that gets missed.
 >
 > This is a customer contract. Section 11 — change of control. If the supplier is acquired, this customer can walk away on thirty days notice, no penalty.
 >
-> [switch to financials]
+> [switch tabs]
 >
 > And this is the financial statement. That same customer, TitanRetail, is 43% of total revenue.
 >
-> Neither document is alarming on its own. The lawyer sees a standard clause. The accountant sees customer concentration. They work separately, so nobody puts the two together — and the buyer finds out after closing that they've just destroyed half the revenue they paid for.
+> Neither document is alarming on its own. The lawyer reads the first, the accountant reads the second, and they work in different rooms — so nobody puts them together. The buyer finds out after closing that they've destroyed nearly half the revenue they paid for.
 >
-> That's what this system is built to catch."
+> This is Loupe. It's built to catch exactly that."
 
 ---
 
-## 0:50–1:40 — What it is
+## 0:55–1:35 — The interface, and what it's about to do
 
-**Show:** the repo in your editor, `src/loupe/agents/` folder expanded.
+**Show:** the landing page. Let the hero text sit on screen for a beat.
 
-> "This is Loupe. It's a multi-agent system built on the OpenAI Agents SDK, running on Gemini.
+> "Ten agents, built on the OpenAI Agents SDK, running on Gemini. Six of them use a language model. Six are plain Python — because reconciling a share total is arithmetic, not judgement, and Python is faster, free, and right every time.
 >
-> Ten agents. Five use a language model — a document classifier, a claim extractor, a tension detector, a red team critic, and a materiality scorer. Five are deterministic Python — entity resolution, arithmetic, dates, gap auditing, and report generation.
+> I'm going to run it against a data room I generated myself. Thirty-five documents for a fictional company, with fifteen problems deliberately hidden inside — and I know exactly where all fifteen are, because I put them there.
 >
-> That split is deliberate. Reconciling a share total is arithmetic, not judgement. Checking whether a file exists is a fact. Those don't need a model, and Python is faster, free, and right every time.
->
-> The important design decision is that agents don't own document types. Most designs for this problem give you a legal agent and a financial agent — but then the contradiction I just showed you falls between them and nobody owns it. Here, every agent reads and writes to one shared evidence store, so an agent can reason about documents it never read."
+> That last part is what makes this measurable rather than impressive-looking."
+
+**Click "Use the sample data room."**
 
 ---
 
-## 1:40–2:40 — Extraction
+## 1:35–2:30 — Watch it run
 
-**Show:** terminal. Run:
+**Show:** the progress panel. Let the stages tick.
 
-```bash
-python -m loupe.cli extract
-```
-
-*(This will say everything is already processed — that's the point.)*
-
-> "First, extraction. Every document gets read and turned into typed claims — atomic facts, each one bound to an exact page and character range.
+> "Here's the pipeline. It classifies each document by reading it, not by guessing from the filename. Extracts every factual claim with an exact page and character reference. Then four detectors run — three of them with no model at all.
 >
-> Notice it says everything's already processed. That's the checkpointing: if a run gets interrupted, it resumes rather than starting over. That happened to me for real during development when I hit a rate limit.
+> Then targeted pair analysis, then adversarial review, then materiality scoring.
 >
-> Sixty-one claims from ten documents."
+> Notice the timings on the right. This whole run is cached, so it's finishing in a couple of seconds. That's deliberate — a demo that depends on live API calls is a demo that can fail in front of an audience. It also means the results are reproducible instead of varying with model sampling."
 
-**Show:** run this to display the entity grouping:
-
-```bash
-python -c "
-from pathlib import Path
-from loupe.store import EvidenceStore
-s = EvidenceStore(Path('data/run'))
-s.load()
-t = s.claims_about('TitanRetail Group')
-print(f'{len(t)} claims across {sorted({c.document_id for c in t})}')
-"
-```
-
-> "And here's the piece that makes the whole thing work. Claims about TitanRetail — four of them, and look at the source documents. The contract and the financial statements. Both under one key.
->
-> The extractor originally produced 'TitanRetail Group' and 'TitanRetail Group Limited' as two separate entities, which meant those claims never got compared. Twenty lines of name normalisation fixed it. Without that, the finding I'm about to show you is unreachable."
+*If it finishes before you've said all that, keep talking over the findings page. Don't rush the point about reproducibility.*
 
 ---
 
-## 2:40–4:00 — Detection
+## 2:30–3:30 — The findings
 
-**Show:** terminal. Run:
+**Show:** the findings page. Point at the stat cards.
 
-```bash
-python -m loupe.cli detect --fresh --no-approval
-```
-
-> "Now detection. This runs four detectors over the claim graph.
+> "Seven of the fifteen planted defects found. Two hundred and thirty-two claims extracted. Zero findings that correspond to nothing real.
 >
-> Arithmetic first — pure Python, no model. It reconciles the cap table.
+> I'll come back to that seven, because I want to be honest about the eight it missed.
 >
-> Then the gap audit, which reports documents that should be there and aren't.
->
-> Then the tension detector — this is the language model agent. It takes every claim about one company, from whichever documents they came from, and asks a very specific question: what conflicts here? Not 'find risks' — if you ask a model to find risks it will find them whether or not they exist. 'What conflicts' has a wrong answer. It either points at two specific claims or it returns nothing.
->
-> Six entities analysed. Five came back with nothing. One came back with the finding."
+> Here are the findings, sorted by severity."
 
-**Pause on the output.** Point at the TitanRetail finding.
+**Scroll to the TitanRetail finding.**
 
-> "There it is. Critical severity. Cross-document. And look at the citations — one from the contract, one from the financial statements. Exact quotes, exact pages.
+> "This is the one I showed you at the start. Look at the badges — cross-document, latent liability. And the two citations underneath: one from the contract, one from the financial statements.
 >
 > That's a conclusion neither document supports on its own."
 
 ---
 
-## 4:00–4:50 — Adversarial review
+## 3:30–4:30 — The citation click ★
 
-**Show:** scroll to the review section of the output.
+**This is the most important thirty seconds of the video. Slow down.**
 
-> "Before anything gets reported, every finding goes through a red team critic.
+**Click the `contract_titanretail p.1` citation.**
+
+> "And this is the part that matters most to me.
 >
-> The critic isn't asked to review findings. It's asked to destroy them — construct the strongest possible argument that each one is wrong. If you ask a model 'is this correct?', it agrees, because agreeing is the easy path. If you tell it to attack, it actually attacks.
+> The source document opens right there, at the cited page, with the exact quoted text above it. One click.
 >
-> Here it retracted two findings. It argued that a litigation schedule isn't a document companies keep in the ordinary course — it's drafted during the transaction — so its absence isn't a red flag. That's correct, and I hadn't thought of it.
+> The reason that's the centrepiece rather than a nice touch: an analyst's only way to check any finding is to follow the citation. If one of them is wrong, they stop trusting all of them — and they'd be right to.
 >
-> And this is enforced by the type system, not by convention. Calling confirm on a finding that was never challenged raises an exception. There's no code path that gets a finding into the report without review."
+> So the system is built so it structurally cannot invent one. The model is never asked for character positions. It returns the exact text it's quoting, and the system finds that text itself with a string search. If the quote doesn't exist in the document, the claim is thrown away rather than reported with a broken reference."
+
+**Click the second citation** — `financial_statements_2025 p.1` — so the panel switches documents.
+
+> "Second citation, different document, same finding. That's the cross-document part made literal."
+
+**Press Escape to close.**
 
 ---
 
-## 4:50–5:40 — The memo
+## 4:30–5:15 — Adversarial review
 
-**Show:** open `data/memo.md` after running:
+**Show:** scroll down within a finding to the objection block.
+
+> "Before anything gets reported, every finding goes through an agent whose only job is to destroy it.
+>
+> Not review it — destroy it. If you ask a model 'is this correct?', it agrees, because agreeing is the easy path. If you tell it to construct the strongest possible argument that the finding is wrong, it actually tries.
+>
+> Here's what it argued against this one. The finding was reported anyway, because the objection wasn't strong enough. But you can see what was argued, which means you're seeing the reasoning rather than just the conclusion."
+
+**Scroll to the "Considered and withdrawn" section.**
+
+> "And here are the findings it killed. Most of these are duplicates — the same issue raised twice by different detectors. The critic sees all findings at once, so it catches that.
+>
+> This is also enforced by the type system, not by convention. Calling confirm on a finding that was never challenged raises an exception. There's no code path that gets an unreviewed finding into the report."
+
+---
+
+## 5:15–6:30 — The evaluation tab ★
+
+**Click "Evaluation" in the left rail.**
+
+> "Now the part I care about most.
+>
+> Seven of fifteen. Forty-seven percent. Zero noise.
+>
+> Most projects in this space can't tell you whether their output is correct. Because I generated the corpus, I know exactly what's wrong with it — so this is measured, not claimed."
+
+**Scroll to the by-class table.**
+
+> "Broken down by the kind of problem. Undisclosed relationships, two out of two. Temporal impossibilities, zero out of two — that detector runs and never fires, and I know why."
+
+**Scroll to the per-defect table.**
+
+> "And this is the table that makes the whole thing worth building. Every planted defect, with the specific capability its detection depends on.
+>
+> Four of these were designed to be beyond the system — they need version handling, or a three-document reasoning chain, or coreference resolution. Two of them got caught anyway, by a route I didn't predict.
+>
+> This isn't a list of excuses. It's a prioritised engineering backlog derived from measurement instead of guesswork. If I had a clean fifteen out of fifteen, I'd have learned nothing."
+
+---
+
+## 6:30–7:20 — The ablation study ★
+
+**Switch to the terminal.**
 
 ```bash
-python -m loupe.cli memo
+python -m loupe.cli ablate
 ```
 
-> "The output is an investment committee memo.
+*(Fully cached — completes in seconds.)*
+
+> "Last thing, and it's the piece I'd point at in an interview.
 >
-> Every finding has its evidence quoted with a document and page reference. Every finding shows what the critic argued against it, and notes that it was reported anyway — so a reader can see the objection that was overcome, not just the conclusion.
+> This removes one component at a time and re-scores. It turns claims about the architecture into measurements."
+
+**Point at the table as it appears.**
+
+> "Remove the pair detector: seven drops to three. That component is doing more than half the work.
 >
-> There's a section listing documents to request from the seller. And here at the bottom, findings that were considered and withdrawn, with the reasons. Most AI systems only show you what they concluded. This one shows you what it considered and rejected.
+> Remove adversarial review: recall goes *up* to eight — and noise goes from zero to forty-four percent. Sixteen findings instead of eight, and seven of the extra ones are meaningless.
 >
-> The memo is generated deterministically. No model is involved in writing it — it's a rendering of the findings ledger, so it can't hallucinate and it can't change between runs."
+> That's the precision-recall tradeoff with an actual number on it. For a diligence report, precision is the side that matters — an analyst who hits seven false findings stops reading, and then your recall is zero regardless of what it measured.
+>
+> And this row: removing the entity-grouped tension detector changes nothing. That's a component I built that earns no cost. I'm reporting it because it's exactly the kind of result you don't go looking for in your own system."
 
 ---
 
-## 5:40–6:20 — The score
+## 7:20–8:00 — Close
 
-**Show:** terminal. Run:
-
-```bash
-python -m loupe.cli score
-```
-
-> "The last piece is the one I care most about.
->
-> I generated the corpus myself, so I know exactly what's wrong with it and where. Three defects planted at known locations — an arithmetic discrepancy, the cross-document liability, and a missing document.
->
-> Three out of three detected. Zero findings that correspond to nothing real.
->
-> I want to be honest about the caveat: ten documents is enough to demonstrate the mechanism, not enough to characterise performance. The meaningful result is the cross-document defect, because that one needed evidence from two documents that no single reader would have compared."
-
----
-
-## 6:20–7:00 — Close
-
-**Show:** the terminal, or slide 10 of your deck.
+**Switch back to the browser, findings page.**
 
 > "One last thing, because it's the best evidence the design works.
 >
@@ -188,22 +205,48 @@ python -m loupe.cli score
 >
 > It was right. My detector, my test corpus, and my test were all wrong in the same way, so my tests could never have caught it. An adversarial agent caught a domain error in my own reasoning.
 >
-> I corrected it. The real defect is 350,000 shares stated as outstanding with no identified holder — which is subtler and more realistic than the one I planted.
+> I corrected it. The real defect is 350,000 shares outstanding with no identified holder, which is subtler and more realistic than the one I planted.
 >
-> The code's on GitHub. Thanks for watching."
+> The code's on GitHub, with the full evaluation and the ablation results. Thanks for watching."
 
 ---
 
-## If you're running short
+## Timing guide
+
+| Section | Duration | Cumulative |
+| --- | --- | --- |
+| Problem in two documents | 0:55 | 0:55 |
+| Interface and setup | 0:40 | 1:35 |
+| Watching it run | 0:55 | 2:30 |
+| The findings | 1:00 | 3:30 |
+| **Citation click** | 1:00 | 4:30 |
+| Adversarial review | 0:45 | 5:15 |
+| **Evaluation tab** | 1:15 | 6:30 |
+| **Ablation study** | 0:50 | 7:20 |
+| Close | 0:40 | 8:00 |
+
+---
+
+## If you run long
 
 Cut in this order:
 
-1. The extraction section (2:40 mark) — mention checkpointing verbally instead of showing it
-2. The memo walkthrough — show it for ten seconds rather than reading sections
-3. The architecture explanation at 0:50 — compress to two sentences
+1. The "Considered and withdrawn" section — mention it verbally instead
+2. The second citation click — one is enough to make the point
+3. The by-class table on the evaluation tab — go straight to the per-defect table
 
-**Never cut:** the opening problem, the TitanRetail finding, the score, or the critic-caught-my-mistake close. Those four carry the video.
+**Never cut:** the opening two documents, the citation click, the evaluation tab, the ablation table, or the closing story about the critic catching your error. Those five carry the video.
 
-## If you're running long
+## If you run short
 
-The problem setup at the start tends to expand. Practise it once with a timer — aim to be at the 50-second mark when you say "that's what this system is built to catch."
+Two things worth adding:
+
+- **The documents tab** — showing the classifier reassigned types by reading the text rather than trusting filenames.
+- **The pairs command** in the terminal: `python -m loupe.cli pairs`. It shows the candidate pairs with zero model calls, which demonstrates that retrieval is deterministic and inspectable before any money is spent.
+
+## Delivery notes
+
+- **The citation click is the emotional centre.** Pause after the document opens. Let it land before you explain it.
+- **Say the honest numbers out loud.** "Seven of fifteen" spoken confidently is more persuasive than fifteen of fifteen, because it tells the viewer you measured rather than tuned.
+- **Don't apologise for the misses.** Frame the per-defect table as a backlog, not a shortfall. It is one.
+- **Practise the opening once with a timer.** Aim to be at the 55-second mark when you say "this is Loupe."
