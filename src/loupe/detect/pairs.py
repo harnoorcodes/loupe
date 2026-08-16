@@ -28,7 +28,7 @@ from __future__ import annotations
 
 import re
 from decimal import Decimal
-from typing import NamedTuple
+from typing import Any, NamedTuple
 
 from loupe.models.claim import Claim, ClaimType
 from loupe.observability.logging import get_logger
@@ -101,15 +101,15 @@ MEASURE_TERMS = SPECIFIC_MEASURES + GENERIC_MEASURES
 _YEAR = re.compile(r"(?<!\d)(?:19|20)\d{2}(?!\d)")
 
 # Domains where a stated total should reconcile against its components.
-# Domains where a stated total should reconcile against its components.
-# Terms are chosen to avoid false domain membership: "shares" rather than
-# "share", because "share of total revenue" is a proportion, not equity.
+# Order matters: a claim mentioning "options" also mentions "shares" when it
+# reads "options over 120,000 shares", so the narrower domain is tested
+# first and a claim is assigned to exactly one domain.
 TOTAL_DOMAINS = {
-    "shares": ("shares", "common stock", "preferred stock"),
     "options": ("options", "warrants"),
-    "revenue": ("revenue",),
-    "receivables": ("receivable", "overdue"),
     "deferred": ("deferred revenue",),
+    "receivables": ("receivable", "overdue"),
+    "revenue": ("revenue",),
+    "shares": ("shares", "common stock", "preferred stock"),
 }
 
 # A claim expressing a proportion is never a component of a total.
@@ -160,7 +160,7 @@ _ADDRESS = re.compile(
 # Claims that describe a ceiling or an authorisation rather than a fact
 # about what exists. Authorised capital is not comparable to issued capital.
 CEILING_TERMS = ("authoris", "authoriz", "reserved", "maximum", "not exceeding",
-                 "up to", "aggregate limit")
+                "up to", "aggregate limit")
 
 NUMERIC_TYPES = (ClaimType.MONETARY, ClaimType.QUANTITY)
 
@@ -315,6 +315,65 @@ def numeric_mismatch_pairs(store: EvidenceStore) -> list[CandidatePair]:
 
 # ----------------------------------------------------------- generator 2
 
+# Terms that disqualify a claim from being a component of a given total.
+# Deferred revenue is money NOT yet recognised, so it is not a part of
+# recognised revenue. Options are not issued shares.
+EXCLUDED_TERMS_BY_DOMAIN: dict[str, tuple[str, ...]] = {
+    "revenue": ("deferred", "not yet recognised", "invoiced but"),
+    "shares": ("option", "warrant", "granted"),
+    "options": (),
+    "receivables": (),
+    "deferred": ("total revenue", "recognised"),
+}
+
+# Which document types can supply components for a total, by domain.
+DOMAIN_DOCUMENT_TYPES: dict[str, tuple[str, ...]] = {
+    "shares": ("cap_table", "employment_agreement", "board_minutes"),
+    "options": ("cap_table", "employment_agreement"),
+    "revenue": ("financial_statement",),
+    "receivables": ("financial_statement",),
+    "deferred": ("financial_statement",),
+}
+# Documents whose figures belong to a different reporting period than the
+# annual statements, and which therefore cannot supply components for an
+# annual total even though their type matches. The period guard cannot catch
+# these, because the individual claims do not state a year.
+OFF_PERIOD_MARKERS = ("management_accounts", "_q1_", "_q2_", "_q3_", "_q4_")
+
+
+def _same_document_kind(
+    component: Claim, domain: str, documents: dict[str, Any]
+) -> bool:
+    """True if the component comes from a document that can hold such a part.
+
+    A revenue total is reconciled against revenue schedules, not against a
+    management accounts pack for a later quarter that happens to mention
+    revenue. Without this, unrelated figures enter the sum and the resulting
+    arithmetic is wrong, which the adjudicator then rejects.
+
+    Falls back to the filename heuristic when the stored type is OTHER or
+    UNKNOWN. Classification is an LLM step that not every entry point runs,
+    and a document whose type was never set must not be silently excluded --
+    that turned a working reconciliation into no finding at all.
+    """
+    from loupe.ingestion.loader import classify
+    from loupe.models.document import DocumentType
+
+    doc = documents.get(component.document_id)
+    if doc is None:
+        return True
+
+    allowed = DOMAIN_DOCUMENT_TYPES.get(domain, ())
+    if not allowed:
+        return True
+
+    doc_type = doc.document_type
+    if doc_type in (DocumentType.OTHER, DocumentType.UNKNOWN):
+        doc_type = classify(doc.filename)
+
+    return doc_type.value in allowed
+
+
 def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
     """Pair a stated total with its components when they do not reconcile.
 
@@ -322,21 +381,31 @@ def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
     company states the total, individual people or customers hold the parts
     -- so entity grouping never brings them together. This rule does.
 
-    The largest value carrying a total marker is treated as the stated
-    total. Everything else in the same domain is treated as a component.
+    Domain membership is not enough on its own. A first version summed
+    deferred revenue lines and next-quarter management figures into a FY2025
+    revenue total, producing arithmetic that was simply wrong, which the
+    adjudicator then correctly rejected. Components must therefore come from
+    a document whose TYPE matches the total's, so that a revenue total is
+    reconciled against a revenue schedule rather than against every number
+    in the corpus that mentions revenue.
     """
     claims = _numeric(store)
+    documents = {d.document_id: d for d in store.documents}
     pairs: list[CandidatePair] = []
+
+    claimed: set[str] = set()
 
     for domain, terms in TOTAL_DOMAINS.items():
         in_domain = [
             c
             for c in claims
-            if any(t in _text(c) for t in terms)
+            if c.claim_id not in claimed
+            and any(t in _text(c) for t in terms)
             and not any(p in _text(c) for p in PROPORTION_MARKERS)
         ]
         if len(in_domain) < 3:
             continue
+        claimed.update(c.claim_id for c in in_domain)
 
         totals = [c for c in in_domain if any(m in _text(c) for m in TOTAL_MARKERS)]
         if not totals:
@@ -345,12 +414,8 @@ def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
         total = max(totals, key=lambda c: c.numeric_value or Decimal(0))
         assert total.numeric_value is not None
 
-        # Components must come from a DIFFERENT document than the total.
-        # A schedule that reconciles internally will always look broken if
-        # some of its own lines were not extracted, and the deterministic
-        # arithmetic detector already covers single-document reconciliation.
-        # Components must also not be totals themselves, and must not belong
-        # to a different reporting period.
+        excluded = EXCLUDED_TERMS_BY_DOMAIN.get(domain, ())
+
         components = [
             c
             for c in in_domain
@@ -360,10 +425,11 @@ def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
             and c.numeric_value < total.numeric_value
             and c.numeric_value >= MIN_COMPONENT
             and not any(m in _text(c) for m in TOTAL_MARKERS)
+            and not any(x in _text(c) for x in excluded)
             and not _different_periods(c, total)
+            and not any(m in c.document_id for m in OFF_PERIOD_MARKERS)
+            and _same_document_kind(c, domain, documents)
         ]
-        if len(components) < 2:
-            continue
 
         # Deduplicate by value: the same holding often appears in several
         # documents, and summing both copies invents a discrepancy.
@@ -371,7 +437,12 @@ def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
         for c in components:
             assert c.numeric_value is not None
             by_value.setdefault(c.numeric_value, c)
-        unique = list(by_value.values())
+        unique = sorted(
+            by_value.values(), key=lambda c: -(c.numeric_value or Decimal(0))
+        )
+
+        if len(unique) < 2:
+            continue
 
         summed = sum(
             (c.numeric_value for c in unique if c.numeric_value is not None),
@@ -385,12 +456,11 @@ def total_component_pairs(store: EvidenceStore) -> list[CandidatePair]:
             f"A stated {domain} total of {total.numeric_value:,} does not "
             f"equal the sum of the individual amounts found "
             f"({parts} = {summed:,}), a difference of "
-            f"{abs(summed - total.numeric_value):,}."
+            f"{abs(summed - total.numeric_value):,}. Check whether the "
+            f"components listed are genuinely parts of that total before "
+            f"treating the difference as a discrepancy."
         )
 
-        # Two pairs per domain is enough. The reason string already carries
-        # the full arithmetic, so additional pairs would restate the same
-        # finding at additional cost.
         for component in unique[:2]:
             pairs.append(
                 CandidatePair(total, component, "total_vs_components", reason)

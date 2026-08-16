@@ -27,17 +27,47 @@ MIN_BLOCK_CHARS = 15
 MAX_BLOCK_CHARS = 2000
 HEADING_MAX_CHARS = 120
 
+# Filename hints, checked in order. More specific patterns come first, so
+# that "option_grant_schedule" resolves to CAP_TABLE rather than falling
+# through to OTHER, and "deferred_revenue_schedule" to FINANCIAL_STATEMENT
+# rather than matching nothing at all.
 _TYPE_HINTS: tuple[tuple[str, DocumentType], ...] = (
+    # Equity records
     ("cap_table", DocumentType.CAP_TABLE),
     ("capitalisation", DocumentType.CAP_TABLE),
+    ("capitalization", DocumentType.CAP_TABLE),
+    ("option_grant", DocumentType.CAP_TABLE),
+    ("stock_certificate", DocumentType.CAP_TABLE),
+    ("share_ledger", DocumentType.CAP_TABLE),
+    # Financial records
+    ("financial_statement", DocumentType.FINANCIAL_STATEMENT),
     ("financial", DocumentType.FINANCIAL_STATEMENT),
-    ("contract", DocumentType.CONTRACT),
-    ("agreement", DocumentType.CONTRACT),
+    ("revenue_by", DocumentType.FINANCIAL_STATEMENT),
+    ("deferred_revenue", DocumentType.FINANCIAL_STATEMENT),
+    ("receivables", DocumentType.FINANCIAL_STATEMENT),
+    ("management_accounts", DocumentType.FINANCIAL_STATEMENT),
+    # Governance
     ("minutes", DocumentType.BOARD_MINUTES),
-    ("employment", DocumentType.EMPLOYMENT_AGREEMENT),
+    ("written_consent", DocumentType.BOARD_MINUTES),
     ("articles", DocumentType.CORPORATE_CHARTER),
     ("incorporation", DocumentType.CORPORATE_CHARTER),
+    ("bylaws", DocumentType.CORPORATE_CHARTER),
+    ("shareholders_agreement", DocumentType.CORPORATE_CHARTER),
+    # People
+    ("employment", DocumentType.EMPLOYMENT_AGREEMENT),
+    # Commercial. Checked late so that "shareholders_agreement" and
+    # "reseller_agreement" do not both collapse to CONTRACT.
+    ("contract", DocumentType.CONTRACT),
+    ("reseller", DocumentType.CONTRACT),
+    ("supplier", DocumentType.CONTRACT),
+    ("contractor", DocumentType.CONTRACT),
+    ("loan_agreement", DocumentType.CONTRACT),
+    ("agreement", DocumentType.CONTRACT),
+    # Compliance
     ("insurance", DocumentType.COMPLIANCE_FILING),
+    ("trademark", DocumentType.COMPLIANCE_FILING),
+    ("litigation", DocumentType.COMPLIANCE_FILING),
+    ("data_processing", DocumentType.COMPLIANCE_FILING),
 )
 
 
