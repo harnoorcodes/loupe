@@ -49,7 +49,7 @@
     "confidence": 0.9,
     "raised_by": "arithmetic_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.087147Z"
+    "created_at": "2026-08-16T11:52:11.228460Z"
   },
   {
     "finding_id": "temporal-amend-000",
@@ -82,7 +82,7 @@
     "confidence": 0.9,
     "raised_by": "temporal_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.088147Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -102,7 +102,7 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.089145Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -120,7 +120,33 @@
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.089145Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
+  },
+  {
+    "finding_id": "gap-ref-001",
+    "finding_type": "missing_document",
+    "severity": "high",
+    "title": "Referenced but absent: written consent of the Board of Directors",
+    "description": "employment_cfo states that a written consent of the Board of Directors dated 9 September 2024 exists: \"approved by written consent of the Board of Directors dated 9 September 2024\". No such document appears in the data room. A document cited by name and date is being asserted as a discrete executed instrument, so its absence means the action it records cannot be verified as properly authorised.",
+    "evidence": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 211,
+        "char_end": 355,
+        "text": "Position. The Executive shall serve as Chief Financial Officer, as approved by written consent of the Board of Directors dated 9 September 2024."
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "proposed",
+    "challenge_reason": null,
+    "confidence": 0.85,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [],
+    "created_at": "2026-08-16T11:52:11.233460Z"
   },
   {
     "finding_id": "tension-0200",
@@ -157,7 +183,7 @@
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.104151Z"
+    "created_at": "2026-08-16T11:52:11.247465Z"
   },
   {
     "finding_id": "tension-0300",
@@ -194,7 +220,7 @@
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.105153Z"
+    "created_at": "2026-08-16T11:52:11.249461Z"
   },
   {
     "finding_id": "pair-0000",
@@ -231,7 +257,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.128181Z"
+    "created_at": "2026-08-16T11:52:11.269460Z"
   },
   {
     "finding_id": "pair-0002",
@@ -268,7 +294,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.128181Z"
+    "created_at": "2026-08-16T11:52:11.269460Z"
   },
   {
     "finding_id": "pair-0205",
@@ -305,7 +331,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:35.755573Z"
+    "created_at": "2026-08-16T11:52:11.271460Z"
   },
   {
     "finding_id": "pair-0300",
@@ -342,7 +368,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0301",
@@ -379,7 +405,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0302",
@@ -416,7 +442,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0303",
@@ -453,7 +479,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0304",
@@ -490,7 +516,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0305",
@@ -527,7 +553,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0400",
@@ -564,7 +590,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.135170Z"
+    "created_at": "2026-08-16T11:52:11.274463Z"
   },
   {
     "finding_id": "pair-0401",
@@ -601,7 +627,7 @@
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [],
-    "created_at": "2026-08-16T11:27:26.135170Z"
+    "created_at": "2026-08-16T11:52:11.274463Z"
   },
   {
     "finding_id": "arith-shares-001",
@@ -649,14 +675,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "The remaining 350,000 shares might represent treasury shares or holdings of minor, unnamed shareholders who were simply left off the first page of the cap table summary.",
+    "challenge_reason": "The cap table summary provided in the evidence is not exhaustive; the 350,000 share discrepancy likely represents holdings of minor, unnamed shareholders or an unallocated option pool, which is standard in corporate cap tables.",
     "confidence": 0.9,
     "raised_by": "arithmetic_detector",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.087147Z"
+    "created_at": "2026-08-16T11:52:11.228460Z"
   },
   {
     "finding_id": "temporal-amend-000",
@@ -685,14 +711,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "This is highly likely to be a simple typographical error where the year '2024' was written instead of '2025' on Amendment No. 2.",
+    "challenge_reason": "The date of 3 November 2024 on Amendment No. 2 is likely a simple typographical drafting error (e.g., intended to be 3 November 2025) and does not represent an actual temporal impossibility.",
     "confidence": 0.9,
     "raised_by": "temporal_detector",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.088147Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
   },
   {
     "finding_id": "gap-R-005",
@@ -708,14 +734,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "The company might not have a formal plan and instead grants options on an ad-hoc basis approved directly by the board, which is legally permissible in certain jurisdictions.",
+    "challenge_reason": "The company may have issued standalone stock option agreements directly authorized by the Board without adopting a formal, overarching Equity Incentive Plan.",
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.089145Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
   },
   {
     "finding_id": "gap-R-014",
@@ -729,14 +755,43 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "Tax returns are highly sensitive and may have been withheld intentionally for a separate clean-room review rather than being completely missing.",
+    "challenge_reason": "Tax returns might be temporarily withheld for confidentiality reasons or are being prepared separately, and their absence is expected in early stages of the data room setup.",
     "confidence": 0.95,
     "raised_by": "gap_auditor",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.089145Z"
+    "created_at": "2026-08-16T11:52:11.230460Z"
+  },
+  {
+    "finding_id": "gap-ref-001",
+    "finding_type": "missing_document",
+    "severity": "low",
+    "title": "Referenced but absent: written consent of the Board of Directors",
+    "description": "employment_cfo states that a written consent of the Board of Directors dated 9 September 2024 exists: \"approved by written consent of the Board of Directors dated 9 September 2024\". No such document appears in the data room. A document cited by name and date is being asserted as a discrete executed instrument, so its absence means the action it records cannot be verified as properly authorised.",
+    "evidence": [
+      {
+        "document_id": "employment_cfo",
+        "page": 1,
+        "char_start": 211,
+        "char_end": 355,
+        "text": "Position. The Executive shall serve as Chief Financial Officer, as approved by written consent of the Board of Directors dated 9 September 2024."
+      }
+    ],
+    "contradicts": [],
+    "claim_ids": [],
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "confirmed",
+    "challenge_reason": "The written board consent is an internal corporate governance document; the executed employment agreement itself is the binding commitment, making the absence of the formal consent an immaterial administrative detail.",
+    "confidence": 0.85,
+    "raised_by": "gap_auditor",
+    "reviewed_by": [
+      "red_team_critic",
+      "red_team_critic"
+    ],
+    "created_at": "2026-08-16T11:52:11.233460Z"
   },
   {
     "finding_id": "tension-0200",
@@ -769,14 +824,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "retracted",
-    "challenge_reason": "The objection is correct. A contract amendment is intended to change the terms of the original agreement. Conflating an intentional pricing modification with an unresolved discrepancy or error is incorrect, so this finding does not survive.",
+    "challenge_reason": "The objection completely defeats the finding. Describing a contractual price increase via amendment as a 'contradiction' or 'inconsistency' is legally incorrect.",
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.104151Z"
+    "created_at": "2026-08-16T11:52:11.247465Z"
   },
   {
     "finding_id": "tension-0300",
@@ -809,14 +864,14 @@
     "materiality": "20000",
     "materiality_currency": "USD",
     "status": "confirmed",
-    "challenge_reason": "The USD 20,000 difference is likely the result of final employment negotiations that occurred after the initial board approval in September 2024.",
+    "challenge_reason": "The USD 20,000 difference may reflect a final negotiation post-board meeting or a typo in the minutes, and is immaterial in the context of executive compensation.",
     "confidence": 0.7,
     "raised_by": "tension_detector",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.105153Z"
+    "created_at": "2026-08-16T11:52:11.249461Z"
   },
   {
     "finding_id": "pair-0000",
@@ -849,14 +904,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "retracted",
-    "challenge_reason": "To avoid redundancy in the due diligence report, the duplicate finding is eliminated. The issue is fully addressed in tension-0300.",
+    "challenge_reason": "Duplicate findings should not survive. tension-0300 is the primary finding for this issue.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.128181Z"
+    "created_at": "2026-08-16T11:52:11.269460Z"
   },
   {
     "finding_id": "pair-0002",
@@ -889,14 +944,14 @@
     "materiality": "240000",
     "materiality_currency": "USD",
     "status": "confirmed",
-    "challenge_reason": "The difference of USD 240,000 could be a presentation or classification difference (such as current vs. non-current deferred revenue) rather than a bookkeeping error.",
+    "challenge_reason": "The USD 240,000 variance could be due to different accounting treatments, timing of recognition, or minor GAAP adjustments between the subledger schedule and the high-level financial statements.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.128181Z"
+    "created_at": "2026-08-16T11:52:11.269460Z"
   },
   {
     "finding_id": "pair-0205",
@@ -929,14 +984,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "Sharing a residential address could be a temporary registration address for an early-stage company and does not necessarily indicate any improper relationship.",
+    "challenge_reason": "The CTO's residential address might be used as a registered address for convenience without any actual conflict of interest or undisclosed operations.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:35.755573Z"
+    "created_at": "2026-08-16T11:52:11.271460Z"
   },
   {
     "finding_id": "pair-0300",
@@ -969,14 +1024,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "retracted",
-    "challenge_reason": "Since pair-0205 already captures this exact issue at a higher severity, this finding is redundant and does not survive.",
+    "challenge_reason": "Duplicate findings should be removed to avoid noise; pair-0205 is the stronger and more specific finding.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0301",
@@ -1009,14 +1064,14 @@
     "materiality": null,
     "materiality_currency": null,
     "status": "confirmed",
-    "challenge_reason": "The shared address might be a legacy registration detail from when the company was founded and does not necessarily indicate a continuing related-party conflict.",
+    "challenge_reason": "The CEO's home address could simply be the registered office for a company she owns or has some historical connection with, which is common for early-stage vendors.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
       "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0302",
@@ -1046,17 +1101,16 @@
       "contract_titanretail-c0004",
       "deferred_revenue_schedule-c0002"
     ],
-    "materiality": "1025000",
-    "materiality_currency": "USD",
-    "status": "confirmed",
-    "challenge_reason": "Deferred revenue represents cash already received. A 30-day termination notice is standard commercial risk, and unless the contract contains a specific clause requiring a refund of prepaid fees upon termination without cause, the cash is retained.",
+    "materiality": null,
+    "materiality_currency": null,
+    "status": "challenged",
+    "challenge_reason": "Not reviewed: exceeded the per-batch review limit.",
     "confidence": 0.75,
     "raised_by": "pair_adjudicator",
     "reviewed_by": [
-      "red_team_critic",
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0303",
@@ -1095,7 +1149,7 @@
     "reviewed_by": [
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0304",
@@ -1134,7 +1188,7 @@
     "reviewed_by": [
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0305",
@@ -1173,7 +1227,7 @@
     "reviewed_by": [
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.133166Z"
+    "created_at": "2026-08-16T11:52:11.272482Z"
   },
   {
     "finding_id": "pair-0400",
@@ -1212,7 +1266,7 @@
     "reviewed_by": [
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.135170Z"
+    "created_at": "2026-08-16T11:52:11.274463Z"
   },
   {
     "finding_id": "pair-0401",
@@ -1251,6 +1305,6 @@
     "reviewed_by": [
       "red_team_critic"
     ],
-    "created_at": "2026-08-16T11:27:26.135170Z"
+    "created_at": "2026-08-16T11:52:11.274463Z"
   }
 ]

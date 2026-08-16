@@ -6,12 +6,12 @@ contributes.
 
 | Configuration | Recall | Noise | Proposed | Confirmed | vs baseline |
 | --- | --- | --- | --- | --- | --- |
-| full | 8/15 (53%) | 0/9 (0%) | 17 | 9 | baseline |
-| no pair detector | 4/15 (27%) | 0/5 (0%) | 6 | 5 | -4 defects |
-| no tension detector | 7/15 (47%) | 1/9 (11%) | 15 | 9 | -1 defects |
-| no entity resolution | 7/15 (47%) | 0/8 (0%) | 16 | 8 | -1 defects |
-| no adversarial review | 9/15 (60%) | 7/17 (41%) | 17 | 17 | +1 defects |
-| deterministic only | 3/15 (20%) | 0/4 (0%) | 4 | 4 | -5 defects |
+| full | 8/15 (53%) | 0/9 (0%) | 18 | 9 | baseline |
+| no pair detector | 5/15 (33%) | 0/6 (0%) | 7 | 6 | -3 defects |
+| no tension detector | 8/15 (53%) | 0/9 (0%) | 16 | 9 | no change |
+| no entity resolution | 7/15 (47%) | 0/8 (0%) | 17 | 8 | -1 defects |
+| no adversarial review | 10/15 (67%) | 7/18 (39%) | 18 | 18 | +2 defects |
+| deterministic only | 4/15 (27%) | 0/5 (0%) | 5 | 5 | -4 defects |
 
 ## What each configuration tests
 
@@ -30,13 +30,13 @@ contributes.
 | D-004 | - | - | - | - | - | - |
 | D-005 | - | - | - | - | - | - |
 | D-006 | yes | yes | yes | yes | yes | - |
-| D-007 | yes | - | - | - | yes | - |
+| D-007 | yes | - | yes | - | yes | - |
 | D-008 | - | - | - | - | yes | - |
-| D-002 | yes | - | yes | yes | yes | - |
+| D-002 | - | - | yes | - | yes | - |
 | D-009 | - | - | - | - | - | - |
 | D-010 | - | - | - | - | - | - |
 | D-003 | yes | yes | yes | yes | yes | yes |
-| D-011 | - | - | - | - | - | - |
+| D-011 | yes | yes | - | yes | yes | yes |
 | D-012 | yes | yes | yes | yes | yes | yes |
 | D-013 | - | - | - | - | - | - |
 | D-014 | yes | - | yes | yes | yes | - |

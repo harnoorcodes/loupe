@@ -24,6 +24,10 @@ from loupe.models.document import Document
 from loupe.models.finding import Finding, FindingType, Severity
 from loupe.observability.logging import get_logger
 from loupe.store.evidence import EvidenceStore
+import re
+from typing import NamedTuple
+
+from loupe.models.span import Span
 
 log = get_logger(__name__)
 
@@ -98,6 +102,170 @@ def find_trigger_evidence(
             return claim.claim_id, claim.raw_text
     return None
 
+# ---------------------------------------------------------------- references
+
+# Phrases that introduce a named document the corpus asserts exists. Each
+# pattern captures the document description and, where present, its date.
+#
+# The date matters more than it looks. A document referred to generically --
+# "as set out in the shareholders agreement" -- may be a loose cross-reference
+# to something the drafter never intended to attach. A document referred to
+# with a specific execution date is being asserted as a discrete instrument
+# that was signed on a particular day, and its absence is a real gap.
+_REFERENCE_PATTERNS = (
+    re.compile(
+        r"(?:approved|authorised|authorized|adopted|executed|ratified)\s+by\s+"
+        r"(written consent(?:\s+of\s+the\s+Board(?:\s+of\s+Directors)?)?)\s+"
+        r"dated\s+(\d{1,2}\s+[A-Za-z]+\s+\d{4})",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"(?:pursuant\s+to|under|set\s+out\s+in|governed\s+by)\s+the\s+"
+        r"([A-Z][A-Za-z ]{4,60}?(?:Agreement|Plan|Policy|Deed|Consent|Resolution))"
+        r"\s+dated\s+(\d{1,2}\s+[A-Za-z]+\s+\d{4})",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"\b(Amendment\s+No\.?\s*\d+)\s+dated\s+(\d{1,2}\s+[A-Za-z]+\s+\d{4})",
+        re.IGNORECASE,
+    ),
+)
+
+# A referenced document is considered present if enough of its distinctive
+# words appear in some filename or document type in the corpus.
+_STOPWORDS = frozenset(
+    {"the", "of", "a", "an", "and", "or", "by", "to", "in", "for", "no", "dated"}
+)
+MIN_TOKEN_OVERLAP = 0.6
+
+
+class DocumentReference(NamedTuple):
+    """A document that the corpus asserts exists.
+
+    Attributes:
+        description: How the referencing document names it.
+        date_text: The execution date as written, which makes the reference
+            specific rather than generic.
+        source_document: Which document made the assertion.
+        quote: The sentence containing the reference, for citation.
+        span: Where that sentence sits in the source.
+    """
+
+    description: str
+    date_text: str
+    source_document: str
+    quote: str
+    span: Span
+
+
+def _tokens(text: str) -> set[str]:
+    """Distinctive lowercase words, for loose filename matching."""
+    words = re.findall(r"[a-z]+", _normalise(text))
+    return {w for w in words if w not in _STOPWORDS and len(w) > 2}
+
+
+def find_references(documents: tuple[Document, ...]) -> list[DocumentReference]:
+    """Find documents that the corpus asserts exist, by name and date.
+
+    Operates on block text rather than extracted claims, because a reference
+    is a property of how a sentence is phrased and does not depend on whether
+    the extractor happened to emit it as a claim.
+    """
+    references: list[DocumentReference] = []
+
+    for doc in documents:
+        if not doc.is_readable:
+            continue
+        for block in doc.blocks:
+            for pattern in _REFERENCE_PATTERNS:
+                for match in pattern.finditer(block.text):
+                    description = match.group(1).strip()
+                    date_text = match.group(2).strip()
+                    references.append(
+                        DocumentReference(
+                            description=description,
+                            date_text=date_text,
+                            source_document=doc.document_id,
+                            quote=match.group(0).strip(),
+                            span=block.span,
+                        )
+                    )
+
+    return references
+
+
+def reference_is_satisfied(
+    reference: DocumentReference, documents: tuple[Document, ...]
+) -> bool:
+    """True if some document in the corpus plausibly is the one referenced.
+
+    Matching is on token overlap against filenames and document types rather
+    than exact strings, because a corpus names a file `board_minutes_2024_09`
+    for something a contract calls "written consent of the Board of
+    Directors". Requiring an exact match would report every reference as
+    missing; requiring none would report none.
+    """
+    wanted = _tokens(reference.description)
+    if not wanted:
+        return True
+
+    for doc in documents:
+        available = _tokens(doc.filename) | _tokens(doc.document_type.value)
+        if not available:
+            continue
+        overlap = len(wanted & available) / len(wanted)
+        if overlap >= MIN_TOKEN_OVERLAP:
+            return True
+
+    return False
+
+
+def detect_missing_references(store: EvidenceStore) -> list[Finding]:
+    """Report documents the corpus asserts exist but does not contain.
+
+    This is negative space the request list cannot anticipate. A checklist
+    knows to ask for a shareholders agreement; it cannot know that this
+    particular company's CFO employment agreement cites a board consent of a
+    specific date, and that no such consent was provided.
+
+    Deterministic: whether a document is present is a matter of fact.
+    """
+    documents = store.documents
+    findings: list[Finding] = []
+    seen: set[str] = set()
+
+    for index, reference in enumerate(find_references(documents)):
+        if reference_is_satisfied(reference, documents):
+            continue
+
+        key = _normalise(f"{reference.description} {reference.date_text}")
+        if key in seen:
+            continue
+        seen.add(key)
+
+        findings.append(
+            Finding(
+                finding_id=f"gap-ref-{index:03d}",
+                finding_type=FindingType.MISSING_DOCUMENT,
+                severity=Severity.HIGH,
+                title=f"Referenced but absent: {reference.description}",
+                description=(
+                    f"{reference.source_document} states that a "
+                    f"{reference.description} dated {reference.date_text} "
+                    f'exists: "{reference.quote}". No such document appears '
+                    f"in the data room. A document cited by name and date is "
+                    f"being asserted as a discrete executed instrument, so "
+                    f"its absence means the action it records cannot be "
+                    f"verified as properly authorised."
+                ),
+                evidence=(reference.span,),
+                confidence=0.85,
+                raised_by=DETECTOR_NAME,
+            )
+        )
+
+    log.info("reference audit complete", missing=len(findings))
+    return findings
 
 def detect(store: EvidenceStore) -> list[Finding]:
     """Report every expected document that is absent from the corpus.
@@ -169,5 +337,9 @@ def detect(store: EvidenceStore) -> list[Finding]:
             )
         )
 
+    
+    findings.extend(detect_missing_references(store))
+
     log.info("gap audit complete", requested=len(REQUEST_LIST), gaps=len(findings))
+    return findings
     return findings
