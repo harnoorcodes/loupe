@@ -22,3 +22,16 @@ src = ["src", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "ARG", "PTH"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI declares request parameters as function-call defaults. This is the
+# framework's documented pattern, not the mutable-default bug B008 targets.
+extend-immutable-calls = [
+    "fastapi.File",
+    "fastapi.Form",
+    "fastapi.Depends",
+    "fastapi.Query",
+    "fastapi.Path",
+    "fastapi.Body",
+    "fastapi.Header",
+]

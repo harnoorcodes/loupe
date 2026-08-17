@@ -26,8 +26,6 @@ from loupe.corpus.registry import EXPECTED_GAPS, PLANTED_DEFECTS, PlantedDefect
 from loupe.models.finding import Finding
 from loupe.observability.logging import get_logger
 
-from loupe.corpus.registry import EXPECTED_GAPS, PLANTED_DEFECTS, PlantedDefect
-
 log = get_logger(__name__)
 
 

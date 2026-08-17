@@ -19,15 +19,15 @@ rather than a generic checklist entry.
 
 from __future__ import annotations
 
-from loupe.corpus.request_list import REQUEST_LIST, RequestItem
-from loupe.models.document import Document
-from loupe.models.finding import Finding, FindingType, Severity
-from loupe.observability.logging import get_logger
-from loupe.store.evidence import EvidenceStore
 import re
 from typing import NamedTuple
 
+from loupe.corpus.request_list import REQUEST_LIST, RequestItem
+from loupe.models.document import Document
+from loupe.models.finding import Finding, FindingType, Severity
 from loupe.models.span import Span
+from loupe.observability.logging import get_logger
+from loupe.store.evidence import EvidenceStore
 
 log = get_logger(__name__)
 

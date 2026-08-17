@@ -22,7 +22,8 @@ from agents import Agent, Runner
 from loupe.agents import approval, classifier, critic, materiality
 from loupe.agents.extractor import extract_corpus
 from loupe.config.settings import settings
-from loupe.detect import arithmetic, gaps, temporal, tension
+from loupe.detect import adjudicate, arithmetic, gaps, pairs, temporal, tension
+from loupe.eval import ablation
 from loupe.eval import render as render_score
 from loupe.eval import score as score_run
 from loupe.ingestion import load_directory
@@ -31,8 +32,6 @@ from loupe.models.finding import Finding, FindingStatus
 from loupe.observability.logging import configure_logging, get_logger
 from loupe.report import memo
 from loupe.store.evidence import EvidenceStore
-from loupe.detect import adjudicate, arithmetic, gaps, pairs, temporal, tension
-from loupe.eval import ablation
 
 log = get_logger(__name__)
 

@@ -8,9 +8,9 @@
 
 Most systems in this space cannot tell you whether their output is correct. An agent reads documents, produces findings, and the findings sound plausible. Nobody — including the person who built it — can say what it missed.
 
-That is not a measurement problem that better prompting solves. It is a ground-truth problem. Without knowing what is actually wrong with a corpus, recall is unknowable.
+That is not a measurement problem better prompting solves. It is a ground-truth problem. Without knowing what is actually wrong with a corpus, recall is unknowable.
 
-Loupe therefore generates its own corpus. Thirty-five documents describing a fictional company, with fifteen defects planted at known locations across six classes. Because the corpus is written rather than collected, ground truth is exact: every defect's location, type, and the capability its detection requires are all recorded.
+Loupe therefore generates its own corpus. Thirty-five documents describing a fictional company, with fifteen defects planted at known locations across six classes. Because the corpus is written rather than collected, ground truth is exact: every defect's location, type, and the capability its detection requires are recorded.
 
 This makes three things possible that are otherwise not:
 
@@ -34,11 +34,9 @@ Thirty-five documents for Northwind Analytics Inc., a fictional B2B SaaS company
 | Employment | 6 — three executive agreements, option grant schedule, contractor agreement, severance policy |
 | Compliance | 6 — IP assignment, insurance, trademark, litigation summary, data processing agreement, vendor list |
 
-Documents are rendered to PDF and DOCX so that the ingestion pipeline is exercised end to end, including the offset preservation that citations depend on.
+Documents are rendered to PDF and DOCX so the ingestion pipeline is exercised end to end, including the offset preservation that citations depend on.
 
 ### 2.2 The defects
-
-Fifteen defects across six classes, each recorded with the capability its detection requires.
 
 | Class | Count |
 | --- | --- |
@@ -60,16 +58,11 @@ The four hard defects were designed to exceed the implementation at the time the
 | D-013 | Inference from a delivery date to an assignment date |
 | D-015 | Coreference across an abbreviated name and a shared address |
 
-Including defects the system is expected to fail is deliberate. A benchmark that scores 100% on its first run is measuring the benchmark rather than the system, and provides no signal about where to work next.
+Including defects the system is expected to fail is deliberate. A benchmark that scores 100% on its first run is measuring the benchmark rather than the system, and gives no signal about where to work next.
 
 ### 2.3 Consistency verification
 
-A planted defect that is not really there scores as a permanent miss and would quietly cap the benchmark. Before generation, a verifier checks that:
-
-- every document a defect names exists
-- at least one anchor phrase for each defect appears in the documents it names
-- the arithmetic behind each numeric defect works out
-- shared addresses appear in the documents the relationship defects depend on
+A planted defect that is not really there scores as a permanent miss and would quietly cap the benchmark. Before generation, a verifier checks that every named document exists, that at least one anchor phrase for each defect appears in the documents it names, that the arithmetic behind each numeric defect works out, and that shared addresses appear where the relationship defects need them.
 
 ```bash
 python scripts/generate_corpus.py --verify
@@ -82,7 +75,7 @@ This caught two real errors during construction: two anchors referenced values t
 A finding detects a defect when both hold:
 
 1. The finding's type is one the defect accepts. Several types may be accepted, because one real problem can be correctly classified in more than one way — a change-of-control exposure is both a cross-document contradiction and a latent liability, and insisting on a single label would score a correct answer as a miss.
-2. At least one of the defect's anchor phrases appears somewhere in the finding's title, description, or cited spans. Only one anchor is required, because a finding may quote a narrower span than the sentence the defect lives in.
+2. At least one anchor phrase appears somewhere in the finding's title, description, or cited spans. Only one is required, because a finding may quote a narrower span than the sentence the defect lives in.
 
 Each finding can claim at most one defect, so a single finding cannot inflate the score.
 
@@ -90,8 +83,6 @@ Leftover findings are split rather than lumped together:
 
 - **Genuine absences that were never planted.** The corpus contains no tax returns, so reporting them missing is correct behaviour and is counted separately.
 - **Findings corresponding to nothing real.** These are the noise rate.
-
-Counting a correct-but-unplanted finding as an error would understate the system; counting it as a success would overstate it.
 
 ---
 
@@ -104,49 +95,65 @@ python -m loupe.cli score
 | | |
 | --- | --- |
 | **Overall recall** | 7 / 15 (47%) |
-| **Noise rate** | 0 / 8 (0%) |
+| **Noise rate** | 1 / 9 (11%) |
 | **Claims extracted** | 232 from 35 documents |
 
 ### 3.1 By defect class
 
 | Class | Found | Planted | Recall |
 | --- | --- | --- | --- |
+| Missing document | 2 | 2 | 100% |
 | Undisclosed relationship | 2 | 2 | 100% |
-| Missing document | 1 | 2 | 50% |
+| Temporal impossibility | 1 | 2 | 50% |
 | Arithmetic | 1 | 3 | 33% |
 | Cross-document contradiction | 1 | 3 | 33% |
-| Latent liability | 1 | 3 | 33% |
-| Temporal impossibility | 0 | 2 | 0% |
+| Latent liability | 0 | 3 | 0% |
+
+Both negative-space classes score 100%. That is the clearest positive result: reporting what a corpus does *not* contain is a capability retrieval-based systems structurally lack, and it works reliably here.
+
+Latent liability scores zero on this run, though the same defect was detected on other runs. See section 3.4.
 
 ### 3.2 By difficulty
 
 | Difficulty | Found | Planted | Recall |
 | --- | --- | --- | --- |
-| Easy | 3 | 3 | 100% |
-| Medium | 2 | 8 | 25% |
-| Hard | 2 | 4 | 50% |
+| Easy | 2 | 3 | 67% |
+| Medium | 4 | 8 | 50% |
+| Hard | 1 | 4 | 25% |
 
-Hard outscoring medium is not an error. The two hard defects that were caught — D-013 and D-015 — both turned on a shared street address, which the candidate pair generator matches literally. The capability I predicted they would need (coreference resolution, temporal inference) turned out not to be the only route to them. That is a result worth reporting precisely because it contradicts the prediction recorded in the corpus.
+An easy defect being missed while a hard one is found is not an error in the labelling. D-002 is easy in the sense that the two facts sit plainly in two documents — but the critic retracts it as standard commercial practice. D-015 is hard in the sense that it was designed to need coreference — but a literal address match reached it by a route the corpus author did not anticipate.
 
 ### 3.3 Every defect
 
 | Defect | Difficulty | Requires | Found |
 | --- | --- | --- | --- |
 | D-001 Share total does not reconcile | easy | arithmetic reconciliation | yes |
-| D-002 Change of control right held by largest customer | easy | cross-document reasoning | yes |
 | D-003 Equity incentive plan referenced but absent | easy | negative space audit | yes |
+| D-002 Change of control right held by largest customer | easy | cross-document reasoning | no |
+| D-006 CFO salary contradicts the board resolution | medium | cross-document comparison | yes |
+| D-011 Board consent for CFO appointment absent | medium | reference-driven gap audit | yes |
+| D-012 Amendment dated before the amendment it amends | medium | date ordering across documents | yes |
+| D-014 Supplier shares an address with the CEO | medium | address matching across documents | yes |
 | D-004 Option grants exceed the cap table figure | medium | cross-document arithmetic | no |
 | D-005 Revenue schedule exceeds stated total revenue | medium | cross-document arithmetic | no |
-| D-006 CFO salary contradicts the board resolution | medium | cross-document comparison | yes |
-| D-007 Deferred revenue stated differently in two documents | medium | cross-document comparison | yes |
+| D-007 Deferred revenue stated differently in two documents | medium | cross-document comparison | no |
 | D-009 Loan acceleration exceeds available cash | medium | cross-document reasoning | no |
-| D-011 Board consent for CFO appointment absent | medium | reference-driven gap audit | no |
-| D-012 Amendment dated before the amendment it amends | medium | date ordering across documents | no |
-| D-014 Supplier shares an address with the CEO | medium | address matching across documents | yes |
+| D-015 Contractor connected to the CTO | hard | coreference and shared address | yes |
 | D-008 Revenue recognised on a superseded fee | hard | version handling | no |
 | D-010 Direct sale into an exclusive reseller territory | hard | three-document chain, geographic inference | no |
-| D-013 Contractor IP created before its assignment took effect | hard | delivery-to-assignment inference | yes |
-| D-015 Contractor connected to the CTO | hard | coreference and shared address | yes |
+| D-013 Contractor IP created before its assignment | hard | delivery-to-assignment inference | no |
+
+### 3.4 Variance between runs
+
+Three `score` runs over the same corpus and the same response cache, within one session, produced **6, 7, and 8** detections.
+
+The variance traces to a single call. The adversarial critic sometimes retracts the change-of-control finding — arguing that a thirty-day notice period is standard commercial practice — and sometimes confirms it. When it confirms, D-002 and occasionally D-007 are detected; when it retracts, they are not.
+
+Two implications worth stating rather than smoothing over:
+
+**Any single number here carries roughly ±1 defect of uncertainty.** The figures reported are from one run and are reproducible from the committed cache, but a cold run may differ.
+
+**The response cache is not only a cost measure.** Without it, this benchmark would not be reproducible at all, and neither would the ablation study, whose configurations must be compared against a stable baseline.
 
 ---
 
@@ -156,72 +163,89 @@ Hard outscoring medium is not an error. The two hard defects that were caught �
 python -m loupe.cli ablate
 ```
 
-Each configuration removes one component and re-scores against the same corpus. Most configurations are subsets of the full pipeline, so their model calls are already in the response cache and re-running costs nothing.
+Each configuration removes one component and re-scores against the same corpus. Most configurations are subsets of the full pipeline, so their model calls are already cached.
 
 | Configuration | Recall | Noise | Proposed | Confirmed | vs baseline |
 | --- | --- | --- | --- | --- | --- |
-| Full system | 7/15 (47%) | 0/8 (0%) | 16 | 8 | baseline |
-| No pair detector | 3/15 (20%) | 0/4 (0%) | 5 | 4 | −4 defects |
-| No tension detector | 7/15 (47%) | 0/8 (0%) | 14 | 8 | no change |
-| No entity resolution | 6/15 (40%) | 0/7 (0%) | 15 | 7 | −1 defect |
-| No adversarial review | 8/15 (53%) | 7/16 (44%) | 16 | 16 | +1 defect, +7 noise |
-| Deterministic only | 2/15 (13%) | 0/3 (0%) | 3 | 3 | −5 defects |
+| Full system | 8/15 (53%) | 0/9 (0%) | 18 | 9 | baseline |
+| No pair detector | 5/15 (33%) | 0/6 (0%) | 7 | 6 | −3 defects |
+| No tension detector | 8/15 (53%) | 0/9 (0%) | 16 | 9 | no change |
+| No entity resolution | 7/15 (47%) | 0/8 (0%) | 17 | 8 | −1 defect |
+| No adversarial review | 10/15 (67%) | 7/18 (39%) | 18 | 18 | +2 defects |
+| Deterministic only | 4/15 (27%) | 0/5 (0%) | 5 | 5 | −4 defects |
+
+The ablation harness's own baseline run detected 8, one more than the `score` run reported in section 3. Same cause as section 3.4.
 
 ### 4.1 The critic trades recall for precision
 
 The most useful number in the study.
 
-Disabling adversarial review raises recall from 7/15 to 8/15 — it recovers D-008, the superseded-fee finding — and simultaneously raises the noise rate from 0% to 44%. Sixteen findings are reported instead of eight, and seven of the additional ones correspond to nothing real.
+Disabling adversarial review raises recall from 8/15 to 10/15 and simultaneously raises the noise rate from 0% to 39%. Eighteen findings are reported instead of nine, and seven of the additional ones correspond to nothing real.
 
-This is the precision–recall tradeoff with a number attached rather than an opinion. It also identifies a specific over-aggression: the critic dismisses D-008 as "a standard contractual progression," which is a defensible reading and a wrong one.
+This is the precision–recall tradeoff with a number attached rather than an opinion. It also identifies a specific over-aggression: the critic dismisses D-008 as "a standard contractual progression," which is defensible and wrong.
 
-For a diligence report, precision is the more valuable side of that trade. An analyst who encounters seven false findings stops reading, at which point effective recall is zero regardless of what was measured.
+For a diligence report, precision is the more valuable side. An analyst who encounters seven false findings stops reading, at which point effective recall is zero regardless of what was measured.
 
 ### 4.2 The pair detector accounts for most of the recall
 
-Removing targeted pair analysis drops recall from 7 to 3. Every undisclosed-relationship defect, the deferred-revenue contradiction, and the change-of-control liability are lost.
+Removing targeted pair analysis drops recall from 8 to 5, and both undisclosed-relationship defects are lost.
 
-This validates the design decision described in the multi-agent document: separating *which claims to compare* (deterministic, exhaustive, free) from *whether a comparison is a finding* (model, narrow question).
+This validates the separation described in the design document: deciding *which claims to compare* is mechanical and exhaustive; deciding *whether a comparison is a finding* is judgement.
 
 ### 4.3 The tension detector contributes nothing
 
 Removing it changes no result. On this corpus it finds only what the pair generator already finds.
 
-This is reported rather than hidden because it is the kind of result a component's author is least inclined to look for. The component remains in the system because it is the more general mechanism — it can surface conflict shapes no rule anticipates — but it currently earns no cost, and that is the honest reading.
+This is reported rather than hidden because it is the kind of result a component's author is least inclined to look for. The component remains because it is the more general mechanism — it can surface conflict shapes no rule anticipates — but on this corpus it earns no cost.
 
-### 4.4 The model earns its cost
+### 4.4 Four defects need no model at all
 
-Deterministic detectors alone reach 2/15. The full system reaches 7/15. Whatever else is true, the language model is doing work that rules do not.
-
-Equally: two defects need no model at all, which is why half the components are deterministic.
+Deterministic detectors alone reach 4/15: arithmetic reconciliation, amendment date ordering, and both gap audits. The full system reaches 8. The model is doing real work, and so is the decision not to use it everywhere.
 
 ---
 
-## 5. Threats to validity
+## 5. What debugging the benchmark taught
+
+Three of the eight detections were recovered by fixing bugs rather than adding capability, and the way those bugs were found is worth recording.
+
+**The failure mode was patching without instrumenting.** Cross-document arithmetic produced no findings. Three separate fixes were applied — tightening component selection, restricting document types, adjusting domain matching — and none worked, because each was a guess at the cause.
+
+Printing the intermediate state resolved it in one attempt. The output showed every claim in each domain and which filter had rejected it:
+
+```
+drop  120,000    option_grant_schedule    wrong-doctype:other
+drop  3,612,000  revenue_by_customer_2025 wrong-doctype:other
+```
+
+**The cause was two levels away from the symptom.** The `pairs` command does not run the LLM classifier, so it falls back to a filename heuristic — and that heuristic had no hint matching `option_grant_schedule` or `revenue_by_customer`. Both documents were typed `other`, and the document-type filter silently excluded every component they contained.
+
+Fixing the heuristic recovered the correct sums immediately. Neither the filter nor the classifier was wrong; the fallback path between them was.
+
+The lesson generalises: in a pipeline where each stage transforms the last, a symptom at stage five is rarely caused at stage five. Printing what each stage actually produced is faster than reasoning about what it should produce.
+
+---
+
+## 6. Threats to validity
 
 **The corpus is synthetic and written by the same author as the system.** Both the defects and the detectors reflect one person's model of what goes wrong in a data room. A defect nobody thought to plant cannot be missed, and cannot be measured.
 
-**Thirty-five documents is small.** A real mid-market data room holds several hundred. Gap detection in particular is much easier at this scale, which is why the 0% noise rate should not be read as a strong claim.
+**Thirty-five documents is small.** A real mid-market data room holds several hundred. Gap detection in particular is much easier at this scale, so the low noise rate should not be read as a strong claim.
 
-**Single deal archetype.** Everything is tuned for a B2B SaaS acquisition in the USD 5–50M range.
-
-**Output is not deterministic without the cache.** The same inputs produced 6/15 on one run and 7/15 on another, differing on a single uncached critic call. The reported figure is from a cached run, which is reproducible; a cold run may vary by one defect.
+**Output is not deterministic without the cache.** Section 3.4 quantifies this: ±1 defect between runs.
 
 **Anchor-based scoring is approximate.** A finding matches a defect if one anchor phrase appears anywhere in it. A finding that mentions the right number for the wrong reason would score as a detection. Manual inspection of the seven detections found no such case, but the rule permits it.
 
+**Iterative development against a fixed benchmark risks overfitting.** Several rounds of detection work were performed with this corpus as the target. Each change was assessed against a specific test: *would this help on a data room nobody has seen?* Fixes that only worked because the author knew what a particular defect looked like were deliberately not made — which is why recall stops at 7 rather than being tuned upward.
+
 ---
 
-## 6. What the results say to do next
-
-The per-defect table is a prioritised backlog derived from measurement rather than guesswork.
+## 7. What the results say to do next
 
 | Work | Recovers | Evidence |
 | --- | --- | --- |
-| Fix component selection in total-versus-parts pairs | D-004, D-005 | Both pairs were generated; the arithmetic in their reason strings was contaminated by figures from other periods, so the adjudicator correctly rejected them |
-| Soften the critic on amendment-driven changes | D-008 | The no-review ablation recovers it |
-| Debug the amendment-ordering check | D-012 | The check runs and never fires |
-| Reference-driven gap detection | D-011 | No detector exists for a document referenced by another document |
-| Pair generation for the loan-versus-cash shape | D-009 | No candidate pair was produced |
-| Version handling | D-008, and false positives on any real corpus | Amendments are currently treated as contradictions |
+| Version handling: an amendment supersedes rather than contradicts | D-008, plus false positives on any real corpus | The no-review ablation recovers D-008, meaning the finding is generated and the critic correctly objects on grounds the system cannot yet address |
+| Soften the adjudicator on near-miss reconciliations | D-004, D-005 | Both pairs are now generated with correct arithmetic; the adjudicator rejects them |
+| Re-extract the loan agreement | D-009 | The principal was captured as a date sentence, not a numeric claim, so no pair can be formed |
+| Multi-hop reasoning over three documents | D-010 | No mechanism exists for chaining beyond a pair |
 
-Two of these — reference-driven gap detection and version handling — are capabilities most systems in this space do not have, rather than bug fixes.
+Two of these — version handling and multi-hop reasoning — are capabilities most systems in this space lack, rather than bug fixes.

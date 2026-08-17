@@ -135,7 +135,7 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    print(f"\n  ground_truth.json")
+    print("\n  ground_truth.json")
     print(f"\n{len(written)} documents, {len(PLANTED_DEFECTS)} planted defects")
     print("  by class:")
     for cls, n in sorted(by_class.items()):

@@ -11,28 +11,28 @@
 
 Most multi-agent designs for document review assign one agent per document type: a legal agent, a financial agent, a compliance agent. That partition is the central mistake this system was built to avoid.
 
-The findings that matter in due diligence live *between* documents. A change-of-control clause is unremarkable in isolation. A customer representing 43% of revenue is unremarkable in isolation. Only together do they mean that an acquisition destroys half the target's income. Under a document-type partition, the legal agent sees one half, the financial agent sees the other, and no agent owns the space between them.
+The findings that matter in due diligence live *between* documents. A change-of-control clause is unremarkable in isolation. A customer representing 43% of revenue is unremarkable in isolation. Only together do they mean an acquisition destroys half the target's income. Under a document-type partition, the legal agent sees one half, the financial agent the other, and no agent owns the space between them.
 
 Loupe organises agents by **cognitive function over a shared evidence store**. Every agent reads from and writes to a common structure of typed claims. An agent can reason about claims extracted from documents it never read.
 
 ### 1.2 Retrieval is mechanical; judgement is not
 
-This is the most consequential decision in the system, and it was reached by measurement rather than design.
+The most consequential decision in the system, and it was reached by measurement rather than design.
 
-The first implementation grouped claims by entity and asked a model to find conflicting pairs within each group. On a 35-document corpus this scored 3 of 15 planted defects. Examining the failures showed why: for most real contradictions, **the two halves belong to different entities**. A stated total is filed under the company; its components are filed under individual people or customers. A supplier's address is filed under the supplier; the founder's address under the founder. Entity grouping structurally cannot bring them together.
+The first implementation grouped claims by entity and asked a model to find conflicting pairs within each group. On a 35-document corpus this scored 3 of 15. Examining the failures showed why: for most real contradictions, **the two halves belong to different entities**. A stated total is filed under the company; its components are filed under individual people or customers. A supplier's address is filed under the supplier; the founder's address under the founder. Entity grouping cannot bring them together.
 
 The system now separates the two concerns:
 
 - **Which claims are worth comparing** is decided by deterministic Python rules. Exhaustive, free, inspectable.
 - **Whether a compared pair is a finding** is decided by a model, one narrow question at a time.
 
-That change took recall from 3/15 to 7/15. The ablation study isolates its contribution at four defects.
+The ablation study isolates this contribution at three defects.
 
 ### 1.3 Use a model only where judgement is required
 
-Reconciling a share total is arithmetic. Checking whether a file exists is a fact. Comparing two dates is deterministic. These run in Python: faster, free, and correct every time.
+Reconciling a share total is arithmetic. Checking whether a file exists is a fact. Comparing two dates is deterministic. These run in Python: faster, free, correct every time.
 
-Six components use a language model. Six do not. The deterministic detectors alone reach 2 of 15 defects, which is the floor the model has to beat to justify its cost — and it does, reaching 7.
+Six components use a language model. Seven do not. The deterministic detectors alone reach 4 of 15 defects, which is the floor the model has to beat — and it does, reaching 8.
 
 ---
 
@@ -49,22 +49,24 @@ flowchart TD
     F --> G[Arithmetic Detector<br/>deterministic]
     F --> H[Temporal Detector<br/>deterministic]
     F --> I[Gap Auditor<br/>deterministic]
-    F --> J[Tension Detector<br/>LLM agent]
-    F --> K[Candidate Pair Generator<br/>deterministic]
+    F --> J[Reference Auditor<br/>deterministic]
+    F --> K[Tension Detector<br/>LLM agent]
+    F --> L[Candidate Pair Generator<br/>deterministic]
 
-    K --> L[Pair Adjudicator<br/>LLM agent]
+    L --> M[Pair Adjudicator<br/>LLM agent]
 
-    G --> M[Red Team Critic<br/>LLM agent]
-    H --> M
-    I --> M
-    J --> M
-    L --> M
+    G --> N[Red Team Critic<br/>LLM agent]
+    H --> N
+    I --> N
+    J --> N
+    K --> N
+    M --> N
 
-    M --> N[Materiality Scorer<br/>LLM agent]
-    N --> O{Human Approval Gate<br/>critical findings only}
-    O --> F
-    F --> P[Memo Composer<br/>deterministic]
-    P --> Q[Findings memo<br/>with resolvable citations]
+    N --> O[Materiality Scorer<br/>LLM agent]
+    O --> P{Human Approval Gate<br/>critical findings only}
+    P --> F
+    F --> Q[Memo Composer<br/>deterministic]
+    Q --> R[Findings memo<br/>with resolvable citations]
 ```
 
 The evidence store sits at the centre deliberately. Agents do not message each other in prose; they read and write typed objects in a shared structure. That is what makes cross-document reasoning possible rather than merely aspirational.
@@ -93,6 +95,7 @@ The evidence store sits at the centre deliberately. Agents do not message each o
 | Arithmetic Detector | Reconcile stated totals against their components |
 | Temporal Detector | Find events dated impossibly relative to each other |
 | Gap Auditor | Report expected documents that are absent |
+| Reference Auditor | Report documents the corpus asserts exist but does not contain |
 | Memo Composer | Render confirmed findings into a report |
 
 ### 3.3 Human in the loop
@@ -113,9 +116,13 @@ The evidence store sits at the centre deliberately. Agents do not message each o
 
 Before this agent, document type was inferred from the filename. That works on a tidy corpus and fails on a real one, where files carry client reference numbers or names like `Doc1_final_v3_SIGNED.pdf`. Reading the opening text is more robust, because a document announces what it is in its first paragraph.
 
-Batching matters: an earlier version processed only the first twenty documents and silently fell back to the filename heuristic for the rest, misclassifying the option grant schedule and the revenue breakdown as `other`. Batches now cover the whole corpus and run concurrently.
+Two failures in this component cost detections and are worth recording:
 
-*Observed behaviour:* reclassified 13 of 35 documents on the reference corpus, including `ip_assignment.docx` from `other` to `contract` and `option_grant_schedule.docx` from `other` to `cap_table`.
+**Batching.** An earlier version processed only the first twenty documents and silently fell back to the filename heuristic for the rest. Batches now cover the whole corpus and run concurrently.
+
+**The fallback path.** The `pairs` command runs without the classifier, so document type comes from the filename heuristic — and that heuristic had no hint matching `option_grant_schedule` or `revenue_by_customer`. Both were typed `other`, and a downstream filter silently excluded every claim they contained. Two detections were lost to a gap in a fallback nobody had exercised.
+
+*Observed behaviour:* reclassifies documents on the reference corpus, including `ip_assignment.docx` from `other` to `contract`.
 
 ### Claim Extractor
 
@@ -131,7 +138,7 @@ A model asked for offsets will confidently return plausible wrong numbers, produ
 
 Claims are atomic. "The company has 4,250,000 shares and 12 employees" is two claims, not one. Atomicity is what makes cross-document comparison mechanical rather than interpretive.
 
-*Observed behaviour:* 232 claims from 35 documents.
+*Observed behaviour:* 232 claims from 35 documents. One known miss: the loan agreement's principal amount was captured as part of a repayment-date sentence rather than as a numeric claim, which makes one planted defect unreachable by any detector.
 
 ### Entity Resolver
 
@@ -140,32 +147,34 @@ Claims are atomic. "The company has 4,250,000 shares and 12 employees" is two cl
 
 Extraction produces variants of the same name: "TitanRetail Group Limited" and "TitanRetail Group", "Northwind Analytics Inc." and "Northwind Analytics". Grouping and pairing both depend on subject identity, so unmerged variants mean the claims are never compared.
 
-This is deliberately not a full entity resolver. It is suffix stripping and case folding: no model call, no cost, deterministic. Coreference — "the Company", "the Executive" — is unresolved and appears in the claim graph as its own entity.
+Deliberately not a full resolver: suffix stripping and case folding, no model call, deterministic. Coreference — "the Company", "the Executive" — is unresolved and appears in the claim graph as its own entity.
 
-*Measured contribution:* the ablation shows removing it costs one defect.
+*Measured contribution:* removing it costs one defect.
 
 ### Candidate Pair Generator
 
 **Input:** the whole claim graph.
-**Output:** pairs of claims that a rule considers worth comparing.
+**Output:** pairs of claims a rule considers worth comparing.
 **No model.**
 
-Four rules, each targeting a class of contradiction that entity grouping cannot reach:
+Four rules, each targeting a class of contradiction entity grouping cannot reach:
 
 | Rule | Selects | Guards against |
 | --- | --- | --- |
 | **Numeric mismatch** | Two claims stating the same measure with different values | Generic measures across unrelated subjects; different reporting periods; authorised capital compared to issued |
-| **Total versus components** | A stated total and the parts that should sum to it | Components from the same document as the total; proportions treated as amounts; stray small numbers |
+| **Total versus components** | A stated total and the parts that should sum to it | Components from the same document as the total; components from a document of the wrong kind; proportions treated as amounts; off-period figures |
 | **Shared address** | One street address appearing in two documents for different parties | Same-entity pairs |
 | **Trigger and magnitude** | A right or condition beside an amount concerning the same party | Routine notice periods filed under the company, which would otherwise pair with every figure in the corpus |
 
-The guards are not incidental. A first implementation produced 49 candidate pairs on the reference corpus, most of them noise: two founders' shareholdings compared against each other, FY2024 revenue against FY2025, a 60-day notice period paired with all nine financial figures. Five specific fixes reduced this to 26 pairs with no loss of defect coverage.
+The guards are not incidental. A first implementation produced 49 candidate pairs, most of them noise: two founders' shareholdings compared against each other, FY2024 revenue against FY2025, a sixty-day notice period paired with all nine financial figures. Successive fixes reduced this to 26 pairs with no loss of defect coverage.
 
-Because generation is deterministic and free, the candidates can be inspected before any model call:
+Because generation is deterministic and free, candidates can be inspected before any model call:
 
 ```bash
 python -m loupe.cli pairs
 ```
+
+*Measured contribution:* three defects.
 
 ### Pair Adjudicator
 
@@ -173,11 +182,9 @@ python -m loupe.cli pairs
 **Output:** a verdict per pair.
 **Model:** reasoning model.
 
-The division of labour is the point. Retrieval was mechanical; this is the judgement. Because each pair arrives with its selection reason, the model answers a narrow question about two specific claims rather than searching a list of thirty for something interesting.
+Retrieval was mechanical; this is the judgement. Because each pair arrives with its selection reason, the model answers a narrow question about two specific claims rather than searching a list of thirty for something interesting.
 
-The prompt is explicit that most pairs will be innocent and that saying so is correct. It is also explicit that a false finding costs more than a missed one, because an analyst who stops trusting the report stops reading it.
-
-*Observed behaviour:* 11 findings proposed from 26 candidate pairs.
+The prompt is explicit that most pairs will be innocent and saying so is correct, and that a false finding costs more than a missed one because an analyst who stops trusting the report stops reading it.
 
 ### Tension Detector
 
@@ -189,7 +196,7 @@ The prompt design decision:
 
 > **The agent is asked "what conflicts here?" — never "find risks."**
 
-A model asked to find risks will find them, because that is what it was asked to do. It will produce fluent, plausible, unfalsifiable risks. Asked instead what conflicts between specific claims it can see, it must either point at two of them or return nothing.
+A model asked to find risks will find them. It will produce fluent, plausible, unfalsifiable risks. Asked instead what conflicts between specific claims it can see, it must either point at two of them or return nothing.
 
 Every reported conflict must cite two claim IDs from the list supplied. A conflict citing an ID that was never given is discarded — the equivalent of span validation.
 
@@ -205,7 +212,7 @@ Three hazards handled explicitly:
 
 1. **Duplicate claims.** The same founder holding appears in the cap table and in their employment agreement. Naive summing double-counts. Claims are deduplicated by value, preferring the cap table as authoritative.
 2. **Total versus component ambiguity.** An option pool described as "outstanding" carries a total marker but is a component. Only the largest stated total is reconciled against.
-3. **Defined terms.** "Issued and outstanding" excludes unexercised options; "fully diluted" includes them. Conflating the two is a definitional error, not a discrepancy. See section 7.
+3. **Defined terms.** "Issued and outstanding" excludes unexercised options; "fully diluted" includes them. Conflating the two is a definitional error, not a discrepancy. See section 8.
 
 ### Temporal Detector
 
@@ -215,7 +222,9 @@ Three hazards handled explicitly:
 
 Two checks: events dated before the company's incorporation, and an amendment dated before the amendment it claims to modify.
 
-*Observed behaviour:* neither check fires on the reference corpus. The amendment check requires both documents to expose a parseable date and an amendment number in their opening text, and does not match the corpus phrasing. This is a known gap rather than a passing test.
+The amendment check operates on documents rather than claims, deliberately. The amendment number and execution date sit in the opening paragraph, and whether the extractor happened to emit both as claims is not something this check should depend on.
+
+*Observed behaviour:* detects that Amendment No. 2, dated 3 November 2024, states it follows Amendment No. 1, dated 12 January 2025.
 
 ### Gap Auditor
 
@@ -223,13 +232,29 @@ Two checks: events dated before the company's incorporation, and an amendment da
 **Output:** missing-document findings.
 **No model.**
 
-This agent reports what is *absent*, which retrieval systems structurally cannot do. It rests on one distinction:
+Reports what is *absent*, which retrieval systems structurally cannot do. It rests on one distinction:
 
 > **A document being present is not the same as a document being mentioned.**
 
-The cap table states that options were granted "under the company equity incentive plan". No such plan exists in the corpus. Searching document body text for keywords would treat that mention as proof of presence and hide the exact defect the audit is for. Presence is matched against filenames only; body text is used for a different purpose — deciding whether an item applies at all.
+The cap table states options were granted "under the company equity incentive plan". No such plan exists in the corpus. Searching document body text for keywords would treat that mention as proof of presence and hide the exact defect the audit is for. Presence is matched against filenames only; body text is used for a different purpose — deciding whether an item applies at all.
 
-That conditional logic is what makes the finding meaningful. An equity incentive plan is reported missing *because the corpus shows options were granted*, not because a generic checklist listed one.
+An equity incentive plan is reported missing *because the corpus shows options were granted*, not because a generic checklist listed one.
+
+### Reference Auditor
+
+**Input:** document text, scanned for references to other documents by name and date.
+**Output:** missing-document findings for documents the corpus asserts exist.
+**No model.**
+
+The gap auditor knows what any deal should have. This one knows what *this* deal claims to have.
+
+When a document says "as approved by written consent of the Board of Directors dated 9 September 2024", it is asserting that a discrete executed instrument exists. If no such document is in the room, that is a gap no fixed checklist could anticipate, because the requirement came from the corpus itself.
+
+The date matters. A generic cross-reference — "as set out in the shareholders agreement" — may point at something never intended to be a separate document. A reference carrying a specific execution date is asserting a signed instrument on a particular day.
+
+Matching is by token overlap against filenames rather than exact string equality, because a corpus names a file `board_minutes_2024_09` for something a contract calls "written consent of the Board of Directors". Requiring exact matches would report every reference as missing; requiring none would report none.
+
+*Observed behaviour:* finds two references in the reference corpus. Correctly resolves the shareholders agreement as present, and correctly reports the board consent as absent.
 
 ### Red Team Critic
 
@@ -241,11 +266,11 @@ The critic is not asked to review a finding. It is asked to **destroy** it.
 
 A reviewer asked "is this correct?" agrees, because agreement is the path of least resistance for a language model. A reviewer instructed to construct the strongest case against a finding surfaces the rounding artifact, the superseded amendment, the definitional error — and when it cannot, the finding has earned its place.
 
-Reviewing all findings in one call also gives the critic sight of the other findings, so it can detect that two findings describe the same issue. On the reference corpus it retracted four findings as duplicates of one another.
+Reviewing all findings in one call also gives the critic sight of the others, so it can detect that two findings describe the same issue. On the reference corpus it retracts several as duplicates.
 
 Before any model call, every citation is re-validated against its source document. A finding whose evidence does not resolve is retracted automatically and never consumes a model call.
 
-*Measured contribution:* the ablation shows the critic costs one defect and removes seven false positives. Disabling it raises recall from 7/15 to 8/15 and raises the noise rate from 0% to 44%.
+*Measured contribution:* the critic costs two defects and removes seven false positives. Disabling it raises recall from 8/15 to 10/15 and the noise rate from 0% to 39%.
 
 ### Materiality Scorer
 
@@ -255,9 +280,7 @@ Before any model call, every citation is re-validated against its source documen
 
 Severity labels are weak decision inputs. "High" tells a buyer to worry; a dollar figure tells them how much, and whether it justifies renegotiating the price.
 
-The agent may use only figures that appear in the finding's own evidence, and is instructed to report `quantifiable: false` when it cannot ground an estimate. An invented figure in a diligence memo is worse than no figure.
-
-*Observed behaviour:* quantifies the share discrepancy and the salary gap; correctly declines to quantify missing-document findings.
+The agent may use only figures appearing in the finding's own evidence, and is instructed to report `quantifiable: false` when it cannot ground an estimate. An invented figure in a diligence memo is worse than no figure.
 
 ### Approval Gate
 
@@ -266,7 +289,7 @@ The agent may use only figures that appear in the finding's own evidence, and is
 
 Critical-severity findings require explicit sign-off before entering the memo.
 
-The gate is deliberately placed *after* adversarial review. A human asked to approve twenty unreviewed findings will rubber-stamp them. A human asked to approve two that already survived a hostile critic is making a real decision. The critic's objection is displayed alongside the finding, so the reviewer sees what was argued against it rather than only the conclusion.
+Placed *after* adversarial review, deliberately. A human asked to approve twenty unreviewed findings will rubber-stamp them. A human asked to approve two that already survived a hostile critic is making a real decision. The critic's objection is displayed alongside the finding, so the reviewer sees what was argued rather than only the conclusion.
 
 ### Memo Composer
 
@@ -326,7 +349,7 @@ sequenceDiagram
 | Materiality scorer | Approval gate | Severity is critical |
 | Ledger | Memo composer | Status is confirmed |
 
-The lifecycle is enforced by the type system rather than by convention. `Finding.confirm()` raises an exception unless the finding was challenged first, so no code path can admit an unreviewed finding to the memo.
+The lifecycle is enforced by the type system rather than by convention. `Finding.confirm()` raises unless the finding was challenged first, so no code path can admit an unreviewed finding to the memo.
 
 ```mermaid
 stateDiagram-v2
@@ -353,9 +376,11 @@ stateDiagram-v2
 | Entity normaliser | Evidence store, pair generator | Merge name variants |
 | Candidate pair rules | Pair generator | Select claims worth comparing |
 | Diligence request list | Gap auditor | Expected-document checklist |
+| Reference patterns | Reference auditor | Documents the corpus asserts exist |
 | Evidence store persistence | All agents | JSON claim graph and append-only ledger |
 | Response cache | All LLM agents | Content-hashed disk cache |
 | Ablation harness | Evaluation | Component contribution measurement |
+| FastAPI web interface | Analyst | Upload, progress, findings, source viewer |
 
 ### Notes on the model integration
 
@@ -366,7 +391,7 @@ The OpenAI Agents SDK supplies the orchestration framework; the model behind it 
 3. **Structured output.** Schema enforcement is less strict than OpenAI's, so a validate-repair-retry layer is mandatory rather than optional.
 4. **Rate limits.** Concurrency is capped and requests retry with exponential backoff and jitter.
 
-Agents request a **model role** — `extraction`, `reasoning`, or `critic` — and the mapping to a concrete model identifier lives in configuration. During development, `gemini-2.5-flash` was found still listed in the provider's model catalogue while being closed to new users. Making model identifiers configuration rather than code meant that discovery cost one line rather than a refactor.
+Agents request a **model role** — `extraction`, `reasoning`, or `critic` — and the mapping to a concrete identifier lives in configuration. During development, `gemini-2.5-flash` was found still listed in the provider's catalogue while closed to new users. Making model identifiers configuration rather than code meant that discovery cost one line rather than a refactor.
 
 ---
 
@@ -380,19 +405,17 @@ Agents request a **model role** — `extraction`, `reasoning`, or `critic` — a
 | Progress record | Which documents have been extracted | Persisted |
 | Response cache | Model responses keyed by content hash | Persisted |
 
-Three properties matter.
-
 **The ledger is append-only.** A lifecycle transition writes a new entry rather than editing the old one, so the audit trail records what was proposed, what was objected to, and what was decided. `current_findings()` returns the latest version of each finding, so history is retained without polluting output.
 
-**Extraction is checkpointed.** Documents already processed are skipped on a re-run, so an interrupted run resumes rather than repeating work. This was exercised in practice when a free-tier rate limit interrupted a run mid-corpus.
+**Extraction is checkpointed.** Documents already processed are skipped on a re-run, so an interrupted run resumes rather than repeating work. Exercised in practice when a free-tier rate limit interrupted a run mid-corpus.
 
-**Model responses are cached by content hash.** Prompt and model identity form the key. A repeated run produces identical output at no cost, which makes both the demonstration and the ablation study reproducible.
+**Model responses are cached by content hash.** Prompt and model identity form the key. Beyond cost, this is what makes both the demonstration and the ablation study reproducible — without it the pipeline varies by one or two defects between identical runs.
 
 ---
 
 ## 8. What adversarial review actually caught
 
-The clearest evidence that the critic mechanism works is that it caught an error in the system's own design.
+The clearest evidence the critic mechanism works is that it caught an error in the system's own design.
 
 The arithmetic detector originally reconciled a cap table by summing founder holdings, preferred shares, **and employee options** against the stated total. All tests passed. The planted defect was described in terms of that sum.
 
@@ -402,7 +425,7 @@ The critic retracted the finding with this objection:
 
 It is correct. "Issued and outstanding" is a term of art that excludes unexercised options; options are not issued shares until exercised. The detector, the corpus, and the test were all wrong in the same way, and three days of passing tests had not surfaced it.
 
-The corpus and detector were corrected. The real discrepancy is 350,000 shares stated as outstanding with no identified holder — a subtler and more realistic defect than the one originally planted.
+The corpus and detector were corrected. The real discrepancy is 350,000 shares stated as outstanding with no identified holder — subtler and more realistic than the one originally planted.
 
 ---
 
@@ -410,14 +433,16 @@ The corpus and detector were corrected. The real discrepancy is 350,000 shares s
 
 Stated as design facts rather than as future work.
 
-**The critic is over-aggressive.** It retracts D-008, a genuine finding about revenue recognised on a superseded contract fee, as "a standard contractual progression." The ablation quantifies the cost at one defect.
+**No version handling.** An amendment that supersedes a term is treated as contradicting it. This is the direct cause of one defect's retraction and would produce false positives on any real data room, which are full of amendments.
+
+**The critic is over-aggressive.** The ablation quantifies the cost at two defects. It dismisses a genuine superseded-fee finding as "a standard contractual progression," which is defensible and wrong.
 
 **The tension detector is redundant.** Removing it changes no result.
 
-**Coreference is unresolved.** "The Company" appears in the claim graph as an entity distinct from Northwind Analytics, fragmenting six claims away from the entity they belong to.
+**Coreference is unresolved.** "The Company" appears in the claim graph as an entity distinct from Northwind Analytics.
 
-**No version handling.** An amendment that supersedes a term is treated as contradicting it. This is the direct cause of D-008's retraction and would produce false positives on any real data room, which are full of amendments.
+**Output varies between runs.** Six, seven, and eight detections were observed on identical input across one session, traced to a single adversarial-review call.
 
-**The temporal detector does not fire.** Its amendment-ordering check does not match the corpus phrasing.
+**One extraction miss blocks a detector entirely.** The loan agreement's principal amount was never captured as a numeric claim, so no rule can pair it against available cash.
 
 **Evidence spans can be narrower than the clause they describe.** The change-of-control finding cites the notice period rather than the trigger.
