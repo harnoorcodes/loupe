@@ -92,7 +92,7 @@ Open http://127.0.0.1:8000, click **"Use the sample data room"**, let it finish,
 
 **Point at the citations.**
 
-> "Three citations. And look at the third one — that's from the CTO's employment agreement, not the cap table. The system pulled a shareholding out of an employment contract to check a cap table.
+> "Four citations. And look at the third one — that's from the CTO's employment agreement, not the cap table. The system pulled a shareholding out of an employment contract to check a cap table.
 >
 > That's the cross-document part, and it's the whole reason the architecture looks the way it does."
 
@@ -114,7 +114,7 @@ Open http://127.0.0.1:8000, click **"Use the sample data room"**, let it finish,
 
 **Click the `employment_cto p.1` citation** so the panel switches documents.
 
-> "Different citation, different document, same finding. That's what cross-document verification looks like in practice."
+> "Different citation, same document, different quote. And note the third one there comes from the CTO's employment agreement — the system pulled a shareholding out of an employment contract to check a cap table. That's the cross-document part."
 
 **Press Escape.**
 

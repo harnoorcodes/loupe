@@ -349,6 +349,8 @@ Prompt injection is a live threat here rather than a theoretical one — the par
 
 **Output varies between runs.** Six, seven, and eight detections were observed on identical input across one session.
 
+**The source viewer embeds PDFs only.** Clicking a citation opens the document at the cited page for PDFs. DOCX files download instead, because browsers cannot render Word documents inline. Verification of a DOCX citation therefore costs a download rather than a click.
+
 **Entity resolution handles suffix variants only.** Coreference such as "the Company" is unresolved and appears in the claim graph as its own entity.
 
 **The loan principal was never extracted as a numeric claim.** The extractor captured the repayment date sentence instead of the facility amount, so no detector can compare it against available cash.

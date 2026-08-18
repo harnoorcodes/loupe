@@ -446,3 +446,5 @@ Stated as design facts rather than as future work.
 **One extraction miss blocks a detector entirely.** The loan agreement's principal amount was never captured as a numeric claim, so no rule can pair it against available cash.
 
 **Evidence spans can be narrower than the clause they describe.** The change-of-control finding cites the notice period rather than the trigger.
+
+**The source viewer is PDF-only.** The interface opens a cited PDF at the cited page in a side panel. DOCX citations fall back to a download, since browsers have no native renderer for them. Converting DOCX to PDF at ingestion would fix this and was not done.
