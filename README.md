@@ -376,6 +376,9 @@ Loupe does not decide whether to proceed with a transaction, provide legal advic
 - [`docs/03-evaluation.md`](docs/03-evaluation.md) — benchmark design, results, ablation study
 
 ---
+## Demo
+
+An 11-minute walkthrough: [https://drive.google.com/file/d/1LlttpwjFEfdlbCERQDqXq3f-8IbBkJB_/view?usp=drive_link]
 
 ## Licence
 

@@ -17,3 +17,6 @@ data/run/
 .idea/
 .vscode/
 data/uploads/
+*.mp4
+*.mov
+*.mkv
